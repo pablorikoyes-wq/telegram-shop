@@ -58,7 +58,7 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 72px; /* ⬅️ ВАЖНО: больше высота */
+  height: 92px; /* ⬅️ ВАЖНО: больше высота */
   background: #ffffff;
   border-top: 1px solid #e5e5e5;
   display: flex;
@@ -94,7 +94,7 @@ body {
 
 /* чтобы контент не прятался под меню */
 body {
-  padding-bottom: 80px;
+  padding-bottom: 100px;
 }
 
 
