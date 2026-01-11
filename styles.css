@@ -165,10 +165,19 @@ body {
 
 /* === UZUM LOGO === */
 .big-logo {
+  background: #6a00ff;
+  border: 12px solid #ffe600;
+  border-radius: 28px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+}
+
+.uzum-icon svg {
+  width: 120px;
+  height: 120px;
+  transform: rotate(-6deg); /* лёгкий наклон как у Uzum */
 }
 
 .uzum-icon {
@@ -210,9 +219,11 @@ body {
 
 /* box текст */
 .box-text {
-  font-size: 32px;
+  margin-top: 6px;
+  font-size: 36px;
   font-weight: 700;
   color: white;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont;
 }
 
 
@@ -220,6 +231,11 @@ body {
 .mini-logos {
   display: flex;
   gap: 14px;
+}
+
+.mini-logos svg {
+  width: 48px;
+  height: 48px;
 }
 
 .mini {
