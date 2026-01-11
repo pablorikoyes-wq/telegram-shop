@@ -30,7 +30,7 @@ window.addEventListener("load", () => {
 document.querySelectorAll(".slider").forEach(slider => {
   const slides = slider.querySelector(".slides");
   const images = slides.querySelectorAll("img");
-  const dots = slider.querySelectorAll(".dots span");
+  const dots = slider.parentElement.querySelectorAll(".dots span");
 
   let index = 0;
   let startX = 0;
