@@ -22,7 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 window.addEventListener("load", () => {
   setTimeout(() => {
-    const splash = document.getElementById("splash");
-    if (splash) splash.remove();
-  }, 2400);
+    document.getElementById("splash").style.opacity = "0";
+    setTimeout(() => {
+      document.getElementById("splash").remove();
+      document.getElementById("app").style.display = "block";
+    }, 400);
+  }, 1800);
 });
+
