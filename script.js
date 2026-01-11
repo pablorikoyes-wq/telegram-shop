@@ -30,3 +30,22 @@ window.addEventListener("load", () => {
   }, 1800);
 });
 
+document.querySelectorAll('.product-slider').forEach(slider => {
+  const slides = slider.querySelector('.slides');
+  const dotsWrap = slider.querySelector('.dots');
+  const imgs = slides.querySelectorAll('img');
+
+  imgs.forEach((_, i) => {
+    const dot = document.createElement('span');
+    if (i === 0) dot.classList.add('active');
+    dotsWrap.appendChild(dot);
+  });
+
+  slides.addEventListener('scroll', () => {
+    const index = Math.round(slides.scrollLeft / slides.clientWidth);
+    dotsWrap.querySelectorAll('span').forEach((d, i) => {
+      d.classList.toggle('active', i === index);
+    });
+  });
+});
+
