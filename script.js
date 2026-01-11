@@ -32,9 +32,18 @@ window.addEventListener("load", () => {
 
 document.querySelectorAll(".slider").forEach(slider => {
   const slides = slider.querySelector(".slides");
+  const images = slides.querySelectorAll("img");
   const dots = slider.querySelectorAll(".dots span");
+
   let index = 0;
   let startX = 0;
+
+  function updateSlider() {
+    slides.style.transform = `translateX(-${index * 100}%)`;
+
+    dots.forEach(dot => dot.classList.remove("active"));
+    if (dots[index]) dots[index].classList.add("active");
+  }
 
   slider.addEventListener("touchstart", e => {
     startX = e.touches[0].clientX;
@@ -42,15 +51,19 @@ document.querySelectorAll(".slider").forEach(slider => {
 
   slider.addEventListener("touchend", e => {
     const endX = e.changedTouches[0].clientX;
-    if (endX < startX - 40) index++;
-    if (endX > startX + 40) index--;
+    const diff = startX - endX;
 
-    index = Math.max(0, Math.min(index, dots.length - 1));
-    slides.style.transform = `translateX(-${index * 100}%)`;
+    if (diff > 40 && index < images.length - 1) {
+      index++;
+    } else if (diff < -40 && index > 0) {
+      index--;
+    }
 
-    dots.forEach(d => d.classList.remove("active"));
-    dots[index].classList.add("active");
+    updateSlider();
   });
+
+  // стартовое состояние
+  updateSlider();
 });
 
 
