@@ -1,14 +1,7 @@
 const tg = window.Telegram.WebApp;
 tg.ready();
 
-// переключение активной кнопки
-document.querySelectorAll('.nav-item').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  });
-});
-
+/* ===== NAV ===== */
 document.addEventListener("DOMContentLoaded", () => {
   const navLinks = document.querySelectorAll(".bottom-nav a");
 
@@ -20,16 +13,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+/* ===== SPLASH ===== */
 window.addEventListener("load", () => {
   setTimeout(() => {
-    document.getElementById("splash").style.opacity = "0";
+    const splash = document.getElementById("splash");
+    if (splash) splash.style.opacity = "0";
+
     setTimeout(() => {
-      document.getElementById("splash").remove();
+      splash?.remove();
       document.getElementById("app").style.display = "block";
     }, 400);
   }, 1800);
 });
 
+/* ===== SLIDER ===== */
 document.querySelectorAll(".slider").forEach(slider => {
   const slides = slider.querySelector(".slides");
   const images = slides.querySelectorAll("img");
@@ -40,9 +37,8 @@ document.querySelectorAll(".slider").forEach(slider => {
 
   function updateSlider() {
     slides.style.transform = `translateX(-${index * 100}%)`;
-
     dots.forEach(dot => dot.classList.remove("active"));
-    if (dots[index]) dots[index].classList.add("active");
+    dots[index]?.classList.add("active");
   }
 
   slider.addEventListener("touchstart", e => {
@@ -50,20 +46,13 @@ document.querySelectorAll(".slider").forEach(slider => {
   });
 
   slider.addEventListener("touchend", e => {
-    const endX = e.changedTouches[0].clientX;
-    const diff = startX - endX;
+    const diff = startX - e.changedTouches[0].clientX;
 
-    if (diff > 40 && index < images.length - 1) {
-      index++;
-    } else if (diff < -40 && index > 0) {
-      index--;
-    }
+    if (diff > 40 && index < images.length - 1) index++;
+    else if (diff < -40 && index > 0) index--;
 
     updateSlider();
   });
 
-  // стартовое состояние
   updateSlider();
 });
-
-
