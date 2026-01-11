@@ -27,10 +27,11 @@ body {
 }
 
 .product-card {
-  background: white;
-  border-radius: 14px;
-  padding: 16px;
-  text-align: left;;
+  background: #fff;
+  border-radius: 16px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-title {
@@ -144,7 +145,8 @@ body {
 .products-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  gap: 14px;
+  padding: 12px;
 }
 
 /* ===== PRODUCT CARD ===== */
@@ -188,15 +190,16 @@ body {
 }
 
 .dots span {
-  width: 5px;
-  height: 5px;
-  background: #ddd;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
+  background: #ddd;
 }
 
-.dots span.active {
+.dots .active {
   background: #6a00ff;
 }
+
 
 /* PRICE */
 .price-new {
@@ -274,29 +277,24 @@ body {
   border-radius: 12px;
 }
 
-.product-images img {
+.product-image img {
   width: 100%;
-  flex: 0 0 100%;
-  scroll-snap-align: start;
+  height: 150px;
+  object-fit: cover;
   border-radius: 12px;
 }
 
 /* PRICES */
-.prices {
-  margin-top: 8px;
-}
-
-.price-sale {
+.price-new {
   color: #6a00ff;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .price-old {
   color: #9e9e9e;
-  font-size: 12px;
   text-decoration: line-through;
-  display: block;
+  font-size: 13px;
 }
 
 /* TITLE */
@@ -312,14 +310,14 @@ body {
   display: flex;
   align-items: center;
   gap: 6px;
+  font-size: 13px;
   margin-top: 6px;
-  font-size: 14px;
 }
 
 .star {
   width: 14px;
   height: 14px;
-  background-color: #f5a623;
+  background: #f5a623;
   clip-path: polygon(
     50% 0%,
     61% 35%,
@@ -335,7 +333,7 @@ body {
 }
 
 .reviews {
-  color: #8e8e8e;
+  color: #9e9e9e;
 }
 
 
@@ -359,22 +357,19 @@ body {
 }
 
 .add-btn {
-  width: 100%;
   margin-top: 10px;
   background: #6a00ff;
   color: white;
   border: none;
   border-radius: 12px;
-  padding: 12px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  font-size: 15px;
   font-weight: 600;
 }
 
-/* корзина */
 .cart-icon {
   width: 18px;
   height: 14px;
@@ -383,7 +378,6 @@ body {
   position: relative;
 }
 
-/* ручка корзины */
 .cart-icon::before {
   content: "";
   position: absolute;
@@ -396,7 +390,6 @@ body {
   border-radius: 6px 6px 0 0;
 }
 
-/* плюс */
 .plus {
   position: absolute;
   right: -6px;
