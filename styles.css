@@ -148,7 +148,7 @@ body {
 #splash {
   position: fixed;
   inset: 0;
-  background: #ffffff;
+  background: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -163,32 +163,58 @@ body {
   animation: splashIn 1.2s ease forwards;
 }
 
-/* BIG LOGO */
+/* === UZUM LOGO === */
 .big-logo {
-  width: 180px;
-  height: 180px;
-  background: #6a00ff;
-  border-radius: 40px;
-  border: 14px solid #ffeb00;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 14px;
+}
+
+.uzum-icon {
+  width: 140px;
+  height: 140px;
+  background: #6a00ff;
+  border: 12px solid #ffd800;
+  border-radius: 32px;
+  position: relative;
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 
-.u-icon {
-  color: white;
-  font-size: 72px;
-  font-weight: 700;
-  line-height: 1;
+/* линии U */
+.uzum-icon span {
+  position: absolute;
+  width: 18px;
+  background: white;
+  border-radius: 12px;
 }
 
+.uzum-icon .left {
+  height: 70px;
+  left: 38px;
+  bottom: 30px;
+}
+
+.uzum-icon .right {
+  height: 70px;
+  right: 38px;
+  bottom: 30px;
+}
+
+.uzum-icon .center {
+  height: 42px;
+  top: 28px;
+}
+
+/* box текст */
 .box-text {
+  font-size: 32px;
+  font-weight: 700;
   color: white;
-  font-size: 36px;
-  font-weight: 600;
-  margin-top: -6px;
 }
+
 
 /* MINI ICONS */
 .mini-logos {
