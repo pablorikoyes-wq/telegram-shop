@@ -181,9 +181,11 @@ body {
 
 /* ===== DOTS ===== */
 .dots {
-  position: absolute;
+  
   bottom: 8px;
   left: 50%;
+  justify-content: center;
+  margin: 8px 0 4px;
   transform: translateX(-50%);
   display: flex;
   gap: 6px;
