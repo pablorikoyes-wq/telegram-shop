@@ -5,46 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>UzumBox</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <!-- Telegram WebApp -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
- <div class="uzum-icon">
-  <svg viewBox="0 0 100 100">
-    <!-- дуга U -->
-    <path
-      d="M28 38
-         C28 68, 72 68, 72 38"
-      fill="none"
-      stroke="white"
-      stroke-width="12"
-      stroke-linecap="round"
-    />
-
-    <!-- power черточка -->
-    <rect
-      x="47"
-      y="18"
-      width="6"
-      height="24"
-      rx="3"
-      fill="white"
-    />
-  </svg>
-</div>
-
-<div class="box-text">box</div>
-
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-center">
+    <img src="assets/uzum-box.png" class="splash-logo" />
     <div class="mini-logos">
-      <div class="mini purple green">U<br><span>bank</span></div>
-      <div class="mini purple orange">U<br><span>nasiya</span></div>
-      <div class="mini purple blue">U<br><span>tezkor</span></div>
-      <div class="mini purple gray">U<br><span>avto</span></div>
+      <img src="assets/uzum-bank.png" />
+      <img src="assets/uzum-nasiya.png" />
+      <img src="assets/uzum-tezkor.png" />
+      <img src="assets/uzum-avto.png" />
     </div>
   </div>
 </div>
@@ -52,13 +27,10 @@
 <!-- APP -->
 <div id="app" style="display:none;">
 
-
-  <!-- HEADER -->
   <header class="header">
     🛒 <span>UzumBox</span>
   </header>
 
-  <!-- CONTENT -->
   <main class="content">
     <div class="product-card">
       <div class="product-title">Kumush uzuk</div>
@@ -67,39 +39,34 @@
     </div>
   </main>
 
-  <!-- BOTTOM NAV -->
-<div class="bottom-nav">
-  <a href="#" class="active">
-    <!-- HOME -->
-    <svg viewBox="0 0 24 24" fill="none">
-      <path d="M12 3v9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      <circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="2"/>
-    </svg>
-    <span>Bosh sahifa</span>
-  </a>
+  <div class="bottom-nav">
+    <a href="#" class="active">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M12 3v9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <span>Bosh sahifa</span>
+    </a>
 
-  <a href="#">
-    <!-- CART -->
-    <svg viewBox="0 0 24 24" fill="none">
-      <path d="M6 8h12l-1.2 11H7.2L6 8Z" stroke="currentColor" stroke-width="2"/>
-      <path d="M9 8V6a3 3 0 0 1 6 0v2" stroke="currentColor" stroke-width="2"/>
-    </svg>
-    <span>Savat</span>
-  </a>
+    <a href="#">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M6 8h12l-1.2 11H7.2L6 8Z" stroke="currentColor" stroke-width="2"/>
+        <path d="M9 8V6a3 3 0 0 1 6 0v2" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <span>Savat</span>
+    </a>
 
-  <a href="#">
-    <!-- PROFILE -->
-    <svg viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
-      <path d="M4 21c1.5-4 14.5-4 16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-    <span>Profil</span>
-  </a>
+    <a href="#">
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+        <path d="M4 21c1.5-4 14.5-4 16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span>Profil</span>
+    </a>
+  </div>
+
 </div>
 
-  <script src="script.js"></script>
-  </div>
+<script src="script.js"></script>
 </body>
 </html>
-
-
