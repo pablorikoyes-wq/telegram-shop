@@ -144,10 +144,10 @@ body {
 /* ===== GRID ===== */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr; /* 👈 одна карточка */
   gap: 14px;
-  padding: 12px;
 }
+
 
 /* ===== PRODUCT CARD ===== */
 .uzum-card {
