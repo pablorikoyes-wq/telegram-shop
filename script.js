@@ -109,3 +109,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+/* ===== PROFILE SAVE ===== */
+const saveBtn = document.getElementById('save-profile');
+
+if (saveBtn) {
+  saveBtn.addEventListener('click', () => {
+    const data = {
+      name: document.getElementById('profile-name').value,
+      surname: document.getElementById('profile-surname').value,
+      phone: document.getElementById('profile-phone').value,
+      address: document.getElementById('profile-address').value,
+    };
+
+    localStorage.setItem('profile', JSON.stringify(data));
+    alert('Profil saqlandi ✅');
+  });
+}
+
+/* LOAD PROFILE */
+const saved = localStorage.getItem('profile');
+if (saved) {
+  const p = JSON.parse(saved);
+  document.getElementById('profile-name').value = p.name || '';
+  document.getElementById('profile-surname').value = p.surname || '';
+  document.getElementById('profile-phone').value = p.phone || '';
+  document.getElementById('profile-address').value = p.address || '';
+}
