@@ -136,7 +136,7 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
       saveCart(cart);
 
       text.textContent = 'Ertaga';
-      btn.classList.remove('in-cart');
+      btn.classList.remove('savatchada');
     } else {
       cart.push({
         id,
@@ -150,7 +150,7 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
       saveCart(cart);
 
       text.textContent = 'Savatchada';
-      btn.classList.add('in-cart');
+      btn.classList.add('savatchada');
     }
 
     renderCart();
