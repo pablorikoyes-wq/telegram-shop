@@ -118,85 +118,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* ===== CART ===== */
 
+/* ================= CART ================= */
+
 function getCart() {
   return JSON.parse(localStorage.getItem('cart')) || [];
 }
 
 function saveCart(cart) {
   localStorage.setItem('cart', JSON.stringify(cart));
-}
-
-function renderCart() {
-  const cartItems = document.getElementById('cart-items');
-  const empty = document.getElementById('cart-empty');
-  const checkout = document.getElementById('checkout-btn');
-
-  if (!cartItems) return;
-
-  const cart = getCart();
-  cartItems.innerHTML = '';
-
-  if (cart.length === 0) {
-    empty.style.display = 'block';
-    checkout.style.display = 'none';
-    return;
-  }
-
-  empty.style.display = 'none';
-  checkout.style.display = 'block';
-
-  cart.forEach(item => {
-  cartItems.innerHTML += `
-    <div class="cart-item">
-      <img src="${item.image}">
-      <div class="cart-info">
-        <div>${item.title}</div>
-        <strong>${(item.price * item.qty).toLocaleString()} so'm</strong>
-<div>Soni: ${item.qty}</div>
-      </div>
-      <button class="remove-btn" data-id="${item.id}">✕</button>
-    </div>
-  `;
-});
-
-document.addEventListener('click', e => {
-  if (e.target.classList.contains('remove-btn')) {
-    const id = e.target.dataset.id;
-    let cart = getCart();
-
-    cart = cart.filter(item => item.id !== id);
-
-    saveCart(cart);
-    renderCart();
-  }
-});
-
 }
 
 /* ADD TO CART */
-/* ===== CART LOGIC ===== */
-
-function getCart() {
-  return JSON.parse(localStorage.getItem('cart')) || [];
-}
-
-function saveCart(cart) {
-  localStorage.setItem('cart', JSON.stringify(cart));
-}
-
-function addToCart(data) {
-  let cart = getCart();
-  const existing = cart.find(i => i.id === data.id);
-
-  if (existing) {
-    existing.qty += 1;
-  } else {
-    cart.push({ ...data, qty: 1, selected: true });
-  }
-
-  saveCart(cart);
-}
-
 document.querySelectorAll('.add-to-cart').forEach(btn => {
   btn.addEventListener('click', () => {
     const data = {
@@ -206,39 +138,35 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
       image: btn.dataset.image
     };
 
-    addToCart(data);
+    let cart = getCart();
+    const item = cart.find(i => i.id === data.id);
 
-    // визуальный эффект как WB
+    if (item) {
+      item.qty += 1;
+    } else {
+      cart.push({ ...data, qty: 1, selected: true });
+    }
+
+    saveCart(cart);
+
+    // UI как Wildberries
     btn.querySelector('.delivery-text').textContent = 'Savatchada';
     const badge = btn.querySelector('.cart-count');
     badge.hidden = false;
-    badge.textContent = '1';
+    badge.textContent = item ? item.qty : 1;
   });
 });
 
-
-
-/* INIT CART */
+/* RENDER CART */
 function renderCart() {
-  const cartItems = document.getElementById('cart-items');
-  const empty = document.getElementById('cart-empty');
-  const checkout = document.getElementById('checkout-btn');
-  const totalEl = document.getElementById('cart-total');
-
-  if (!cartItems) return;
-
   const cart = getCart();
-  cartItems.innerHTML = '';
+  const list = document.getElementById('cart-items');
+  const totalEl = document.getElementById('total-sum');
+  const checkout = document.getElementById('checkout-btn');
 
-  if (cart.length === 0) {
-    empty.style.display = 'block';
-    checkout.style.display = 'none';
-    return;
-  }
+  if (!list) return;
 
-  empty.style.display = 'none';
-  checkout.style.display = 'block';
-
+  list.innerHTML = '';
   let total = 0;
 
   cart.forEach((item, index) => {
@@ -246,7 +174,7 @@ function renderCart() {
       total += item.price * item.qty;
     }
 
-    cartItems.innerHTML += `
+    list.innerHTML += `
       <div class="cart-item">
         <input type="checkbox" ${item.selected ? 'checked' : ''}
           onchange="toggleSelect(${index})">
@@ -261,23 +189,21 @@ function renderCart() {
             <button onclick="changeQty(${index}, -1)">−</button>
             <span>${item.qty}</span>
             <button onclick="changeQty(${index}, 1)">+</button>
+            <button class="buy-btn">Купить</button>
           </div>
         </div>
-
-        <button class="buy-now">Купить</button>
       </div>
     `;
   });
 
-  totalEl.innerText = total.toLocaleString() + " so'm";
+  totalEl.textContent = total.toLocaleString() + " so'm";
+  checkout.style.display = cart.length ? 'block' : 'none';
 }
 
 function changeQty(index, delta) {
   const cart = getCart();
   cart[index].qty += delta;
-
   if (cart[index].qty < 1) cart[index].qty = 1;
-
   saveCart(cart);
   renderCart();
 }
@@ -289,48 +215,3 @@ function toggleSelect(index) {
   renderCart();
 }
 
-function renderCart() {
-  const cart = getCart();
-  const container = document.getElementById('cart-items');
-  const totalEl = document.getElementById('total-sum');
-
-  if (!container) return;
-
-  container.innerHTML = '';
-  let total = 0;
-
-  cart.forEach(item => {
-    if (item.selected) total += item.price * item.qty;
-
-    container.innerHTML += `
-      <div class="cart-item">
-        <img src="${item.image}">
-        <div>
-          <div>${item.title}</div>
-          <strong>${item.price.toLocaleString()} so'm</strong>
-
-          <div class="qty">
-            <button onclick="changeQty('${item.id}', -1)">−</button>
-            <span>${item.qty}</span>
-            <button onclick="changeQty('${item.id}', 1)">+</button>
-            <button class="buy-btn">Купить</button>
-          </div>
-        </div>
-      </div>
-    `;
-  });
-
-  totalEl.textContent = total.toLocaleString();
-}
-
-function changeQty(id, delta) {
-  let cart = getCart();
-  const item = cart.find(i => i.id === id);
-  if (!item) return;
-
-  item.qty += delta;
-  if (item.qty < 1) item.qty = 1;
-
-  saveCart(cart);
-  renderCart();
-}
