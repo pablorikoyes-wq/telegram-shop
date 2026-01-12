@@ -427,6 +427,22 @@ body {
   background: none; /* 🔥 убрали белый круг */
 }
 
+.plus {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  background: white;
+  color: #6a00ff;
+  font-size: 12px;
+  font-weight: 700;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ===== PRODUCT SLIDER ===== */
 .slider {
   width: 100%;
@@ -664,14 +680,15 @@ body {
 
 .checkout-btn {
   position: fixed;
-  bottom: 96px;
+  bottom: 120px; /* 👈 ЧУТЬ ВЫШЕ */
   left: 16px;
   right: 16px;
+  height: 56px;
   background: #ff7a00;
   color: white;
   border: none;
   border-radius: 16px;
-  padding: 16px;
   font-size: 16px;
   font-weight: 700;
+  z-index: 999;
 }

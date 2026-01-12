@@ -116,10 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-/* ===== CART ===== */
-
-/* ================= CART ================= */
-
 function getCart() {
   return JSON.parse(localStorage.getItem('cart')) || [];
 }
@@ -127,6 +123,49 @@ function getCart() {
 function saveCart(cart) {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
+
+document.querySelectorAll('.add-to-cart').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.dataset.id;
+
+    let cart = getCart();
+    const index = cart.findIndex(i => i.id === id);
+
+    const plus = btn.querySelector('.plus');
+    const badge = btn.querySelector('.cart-count');
+    const text = btn.querySelector('.delivery-text');
+
+    // ❌ УДАЛЯЕМ
+    if (index !== -1) {
+      cart.splice(index, 1);
+      saveCart(cart);
+
+      text.textContent = 'Ertaga';
+      badge.hidden = true;
+      plus.style.display = 'flex';
+    }
+    // ✅ ДОБАВЛЯЕМ
+    else {
+      cart.push({
+        id,
+        title: btn.dataset.title,
+        price: Number(btn.dataset.price),
+        image: btn.dataset.image,
+        qty: 1,
+        selected: true
+      });
+
+      saveCart(cart);
+
+      text.textContent = 'Savatchada';
+      badge.hidden = false;
+      badge.textContent = '1';
+      plus.style.display = 'none';
+    }
+
+    renderCart();
+  });
+});
 
 
 
@@ -207,51 +246,8 @@ function saveCart(cart) {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-document.querySelectorAll('.add-to-cart').forEach(btn => {
-  btn.addEventListener('click', () => {
-    if (btn.classList.contains('disabled')) return;
 
-    const data = {
-      id: btn.dataset.id,
-      title: btn.dataset.title,
-      price: Number(btn.dataset.price),
-      image: btn.dataset.image,
-      qty: 1,
-      selected: true
-    };
-
-    let cart = getCart();
-    cart.push(data);
-    saveCart(cart);
-
-    // 🎯 UI как WB
-    btn.classList.add('disabled');
-    btn.querySelector('.delivery-text').textContent = 'Savatchada';
-
-    btn.querySelector('.cart-plus').style.display = 'none';
-    const badge = btn.querySelector('.cart-count');
-    badge.hidden = false;
-    badge.textContent = '1';
-  });
-});
 
 
 /* ===== BUTTON STATES ===== */
-function setBtnInCart(btn) {
-  btn.classList.add('in-cart');
-  btn.querySelector('.delivery-text').textContent = 'Savatchada';
 
-  btn.querySelector('.cart-plus').style.display = 'none';
-
-  const badge = btn.querySelector('.cart-count');
-  badge.hidden = false;
-  badge.textContent = '1';
-}
-
-function setBtnDefault(btn) {
-  btn.classList.remove('in-cart');
-  btn.querySelector('.delivery-text').textContent = 'Ertaga';
-
-  btn.querySelector('.cart-plus').style.display = 'block';
-  btn.querySelector('.cart-count').hidden = true;
-}
