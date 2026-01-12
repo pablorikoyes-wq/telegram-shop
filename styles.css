@@ -263,18 +263,14 @@ body {
 
 /* BUTTON */
 .buy-btn {
-  margin-top: 8px;
-  width: 100%;
+  flex: 1;
+  height: 44px;
   background: #6a00ff;
   color: #fff;
   border: none;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 13px;
+  border-radius: 14px;
+  font-size: 15px;
   font-weight: 600;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .buy-btn span {
@@ -396,6 +392,8 @@ body {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+
+  position: relative;
 }
 
 .add-btn.disabled {
@@ -417,6 +415,21 @@ body {
   fill: none;
 }
 
+.add-btn.in-cart::after {
+  content: "1";
+  position: absolute;
+  top: 6px;
+  left: 38px;
+  background: red;
+  color: white;
+  font-size: 10px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 
 
@@ -664,3 +677,29 @@ body {
   font-weight: 700;
   z-index: 999;
 }
+
+.cart-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.qty-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f1f1f1;
+  border-radius: 20px;
+  padding: 6px 12px;
+}
+
+.qty-box button {
+  border: none;
+  background: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+

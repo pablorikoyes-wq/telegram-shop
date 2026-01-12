@@ -129,43 +129,34 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
     const id = btn.dataset.id;
     let cart = getCart();
     const index = cart.findIndex(i => i.id === id);
-
-    const badge = btn.querySelector('.cart-count');
     const text = btn.querySelector('.delivery-text');
 
-    // ❌ УБИРАЕМ ИЗ КОРЗИНЫ
     if (index !== -1) {
-  // ❌ удаляем из корзины
-  cart.splice(index, 1);
-  saveCart(cart);
+      cart.splice(index, 1);
+      saveCart(cart);
 
-  text.textContent = 'Ertaga';
-  btn.classList.remove('in-cart');
-  badge.hidden = true; // ❗ скрываем всегда
-} else {
-  // ✅ добавляем в корзину
-  cart.push({
-    id,
-    title: btn.dataset.title,
-    price: Number(btn.dataset.price),
-    image: btn.dataset.image,
-    qty: 1,
-    selected: true
-  });
+      text.textContent = 'Ertaga';
+      btn.classList.remove('in-cart');
+    } else {
+      cart.push({
+        id,
+        title: btn.dataset.title,
+        price: Number(btn.dataset.price),
+        image: btn.dataset.image,
+        qty: 1,
+        selected: true
+      });
 
-  saveCart(cart);
+      saveCart(cart);
 
-  text.textContent = 'Savatchada';
-  btn.classList.add('in-cart');
-
-  badge.textContent = '1';
-  badge.hidden = false; // ❗ показываем ТОЛЬКО тут
-}
-
+      text.textContent = 'Savatchada';
+      btn.classList.add('in-cart');
+    }
 
     renderCart();
   });
 });
+
 
 
 
@@ -211,6 +202,7 @@ function renderCart() {
 
   <button class="buy-btn">Sotib olish</button>
 </div>
+
         </div>
       </div>
     `;
