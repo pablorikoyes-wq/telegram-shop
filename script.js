@@ -14,29 +14,25 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ===== SPLASH ===== */
-window.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
   const splash = document.getElementById("splash");
   const app = document.getElementById("app");
 
-  if (!splash || !app) return;
+  const splashShown = sessionStorage.getItem("splashShown");
 
-  // если splash уже показывался
-  if (sessionStorage.getItem("splashShown")) {
-    splash.remove();
-    app.style.display = "block";
-    return;
-  }
-
-  // первый запуск
-  setTimeout(() => {
-    splash.style.opacity = "0";
+  if (!splashShown) {
+    splash.style.display = "flex";
     setTimeout(() => {
-      splash.remove();
+      splash.style.display = "none";
       app.style.display = "block";
       sessionStorage.setItem("splashShown", "true");
-    }, 400);
-  }, 1200);
+    }, 1500);
+  } else {
+    splash.style.display = "none";
+    app.style.display = "block";
+  }
 });
+
 
 
 /* ===== SLIDER ===== */
@@ -69,3 +65,4 @@ document.querySelectorAll(".slider").forEach(slider => {
 
   updateSlider();
 });
+
