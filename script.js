@@ -150,17 +150,31 @@ function renderCart() {
   checkout.style.display = 'block';
 
   cart.forEach(item => {
-    cartItems.innerHTML += `
-      <div class="cart-item">
-        <img src="${item.image}">
-        <div class="cart-info">
-          <div>${item.title}</div>
-          <strong>${(item.price * item.qty).toLocaleString()} so'm</strong>
-          <small>Soni: ${item.qty}</small>
-        </div>
+  cartItems.innerHTML += `
+    <div class="cart-item">
+      <img src="${item.image}">
+      <div class="cart-info">
+        <div>${item.title}</div>
+        <strong>${(item.price * item.qty).toLocaleString()} so'm</strong>
+        <div>Soni: ${item.qty}</div>
       </div>
-    `;
-  });
+      <button class="remove-btn" data-id="${item.id}">✕</button>
+    </div>
+  `;
+});
+
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('remove-btn')) {
+    const id = e.target.dataset.id;
+    let cart = getCart();
+
+    cart = cart.filter(item => item.id !== id);
+
+    saveCart(cart);
+    renderCart();
+  }
+});
+
 }
 
 /* ADD TO CART */
