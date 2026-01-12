@@ -72,3 +72,40 @@ document.querySelectorAll('.bottom-nav a').forEach(link => {
     link.classList.add('active');
   });
 });
+
+/* ===== PROFILE SAVE / LOAD ===== */
+document.addEventListener("DOMContentLoaded", () => {
+  const nameInput = document.getElementById("profile-name");
+  const surnameInput = document.getElementById("profile-surname");
+  const phoneInput = document.getElementById("profile-phone");
+  const addressInput = document.getElementById("profile-address");
+  const saveBtn = document.getElementById("save-profile");
+
+  // загрузка профиля
+  const savedProfile = localStorage.getItem("profile");
+  if (savedProfile) {
+    const profile = JSON.parse(savedProfile);
+    nameInput.value = profile.name || "";
+    surnameInput.value = profile.surname || "";
+    phoneInput.value = profile.phone || "";
+    addressInput.value = profile.address || "";
+  }
+
+  // сохранение профиля
+  saveBtn.addEventListener("click", () => {
+    const profile = {
+      name: nameInput.value.trim(),
+      surname: surnameInput.value.trim(),
+      phone: phoneInput.value.trim(),
+      address: addressInput.value.trim()
+    };
+
+    localStorage.setItem("profile", JSON.stringify(profile));
+
+    if (window.Telegram?.WebApp) {
+      Telegram.WebApp.showAlert("Profil saqlandi ✅");
+    } else {
+      alert("Profil saqlandi");
+    }
+  });
+});
