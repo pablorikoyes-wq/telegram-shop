@@ -1,19 +1,7 @@
 const tg = window.Telegram.WebApp;
 tg.ready();
 
-/* ===== NAV ===== */
-document.addEventListener("DOMContentLoaded", () => {
-  const navLinks = document.querySelectorAll(".bottom-nav a");
-
-  navLinks.forEach(link => {
-    link.addEventListener("click", () => {
-      navLinks.forEach(l => l.classList.remove("active"));
-      link.classList.add("active");
-    });
-  });
-});
-
-/* ===== SPLASH ===== */
+/* ===== SPLASH (один раз) ===== */
 document.addEventListener("DOMContentLoaded", () => {
   const splash = document.getElementById("splash");
   const app = document.getElementById("app");
@@ -32,8 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
     app.style.display = "block";
   }
 });
-
-
 
 /* ===== SLIDER ===== */
 document.querySelectorAll(".slider").forEach(slider => {
@@ -66,22 +52,23 @@ document.querySelectorAll(".slider").forEach(slider => {
   updateSlider();
 });
 
+/* ===== PAGE SWITCH (SPA) ===== */
 document.querySelectorAll('.bottom-nav a').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
 
     const page = link.dataset.page;
 
-    // pages
     document.querySelectorAll('.page').forEach(p => {
       p.classList.remove('active');
     });
+
     document.getElementById('page-' + page).classList.add('active');
 
-    // bottom nav active
     document.querySelectorAll('.bottom-nav a').forEach(a => {
       a.classList.remove('active');
     });
+
     link.classList.add('active');
   });
 });
