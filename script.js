@@ -127,50 +127,44 @@ function saveCart(cart) {
 document.querySelectorAll('.add-to-cart').forEach(btn => {
   btn.addEventListener('click', () => {
     const id = btn.dataset.id;
-
     let cart = getCart();
     const index = cart.findIndex(i => i.id === id);
 
-    const plus = btn.querySelector('.plus');
     const badge = btn.querySelector('.cart-count');
     const text = btn.querySelector('.delivery-text');
 
-    // ❌ УДАЛЯЕМ
+    // ❌ УБИРАЕМ ИЗ КОРЗИНЫ
     if (index !== -1) {
       cart.splice(index, 1);
       saveCart(cart);
 
       text.textContent = 'Ertaga';
       badge.hidden = true;
-      plus.style.display = 'flex';
-
-      btn.classList.remove('in-cart'); // 👈 ВАЖНО
+      btn.classList.remove('in-cart');
     }
-    // ✅ ДОБАВЛЯЕМ
+    // ✅ ДОБАВЛЯЕМ В КОРЗИНУ
     else {
       cart.push({
-  id,
-  title: btn.dataset.title,
-  price: Number(btn.dataset.price),
-  image: btn.dataset.image,
-  qty: 1,
-  selected: true
-});
-
-btn.classList.add('in-cart');
-
+        id,
+        title: btn.dataset.title,
+        price: Number(btn.dataset.price),
+        image: btn.dataset.image,
+        qty: 1,
+        selected: true
+      });
 
       saveCart(cart);
 
       text.textContent = 'Savatchada';
       badge.hidden = false;
       badge.textContent = '1';
-      plus.style.display = 'none';
+      btn.classList.add('in-cart');
     }
 
     renderCart();
   });
 });
+
 
 
 

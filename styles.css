@@ -417,21 +417,7 @@ body {
   fill: none;
 }
 
-.cart-icon .plus {
-  position: absolute;
-  right: -6px;
-  bottom: -6px;
-  background: white;
-  color: #6a00ff;
-  font-size: 12px;
-  font-weight: 700;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  display: flex;          /* 👈 ВАЖНО */
-  align-items: center;
-  justify-content: center;
-}
+
 
 
 
@@ -662,6 +648,7 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 
 .checkout-btn {
   position: fixed;
