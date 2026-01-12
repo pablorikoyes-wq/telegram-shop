@@ -66,3 +66,22 @@ document.querySelectorAll(".slider").forEach(slider => {
   updateSlider();
 });
 
+document.querySelectorAll('.bottom-nav a').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+
+    const page = link.dataset.page;
+
+    // pages
+    document.querySelectorAll('.page').forEach(p => {
+      p.classList.remove('active');
+    });
+    document.getElementById('page-' + page).classList.add('active');
+
+    // bottom nav active
+    document.querySelectorAll('.bottom-nav a').forEach(a => {
+      a.classList.remove('active');
+    });
+    link.classList.add('active');
+  });
+});
