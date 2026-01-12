@@ -373,6 +373,11 @@ body {
   gap: 6px;
 }
 
+.add-btn.in-cart {
+  background: #e0e0e0;
+  color: #777;
+}
+
 .add-btn {
   margin-top: 10px;
   width: 100%;
@@ -579,6 +584,15 @@ body {
   margin-bottom: 10px;
 }
 
+.cart-plus {
+  position: absolute;
+  right: -6px;
+  bottom: -6px;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+}
+
 .cart-item img {
   width: 60px;
   height: 60px;
@@ -646,4 +660,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.checkout-btn {
+  position: fixed;
+  bottom: 96px;
+  left: 16px;
+  right: 16px;
+  background: #ff7a00;
+  color: white;
+  border: none;
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 700;
 }

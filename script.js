@@ -199,37 +199,42 @@ function removeFromCart(id) {
   saveCart(cart);
 }
 
+function getCart() {
+  return JSON.parse(localStorage.getItem('cart')) || [];
+}
+
+function saveCart(cart) {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
 document.querySelectorAll('.add-to-cart').forEach(btn => {
-  const id = btn.dataset.id;
-
-  // восстановление состояния при загрузке
-  if (isInCart(id)) {
-    setBtnInCart(btn);
-  }
-
   btn.addEventListener('click', () => {
-    if (isInCart(id)) {
-      // ❌ убрать товар
-      removeFromCart(id);
-      setBtnDefault(btn);
-    } else {
-      // ✅ добавить товар
-      const cart = getCart();
-      cart.push({
-        id,
-        title: btn.dataset.title,
-        price: Number(btn.dataset.price),
-        image: btn.dataset.image,
-        qty: 1,
-        selected: true
-      });
-      saveCart(cart);
-      setBtnInCart(btn);
-    }
+    if (btn.classList.contains('disabled')) return;
 
-    renderCart();
+    const data = {
+      id: btn.dataset.id,
+      title: btn.dataset.title,
+      price: Number(btn.dataset.price),
+      image: btn.dataset.image,
+      qty: 1,
+      selected: true
+    };
+
+    let cart = getCart();
+    cart.push(data);
+    saveCart(cart);
+
+    // 🎯 UI как WB
+    btn.classList.add('disabled');
+    btn.querySelector('.delivery-text').textContent = 'Savatchada';
+
+    btn.querySelector('.cart-plus').style.display = 'none';
+    const badge = btn.querySelector('.cart-count');
+    badge.hidden = false;
+    badge.textContent = '1';
   });
 });
+
 
 /* ===== BUTTON STATES ===== */
 function setBtnInCart(btn) {
