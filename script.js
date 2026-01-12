@@ -156,7 +156,7 @@ function renderCart() {
       <div class="cart-info">
         <div>${item.title}</div>
         <strong>${(item.price * item.qty).toLocaleString()} so'm</strong>
-        <div>Soni: ${item.qty}</div>
+<div>Soni: ${item.qty}</div>
       </div>
       <button class="remove-btn" data-id="${item.id}">✕</button>
     </div>
@@ -192,13 +192,26 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
     if (existing) {
       existing.qty += 1;
     } else {
-      cart.push({
-        id,
-        title: btn.dataset.title,
-        price: Number(btn.dataset.price),
-        image: btn.dataset.image,
-        qty: 1
-      });
+      const id = btn.dataset.id;
+let cart = getCart();
+
+const existing = cart.find(item => item.id === id);
+
+if (existing) {
+  existing.qty += 1;
+} else {
+  cart.push({
+    id,
+    title: btn.dataset.title,
+    price: Number(btn.dataset.price),
+    image: btn.dataset.image,
+    qty: 1
+  });
+}
+
+saveCart(cart);
+renderCart();
+alert('Savatga qo‘shildi ✅');
     }
 
     saveCart(cart);
