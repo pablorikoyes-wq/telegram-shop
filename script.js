@@ -182,50 +182,110 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
   btn.addEventListener('click', () => {
     const cart = getCart();
 
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const cart = getCart();
-
     const id = btn.dataset.id;
     const existing = cart.find(i => i.id === id);
 
     if (existing) {
       existing.qty += 1;
     } else {
-      const id = btn.dataset.id;
-let cart = getCart();
-
-const existing = cart.find(item => item.id === id);
-
-if (existing) {
-  existing.qty += 1;
-} else {
-  cart.push({
-    id,
-    title: btn.dataset.title,
-    price: Number(btn.dataset.price),
-    image: btn.dataset.image,
-    qty: 1
-  });
-}
-
-saveCart(cart);
-renderCart();
-alert('Savatga qo‘shildi ✅');
+      cart.push({
+        id,
+        title: btn.dataset.title,
+        price: Number(btn.dataset.price),
+        image: btn.dataset.image,
+        qty: 1,
+        selected: true
+      });
     }
 
     saveCart(cart);
-    Telegram.WebApp.showAlert('Savatga qo‘shildi ✅');
-  });
-});
 
+    // гасим кнопку
+    btn.classList.add('disabled');
+    btn.setAttribute('disabled', true);
 
-    saveCart(cart);
+    // бейдж 1
+    if (!btn.querySelector('.cart-badge')) {
+      const badge = document.createElement('div');
+      badge.className = 'cart-badge';
+      badge.innerText = '1';
+      btn.style.position = 'relative';
+      btn.appendChild(badge);
+    }
+
     renderCart();
-
-    alert('Savatga qo‘shildi ✅');
   });
 });
+
 
 /* INIT CART */
-renderCart();
+function renderCart() {
+  const cartItems = document.getElementById('cart-items');
+  const empty = document.getElementById('cart-empty');
+  const checkout = document.getElementById('checkout-btn');
+  const totalEl = document.getElementById('cart-total');
+
+  if (!cartItems) return;
+
+  const cart = getCart();
+  cartItems.innerHTML = '';
+
+  if (cart.length === 0) {
+    empty.style.display = 'block';
+    checkout.style.display = 'none';
+    return;
+  }
+
+  empty.style.display = 'none';
+  checkout.style.display = 'block';
+
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    if (item.selected) {
+      total += item.price * item.qty;
+    }
+
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        <input type="checkbox" ${item.selected ? 'checked' : ''}
+          onchange="toggleSelect(${index})">
+
+        <img src="${item.image}">
+
+        <div class="cart-info">
+          <div>${item.title}</div>
+          <strong>${(item.price * item.qty).toLocaleString()} so'm</strong>
+
+          <div class="qty">
+            <button onclick="changeQty(${index}, -1)">−</button>
+            <span>${item.qty}</span>
+            <button onclick="changeQty(${index}, 1)">+</button>
+          </div>
+        </div>
+
+        <button class="buy-now">Купить</button>
+      </div>
+    `;
+  });
+
+  totalEl.innerText = total.toLocaleString() + " so'm";
+}
+
+function changeQty(index, delta) {
+  const cart = getCart();
+  cart[index].qty += delta;
+
+  if (cart[index].qty < 1) cart[index].qty = 1;
+
+  saveCart(cart);
+  renderCart();
+}
+
+function toggleSelect(index) {
+  const cart = getCart();
+  cart[index].selected = !cart[index].selected;
+  saveCart(cart);
+  renderCart();
+}
+
