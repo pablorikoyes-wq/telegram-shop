@@ -535,3 +535,12 @@ body {
   font-weight: 500;
 }
 
+#page-profile input,
+#page-profile textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}

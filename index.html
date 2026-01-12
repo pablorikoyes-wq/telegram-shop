@@ -36,71 +36,96 @@
 
   <!-- PRODUCTS -->
   <main class="content">
-  <div class="products-grid">
 
-<div class="product-card">
+  <!-- 🟣 HOME -->
+  <section id="page-home" class="page active">
+    <div class="products-grid">
 
-  <!-- SLIDER -->
-  <div class="slider">
-    <div class="slides">
-      <img src="assets/products/sofa/sofa-1.jpg">
-      <img src="assets/products/sofa/sofa-2.jpg">
-      <img src="assets/products/sofa/sofa-3.jpg">
-      <img src="assets/products/sofa/sofa-4.jpg">
-      <img src="assets/products/sofa/sofa-5.jpg">
-      <img src="assets/products/sofa/sofa-6.jpg">
+      <div class="product-card">
+
+        <!-- SLIDER -->
+        <div class="slider">
+          <div class="slides">
+            <img src="assets/products/sofa/sofa-1.jpg">
+            <img src="assets/products/sofa/sofa-2.jpg">
+            <img src="assets/products/sofa/sofa-3.jpg">
+            <img src="assets/products/sofa/sofa-4.jpg">
+            <img src="assets/products/sofa/sofa-5.jpg">
+            <img src="assets/products/sofa/sofa-6.jpg">
+          </div>
+        </div>
+
+        <!-- DOTS -->
+        <div class="dots">
+          <span class="active"></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <!-- PRICE -->
+        <div class="price">
+          <div class="price-new">250 000 so'm</div>
+          <div class="price-old">990 000 so'm</div>
+        </div>
+
+        <!-- TITLE -->
+        <div class="title">Uglovoy arab divan (16 narsa)</div>
+
+        <!-- RATING -->
+        <div class="rating">
+          <span class="star"></span>
+          <span class="rate">4.8</span>
+          <span class="reviews">(7 ta sharh)</span>
+        </div>
+
+        <!-- BUTTON -->
+        <button class="add-btn">
+          <span class="cart-icon">
+            <svg viewBox="0 0 24 24" class="cart-svg">
+              <path d="M6 8h12l-1.2 11H7.2L6 8Z"/>
+              <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
+            </svg>
+            <span class="plus">+</span>
+          </span>
+          <span class="delivery-text">Ertaga</span>
+        </button>
+
+      </div>
     </div>
-  </div>
+  </section>
 
-  <!-- DOTS (ВАЖНО: ВНЕ slider) -->
-  <div class="dots">
-    <span class="active"></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
+  <!-- 🟣 CART -->
+  <section id="page-cart" class="page">
+    <h2>Savat</h2>
+    <p>Hozircha bo‘sh</p>
+  </section>
 
-  <!-- PRICE -->
-  <div class="price">
-    <div class="price-new">250 000 so'm</div>
-    <div class="price-old">990 000 so'm</div>
-  </div>
+  <!-- 🟣 PROFILE -->
+  <section id="page-profile" class="page">
+    <h2>Profil</h2>
 
-  <!-- TITLE -->
-  <div class="title">
-    Uglovoy arab divan (16 narsa)
-  </div>
+    <label>Ism</label>
+    <input placeholder="Ismingiz">
 
-  <!-- RATING -->
-  <div class="rating">
-    <span class="star"></span>
-    <span class="rate">4.8</span>
-    <span class="reviews">(7 ta sharh)</span>
-  </div>
+    <label>Familiya</label>
+    <input placeholder="Familiyangiz">
 
-  <!-- BUTTON -->
-  <button class="add-btn">
-    <span class="cart-icon">
-      <svg viewBox="0 0 24 24" class="cart-svg">
-        <path d="M6 8h12l-1.2 11H7.2L6 8Z"/>
-        <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
-      </svg>
-      <span class="plus">+</span>
-    </span>
-    <span class="delivery-text">Ertaga</span>
-  </button>
+    <label>Telefon</label>
+    <input placeholder="+998">
 
-</div>
+    <label>Manzil</label>
+    <textarea placeholder="Manzilni kiriting"></textarea>
 
+    <button class="save-btn">Saqlash</button>
+    <button class="contact-btn">📞 Biz bilan bog‘lanish</button>
+  </section>
 
-  </div>
 </main>
 
 
+
 <div class="bottom-nav">
-  <a href="index.html">
+
+  <a href="#" data-page="home" class="active">
     <svg viewBox="0 0 24 24" fill="none">
       <path d="M12 3v9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       <circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="2"/>
@@ -108,7 +133,7 @@
     <span>Bosh sahifa</span>
   </a>
 
-  <a href="cart.html">
+  <a href="#" data-page="cart">
     <svg viewBox="0 0 24 24" fill="none">
       <path d="M6 8h12l-1.2 11H7.2L6 8Z" stroke="currentColor" stroke-width="2"/>
       <path d="M9 8V6a3 3 0 0 1 6 0v2" stroke="currentColor" stroke-width="2"/>
@@ -116,16 +141,16 @@
     <span>Savat</span>
   </a>
 
-  <a href="profile.html" class="active">
+  <a href="#" data-page="profile">
     <svg viewBox="0 0 24 24" fill="none">
       <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
-      <path d="M4 21c1.5-4 14.5-4 16 0"
-            stroke="currentColor" stroke-width="2"
-            stroke-linecap="round"/>
+      <path d="M4 21c1.5-4 14.5-4 16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
     </svg>
     <span>Profil</span>
   </a>
+
 </div>
+
 
 
 
