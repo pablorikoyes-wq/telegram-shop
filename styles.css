@@ -417,3 +417,77 @@ body {
   background: #6a00ff;            /* ✅ фиолетовая */
 }
 
+/* ===== PROFILE PAGE ===== */
+
+.profile-header {
+  background: #6a00ff;
+  color: white;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+}
+
+.profile-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profile-field label {
+  font-size: 13px;
+  color: #666;
+}
+
+.profile-field input,
+.profile-field textarea {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.profile-field textarea {
+  resize: none;
+  height: 80px;
+}
+
+.save-btn {
+  margin-top: 10px;
+  background: #6a00ff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.contact-btn {
+  background: #f3f3f3;
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 14px;
+}
