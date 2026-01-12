@@ -143,17 +143,22 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
       text.textContent = 'Ertaga';
       badge.hidden = true;
       plus.style.display = 'flex';
+
+      btn.classList.remove('in-cart'); // 👈 ВАЖНО
     }
     // ✅ ДОБАВЛЯЕМ
     else {
       cart.push({
-        id,
-        title: btn.dataset.title,
-        price: Number(btn.dataset.price),
-        image: btn.dataset.image,
-        qty: 1,
-        selected: true
-      });
+  id,
+  title: btn.dataset.title,
+  price: Number(btn.dataset.price),
+  image: btn.dataset.image,
+  qty: 1,
+  selected: true
+});
+
+btn.classList.add('in-cart');
+
 
       saveCart(cart);
 
@@ -171,6 +176,7 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
 
 /* RENDER CART */
 function renderCart() {
+  const empty = document.getElementById('cart-empty');
   const cart = getCart();
   const list = document.getElementById('cart-items');
   const totalEl = document.getElementById('total-sum');
@@ -186,6 +192,8 @@ function renderCart() {
       total += item.price * item.qty;
     }
 
+    empty.style.display = cart.length ? 'none' : 'block';
+
     list.innerHTML += `
       <div class="cart-item">
         <input type="checkbox" ${item.selected ? 'checked' : ''}
@@ -197,12 +205,15 @@ function renderCart() {
           <div>${item.title}</div>
           <strong>${(item.price * item.qty).toLocaleString()} so'm</strong>
 
-          <div class="qty">
-            <button onclick="changeQty(${index}, -1)">−</button>
-            <span>${item.qty}</span>
-            <button onclick="changeQty(${index}, 1)">+</button>
-            <button class="buy-btn">Купить</button>
-          </div>
+          <div class="cart-actions">
+  <div class="qty-box">
+    <button onclick="changeQty(${index}, -1)">−</button>
+    <span>${item.qty}</span>
+    <button onclick="changeQty(${index}, 1)">+</button>
+  </div>
+
+  <button class="buy-btn">Sotib olish</button>
+</div>
         </div>
       </div>
     `;
