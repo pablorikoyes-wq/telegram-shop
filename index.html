@@ -78,16 +78,22 @@
         </div>
 
         <!-- BUTTON -->
-        <button class="add-btn">
-          <span class="cart-icon">
-            <svg viewBox="0 0 24 24" class="cart-svg">
-              <path d="M6 8h12l-1.2 11H7.2L6 8Z"/>
-              <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
-            </svg>
-            <span class="plus">+</span>
-          </span>
-          <span class="delivery-text">Ertaga</span>
-        </button>
+        <button class="add-btn add-to-cart"
+  data-id="1"
+  data-title="Uglovoy arab divan (16 narsa)"
+  data-price="250000"
+  data-image="assets/products/sofa/sofa-1.jpg"
+>
+  <span class="cart-icon">
+    <svg viewBox="0 0 24 24" class="cart-svg">
+      <path d="M6 8h12l-1.2 11H7.2L6 8Z"/>
+      <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
+    </svg>
+    <span class="plus">+</span>
+  </span>
+  <span class="delivery-text">Ertaga</span>
+</button>
+
 
       </div>
     </div>
@@ -96,7 +102,8 @@
   <!-- 🛒 CART -->
 <section id="page-cart" class="page">
   <h2>Savat</h2>
-  <p class="empty-cart">Hozircha bo‘sh</p>
+
+  <p id="cart-empty">Hozircha bo‘sh</p>
 
   <div id="cart-items"></div>
 
@@ -104,6 +111,7 @@
     Buyurtma berish
   </button>
 </section>
+
 
   <!-- 🟣 CART -->
   <section id="page-cart" class="page">

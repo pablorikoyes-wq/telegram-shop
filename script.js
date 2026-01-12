@@ -136,3 +136,67 @@ if (saved) {
   document.getElementById('profile-phone').value = p.phone || '';
   document.getElementById('profile-address').value = p.address || '';
 }
+
+/* ===== CART ===== */
+
+function getCart() {
+  return JSON.parse(localStorage.getItem('cart')) || [];
+}
+
+function saveCart(cart) {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function renderCart() {
+  const cartItems = document.getElementById('cart-items');
+  const empty = document.getElementById('cart-empty');
+  const checkout = document.getElementById('checkout-btn');
+
+  if (!cartItems) return;
+
+  const cart = getCart();
+  cartItems.innerHTML = '';
+
+  if (cart.length === 0) {
+    empty.style.display = 'block';
+    checkout.style.display = 'none';
+    return;
+  }
+
+  empty.style.display = 'none';
+  checkout.style.display = 'block';
+
+  cart.forEach(item => {
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        <img src="${item.image}">
+        <div class="cart-info">
+          <div>${item.title}</div>
+          <strong>${item.price.toLocaleString()} so'm</strong>
+        </div>
+      </div>
+    `;
+  });
+}
+
+/* ADD TO CART */
+document.querySelectorAll('.add-to-cart').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const cart = getCart();
+
+    cart.push({
+      id: btn.dataset.id,
+      title: btn.dataset.title,
+      price: Number(btn.dataset.price),
+      image: btn.dataset.image
+    });
+
+    saveCart(cart);
+    renderCart();
+
+    alert('Savatga qo‘shildi ✅');
+  });
+});
+
+/* INIT CART */
+renderCart();
