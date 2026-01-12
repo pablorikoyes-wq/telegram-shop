@@ -15,16 +15,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* ===== SPLASH ===== */
 window.addEventListener("load", () => {
-  setTimeout(() => {
-    const splash = document.getElementById("splash");
-    if (splash) splash.style.opacity = "0";
+  const splash = document.getElementById("splash");
+  const app = document.getElementById("app");
 
+  if (!splash || !app) return;
+
+  // если splash уже показывался
+  if (sessionStorage.getItem("splashShown")) {
+    splash.remove();
+    app.style.display = "block";
+    return;
+  }
+
+  // первый запуск
+  setTimeout(() => {
+    splash.style.opacity = "0";
     setTimeout(() => {
-      splash?.remove();
-      document.getElementById("app").style.display = "block";
+      splash.remove();
+      app.style.display = "block";
+      sessionStorage.setItem("splashShown", "true");
     }, 400);
-  }, 1800);
+  }, 1200);
 });
+
 
 /* ===== SLIDER ===== */
 document.querySelectorAll(".slider").forEach(slider => {

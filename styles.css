@@ -22,6 +22,70 @@ body {
 }
 
 /* ===== CONTENT ===== */
+
+/* чтобы контент не залезал под нижнюю панель */
+.content,
+.profile-content {
+  padding: 16px;
+  padding-bottom: 120px; /* место под bottom-nav */
+}
+
+/* профиль */
+.profile-content {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* заголовок */
+.profile-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+/* поля */
+.profile-field {
+  margin-bottom: 14px;
+}
+
+.profile-field label {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.profile-field input,
+.profile-field textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  font-size: 15px;
+  outline: none;
+}
+
+/* кнопка сохранить */
+.profile-save {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: #6a00ff;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* связаться */
+.profile-contact {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 14px;
+  color: #6a00ff;
+}
+
 .content {
   padding: 16px;
 }
