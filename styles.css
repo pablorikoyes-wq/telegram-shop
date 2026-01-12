@@ -179,29 +179,7 @@ body {
   object-fit: cover;
 }
 
-/* ===== DOTS ===== */
-.dots {
-  
-  bottom: 8px;
-  left: 50%;
-  justify-content: center;
-  margin: 8px 0 4px;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 6px;
-  z-index: 5;
-}
 
-.dots span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.6);
-}
-
-.dots span.active {
-  background: #6a00ff;
-}
 
 
 
@@ -412,4 +390,30 @@ body {
   object-fit: cover;
 }
 
+/* ===== SLIDER DOTS (FIX) ===== */
+
+.slider {
+  position: relative;
+}
+
+.dots {
+  position: static;              /* ❗ убираем absolute */
+  display: flex;
+  justify-content: center;        /* ✅ центр */
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;                /* ✅ под картинкой */
+}
+
+.dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #d0d0d0;            /* ✅ серые */
+  transition: background 0.2s;
+}
+
+.dots span.active {
+  background: #6a00ff;            /* ✅ фиолетовая */
+}
 
