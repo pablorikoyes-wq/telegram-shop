@@ -110,11 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     localStorage.setItem("profile", JSON.stringify(profile));
 
-    if (window.Telegram?.WebApp) {
-      Telegram.WebApp.showAlert("Profil saqlandi ✅");
-    } else {
-      alert("Profil saqlandi");
-    }
+   
   });
 });
 
@@ -178,44 +174,48 @@ document.addEventListener('click', e => {
 }
 
 /* ADD TO CART */
+/* ===== CART LOGIC ===== */
+
+function getCart() {
+  return JSON.parse(localStorage.getItem('cart')) || [];
+}
+
+function saveCart(cart) {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+function addToCart(data) {
+  let cart = getCart();
+  const existing = cart.find(i => i.id === data.id);
+
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cart.push({ ...data, qty: 1, selected: true });
+  }
+
+  saveCart(cart);
+}
+
 document.querySelectorAll('.add-to-cart').forEach(btn => {
   btn.addEventListener('click', () => {
-    const cart = getCart();
+    const data = {
+      id: btn.dataset.id,
+      title: btn.dataset.title,
+      price: Number(btn.dataset.price),
+      image: btn.dataset.image
+    };
 
-    const id = btn.dataset.id;
-    const existing = cart.find(i => i.id === id);
+    addToCart(data);
 
-    if (existing) {
-      existing.qty += 1;
-    } else {
-      cart.push({
-        id,
-        title: btn.dataset.title,
-        price: Number(btn.dataset.price),
-        image: btn.dataset.image,
-        qty: 1,
-        selected: true
-      });
-    }
-
-    saveCart(cart);
-
-    // гасим кнопку
-    btn.classList.add('disabled');
-    btn.setAttribute('disabled', true);
-
-    // бейдж 1
-    if (!btn.querySelector('.cart-badge')) {
-      const badge = document.createElement('div');
-      badge.className = 'cart-badge';
-      badge.innerText = '1';
-      btn.style.position = 'relative';
-      btn.appendChild(badge);
-    }
-
-    renderCart();
+    // визуальный эффект как WB
+    btn.querySelector('.delivery-text').textContent = 'Savatchada';
+    const badge = btn.querySelector('.cart-count');
+    badge.hidden = false;
+    badge.textContent = '1';
   });
 });
+
 
 
 /* INIT CART */
@@ -289,3 +289,48 @@ function toggleSelect(index) {
   renderCart();
 }
 
+function renderCart() {
+  const cart = getCart();
+  const container = document.getElementById('cart-items');
+  const totalEl = document.getElementById('total-sum');
+
+  if (!container) return;
+
+  container.innerHTML = '';
+  let total = 0;
+
+  cart.forEach(item => {
+    if (item.selected) total += item.price * item.qty;
+
+    container.innerHTML += `
+      <div class="cart-item">
+        <img src="${item.image}">
+        <div>
+          <div>${item.title}</div>
+          <strong>${item.price.toLocaleString()} so'm</strong>
+
+          <div class="qty">
+            <button onclick="changeQty('${item.id}', -1)">−</button>
+            <span>${item.qty}</span>
+            <button onclick="changeQty('${item.id}', 1)">+</button>
+            <button class="buy-btn">Купить</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  totalEl.textContent = total.toLocaleString();
+}
+
+function changeQty(id, delta) {
+  let cart = getCart();
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+
+  item.qty += delta;
+  if (item.qty < 1) item.qty = 1;
+
+  saveCart(cart);
+  renderCart();
+}
