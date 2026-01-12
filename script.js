@@ -59,19 +59,27 @@ document.querySelectorAll('.bottom-nav a').forEach(link => {
 
     const page = link.dataset.page;
 
+    // переключаем страницы
     document.querySelectorAll('.page').forEach(p => {
       p.classList.remove('active');
     });
 
-    document.getElementById('page-' + page).classList.add('active');
+    const targetPage = document.getElementById('page-' + page);
+    if (targetPage) targetPage.classList.add('active');
 
+    // активная кнопка
     document.querySelectorAll('.bottom-nav a').forEach(a => {
       a.classList.remove('active');
     });
-
     link.classList.add('active');
+
+    // 🔥 ВАЖНО: если зашли в корзину — перерисовываем её
+    if (page === 'cart') {
+      renderCart();
+    }
   });
 });
+
 
 /* ===== PROFILE SAVE / LOAD ===== */
 document.addEventListener("DOMContentLoaded", () => {
@@ -110,32 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* ===== PROFILE SAVE ===== */
-const saveBtn = document.getElementById('save-profile');
 
-if (saveBtn) {
-  saveBtn.addEventListener('click', () => {
-    const data = {
-      name: document.getElementById('profile-name').value,
-      surname: document.getElementById('profile-surname').value,
-      phone: document.getElementById('profile-phone').value,
-      address: document.getElementById('profile-address').value,
-    };
-
-    localStorage.setItem('profile', JSON.stringify(data));
-    alert('Profil saqlandi ✅');
-  });
-}
-
-/* LOAD PROFILE */
-const saved = localStorage.getItem('profile');
-if (saved) {
-  const p = JSON.parse(saved);
-  document.getElementById('profile-name').value = p.name || '';
-  document.getElementById('profile-surname').value = p.surname || '';
-  document.getElementById('profile-phone').value = p.phone || '';
-  document.getElementById('profile-address').value = p.address || '';
-}
 
 /* ===== CART ===== */
 
@@ -172,7 +155,8 @@ function renderCart() {
         <img src="${item.image}">
         <div class="cart-info">
           <div>${item.title}</div>
-          <strong>${item.price.toLocaleString()} so'm</strong>
+          <strong>${(item.price * item.qty).toLocaleString()} so'm</strong>
+          <small>Soni: ${item.qty}</small>
         </div>
       </div>
     `;
@@ -184,12 +168,30 @@ document.querySelectorAll('.add-to-cart').forEach(btn => {
   btn.addEventListener('click', () => {
     const cart = getCart();
 
-    cart.push({
-      id: btn.dataset.id,
-      title: btn.dataset.title,
-      price: Number(btn.dataset.price),
-      image: btn.dataset.image
-    });
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const cart = getCart();
+
+    const id = btn.dataset.id;
+    const existing = cart.find(i => i.id === id);
+
+    if (existing) {
+      existing.qty += 1;
+    } else {
+      cart.push({
+        id,
+        title: btn.dataset.title,
+        price: Number(btn.dataset.price),
+        image: btn.dataset.image,
+        qty: 1
+      });
+    }
+
+    saveCart(cart);
+    Telegram.WebApp.showAlert('Savatga qo‘shildi ✅');
+  });
+});
+
 
     saveCart(cart);
     renderCart();
