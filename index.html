@@ -41,7 +41,7 @@
   <section id="page-home" class="page active">
     <div class="products-grid">
 
-      <div class="product-card">
+      <div class="product-card" onclick="openProduct()">
 
         <!-- SLIDER -->
         <div class="slider">
@@ -54,53 +54,44 @@
             <img src="assets/products/sofa/sofa-6.jpg">
           </div>
         </div>
-
+      
         <!-- DOTS -->
         <div class="dots">
           <span class="active"></span>
           <span></span><span></span><span></span><span></span><span></span>
         </div>
-
+      
         <!-- PRICE -->
         <div class="price">
           <div class="price-new">250 000 so'm</div>
           <div class="price-old">990 000 so'm</div>
         </div>
-
+      
         <!-- TITLE -->
         <div class="title">Uglovoy arab divan (16 narsa)</div>
-
+      
         <!-- RATING -->
         <div class="rating">
           <span class="star"></span>
           <span class="rate">4.8</span>
           <span class="reviews">(7 ta sharh)</span>
         </div>
-
+      
         <!-- BUTTON -->
-<button 
-  class="add-btn add-to-cart"
-  data-id="sofa-1"
-  data-title="Uglovoy arab divan (16 narsa)"
-  data-price="250000"
-  data-image="assets/products/sofa/sofa-1.jpg"
->
-  <span class="cart-icon">
-    <svg viewBox="0 0 24 24" class="cart-svg">
-      <path d="M6 8h12l-1.2 11H7.2L6 8Z"/>
-      <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
-    </svg>
-  </span>
-
-  <span class="delivery-text">Ertaga</span>
-</button>
-
-
-
-
-
-
-
+        <button 
+          class="add-btn"
+          onclick="event.stopPropagation(); quickAddToCart(event)"
+        >
+          <span class="cart-icon">
+            <svg viewBox="0 0 24 24" class="cart-svg">
+              <path d="M6 8h12l-1.2 11H7.2L6 8Z"/>
+              <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
+            </svg>
+          </span>
+      
+          <span class="delivery-text">Ertaga</span>
+        </button>
+      
       </div>
     </div>
   </section>
@@ -146,6 +137,147 @@
   </button>
 </section>
 
+<!-- 🛍️ PRODUCT PAGE -->
+<section id="page-product" class="page">
+  
+  <!-- SLIDER -->
+  <div class="product-slider">
+    <div class="slider-images" id="product-slider-images">
+      <img src="assets/products/sofa/sofa-1.jpg">
+      <img src="assets/products/sofa/sofa-2.jpg">
+      <img src="assets/products/sofa/sofa-3.jpg">
+      <img src="assets/products/sofa/sofa-4.jpg">
+      <img src="assets/products/sofa/sofa-5.jpg">
+      <img src="assets/products/sofa/sofa-6.jpg">
+    </div>
+    <div class="slider-dots" id="product-dots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+
+  <div class="product-content">
+    
+    <!-- PRICE & TITLE -->
+    <div class="product-main">
+      <button class="back-btn-inline" onclick="goToHome()">← Orqaga</button>
+      
+      <h1 class="product-title">Uglovoy arab divan (16 narsa)</h1>
+      
+      <div class="product-rating">
+        <span class="stars">⭐ 4.8</span>
+        <span class="reviews-count">(7 ta sharh)</span>
+      </div>
+
+      <div class="product-price">
+        <div class="price-current">250 000 so'm</div>
+        <div class="price-old">990 000 so'm</div>
+        <div class="discount-badge">-75%</div>
+      </div>
+    </div>
+
+    <!-- DELIVERY INFO -->
+    <div class="delivery-section">
+      <h3>Ertaga yetkazib beramiz</h3>
+      <p>Topshirish punktiga yoki kuryer orqali</p>
+
+      <div class="payment-methods">
+        <h4>Qulay usulda xavfsiz to'lov</h4>
+        <p>Karta orqali, naqd pulda yoki bo'lib to'lang</p>
+        <div class="payment-icons">
+          <div class="payment-icon" style="background:#7000FF">Uzum</div>
+          <div class="payment-icon" style="background:#FF6B00">Humo</div>
+          <div class="payment-icon" style="background:#6A00FF">UzCard</div>
+          <div class="payment-icon" style="background:#000">Visa</div>
+          <div class="payment-icon" style="background:#EB001B">MC</div>
+        </div>
+      </div>
+
+      <div class="return-info">
+        <h4>Qaytarish oson va tez</h4>
+        <p>Tovarlarni 10 kun ichida qabul qilamiz va darhol pulini qaytaramiz.</p>
+      </div>
+    </div>
+
+    <!-- REVIEWS -->
+    <div class="reviews-section">
+      <div class="reviews-header">
+        <h3>7 ta sharh</h3>
+        <a href="#" class="view-all">Barchasi →</a>
+      </div>
+
+      <div class="review-card">
+        <div class="review-rating">⭐⭐⭐⭐⭐</div>
+        <div class="review-date">05 yanvar 2026</div>
+        <p class="review-text">
+          <strong>Afzalliklari:</strong> мощность 4800 вт бу дегани матор умуман кизимеди Жужа тез майдалайди
+        </p>
+        <p class="review-text">
+          <strong>Izoh:</strong> олганимга 5кун булди хозирча муоммосиз яхши ишляпти
+        </p>
+        <div class="review-images">
+          <img src="assets/products/sofa/sofa-1.jpg">
+          <img src="assets/products/sofa/sofa-2.jpg">
+          <img src="assets/products/sofa/sofa-3.jpg">
+          <span class="more-images">+3</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class="description-section">
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab(0)">Ta'rif</button>
+        <button class="tab" onclick="switchTab(1)">Tavsiflar</button>
+      </div>
+
+      <div class="tab-content active">
+        <h3>🔥 Statsionar Blender — 4800W, 10 tezlik, 2800 ml katta idish + quruq maydalagich 🔥</h3>
+        <p>Kuch, uslub va ko'p funksionallik — hammasi bitta qurilmada.</p>
+        
+        <h4>Mahsulot haqida ></h4>
+        
+        <h4>Sotuvchi</h4>
+        <div class="seller-info">
+          <div class="seller-logo">🏪</div>
+          <div>
+            <strong>ENG YAXSHISI</strong>
+            <div>⭐ 4.0 <span>4 ta baho</span></div>
+          </div>
+        </div>
+        <button class="seller-btn">Sotuvchidan so'rash</button>
+      </div>
+
+      <div class="tab-content">
+        <p>Характеристики товара здесь...</p>
+      </div>
+    </div>
+
+    <!-- SIMILAR -->
+    <div class="similar-section">
+      <h3>Shuningdek qarang</h3>
+      <div class="similar-item">
+        <strong>Statsionar blenderlar</strong>
+        <span>Turkum →</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM BAR -->
+  <div class="product-bottom-bar">
+    <div class="price-info">
+      <div class="price-main">250 000 so'm</div>
+      <div class="delivery-text">Ertaga</div>
+    </div>
+    <button class="add-cart-btn" onclick="addToCartFromProduct()">Savatga</button>
+  </div>
+
+</section>
 
 </main>
 

@@ -17,7 +17,7 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=["start"])
 async def start_handler(message: types.Message):
-    user_name = message.from_user.first_name or "Do‘st"
+    user_name = message.from_user.first_name or "Do'st"
 
     text = (
         f"*Assalomu alaykum {user_name} 👋*\n\n"
@@ -42,7 +42,5 @@ async def start_handler(message: types.Message):
 
 
 if __name__ == "__main__":
+    print("🚀 Bot ishga tushmoqda...")
     executor.start_polling(dp, skip_updates=True)
-
-
-
