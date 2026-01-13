@@ -251,3 +251,144 @@ function saveCart(cart) {
 
 /* ===== BUTTON STATES ===== */
 
+/* ===== OPEN PRODUCT PAGE ===== */
+function openProduct() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-product').classList.add('active');
+  
+  document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
+  
+  initProductSlider();
+}
+
+function goToHome() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-home').classList.add('active');
+  
+  document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
+  document.querySelector('[data-page="home"]').classList.add('active');
+}
+
+/* ===== PRODUCT SLIDER ===== */
+let productSliderIndex = 0;
+
+function initProductSlider() {
+  productSliderIndex = 0;
+  updateProductSlider();
+  
+  const slider = document.getElementById('product-slider-images');
+  const dots = document.querySelectorAll('#product-dots .dot');
+  let startX = 0;
+  
+  slider.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  });
+  
+  slider.addEventListener('touchend', (e) => {
+    const diff = startX - e.changedTouches[0].clientX;
+    const totalSlides = slider.querySelectorAll('img').length;
+    
+    if (diff > 50 && productSliderIndex < totalSlides - 1) {
+      productSliderIndex++;
+    } else if (diff < -50 && productSliderIndex > 0) {
+      productSliderIndex--;
+    }
+    
+    updateProductSlider();
+  });
+  
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      productSliderIndex = index;
+      updateProductSlider();
+    });
+  });
+}
+
+function updateProductSlider() {
+  const slider = document.getElementById('product-slider-images');
+  const dots = document.querySelectorAll('#product-dots .dot');
+  
+  slider.style.transform = `translateX(-${productSliderIndex * 100}%)`;
+  
+  dots.forEach((dot, index) => {
+    dot.classList.toggle('active', index === productSliderIndex);
+  });
+}
+
+/* ===== TABS ===== */
+function switchTab(tabIndex) {
+  const tabs = document.querySelectorAll('#page-product .tab');
+  const contents = document.querySelectorAll('#page-product .tab-content');
+  
+  tabs.forEach((tab, index) => {
+    tab.classList.toggle('active', index === tabIndex);
+  });
+  
+  contents.forEach((content, index) => {
+    content.classList.toggle('active', index === tabIndex);
+  });
+}
+
+/* ===== ADD TO CART FROM PRODUCT ===== */
+function addToCartFromProduct() {
+  let cart = getCart();
+  
+  const product = {
+    id: 'sofa-1',
+    title: 'Uglovoy arab divan (16 narsa)',
+    price: 250000,
+    image: 'assets/products/sofa/sofa-1.jpg',
+    qty: 1,
+    selected: true
+  };
+  
+  const existingIndex = cart.findIndex(item => item.id === product.id);
+  
+  if (existingIndex !== -1) {
+    cart[existingIndex].qty += 1;
+    tg.showAlert('Miqdor oshirildi!');
+  } else {
+    cart.push(product);
+    tg.showAlert('Savatga qo\'shildi!');
+  }
+  
+  saveCart(cart);
+  
+  const btn = document.querySelector('.add-cart-btn');
+  btn.textContent = 'Qo\'shildi ✓';
+  btn.style.background = '#4CAF50';
+  
+  setTimeout(() => {
+    btn.textContent = 'Savatga';
+    btn.style.background = '#6a00ff';
+  }, 1500);
+}
+
+/* ===== QUICK ADD (НА ГЛАВНОЙ) ===== */
+function quickAddToCart(event) {
+  event.stopPropagation();
+  
+  let cart = getCart();
+  const product = {
+    id: 'sofa-1',
+    title: 'Uglovoy arab divan (16 narsa)',
+    price: 250000,
+    image: 'assets/products/sofa/sofa-1.jpg',
+    qty: 1,
+    selected: true
+  };
+  
+  const existingIndex = cart.findIndex(item => item.id === product.id);
+  
+  if (existingIndex !== -1) {
+    cart.splice(existingIndex, 1);
+    event.target.closest('button').querySelector('.delivery-text').textContent = 'Ertaga';
+  } else {
+    cart.push(product);
+    event.target.closest('button').querySelector('.delivery-text').textContent = 'Savatchada';
+  }
+  
+  saveCart(cart);
+  renderCart();
+}
