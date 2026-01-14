@@ -1303,3 +1303,154 @@ body {
   align-items: center;
   gap: 10px;
 }
+
+/* ===== CHECKOUT PAGE ===== */
+
+#page-checkout {
+  padding: 0 !important;
+}
+
+.checkout-header {
+  background: white;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #e5e5e5;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.checkout-header button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.checkout-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.checkout-content {
+  padding: 16px;
+  padding-bottom: 100px;
+}
+
+.checkout-products,
+.checkout-form,
+.checkout-total {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.checkout-products h3,
+.checkout-form h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* ТОВАРЫ */
+.checkout-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.checkout-item:last-child {
+  border-bottom: none;
+}
+
+.checkout-item img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.checkout-item-info {
+  flex: 1;
+}
+
+.checkout-item-title {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.checkout-item-qty {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.checkout-item-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #6a00ff;
+}
+
+/* ФОРМА */
+.checkout-form label {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.checkout-form input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  font-size: 15px;
+  margin-top: 6px;
+}
+
+.checkout-form input:focus {
+  outline: none;
+  border-color: #6a00ff;
+}
+
+/* ИТОГО */
+.total-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 15px;
+}
+
+.total-main {
+  border-top: 2px solid #e5e5e5;
+  margin-top: 8px;
+  padding-top: 14px;
+  font-size: 18px;
+}
+
+.total-main strong {
+  color: #6a00ff;
+  font-size: 20px;
+}
+
+/* КНОПКА */
+.submit-order-btn {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  height: 56px;
+  background: #6a00ff;
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(106, 0, 255, 0.3);
+  z-index: 999;
+}

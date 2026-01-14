@@ -565,45 +565,118 @@ function renderCheckout() {
   totalEl.textContent = total.toLocaleString();
 }
 
-function payOrder() {
-  alert('Buyurtma qabul qilindi ✅');
-  localStorage.removeItem('cart');
-  location.reload();
+
+
+
+
+/* ===== CHECKOUT ===== */
+
+document.getElementById('checkout-btn')?.addEventListener('click', () => {
+  const cart = getCart();
+  const selected = cart.filter(item => item.selected);
+  
+  if (selected.length === 0) {
+    tg.showAlert('Savatda mahsulot yo\'q');
+    return;
+  }
+
+  openCheckout();
+});
+
+function openCheckout() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-checkout').classList.add('active');
+  
+  fillCheckoutData();
 }
 
-function renderCheckout() {
-  const profile = JSON.parse(localStorage.getItem('profile')) || {};
-  const cart = getCart().filter(i => i.selected);
+function backToCart() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-cart').classList.add('active');
+  
+  document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
+  document.querySelector('[data-page="cart"]').classList.add('active');
+  
+  renderCart();
+}
 
-  document.getElementById('checkout-name').value = profile.name || '';
-  document.getElementById('checkout-surname').value = profile.surname || '';
-  document.getElementById('checkout-phone').value = profile.phone || '';
-  document.getElementById('checkout-address').value = profile.address || '';
-
-  const list = document.getElementById('checkout-items');
-  const totalEl = document.getElementById('checkout-total');
-
-  list.innerHTML = '';
-  let total = 0;
-
-  cart.forEach(item => {
-    total += item.price * item.qty;
-    list.innerHTML += `
+function fillCheckoutData() {
+  const cart = getCart();
+  const selected = cart.filter(item => item.selected);
+  
+  // Товары
+  const itemsList = document.getElementById('checkout-items');
+  itemsList.innerHTML = '';
+  
+  let subtotal = 0;
+  
+  selected.forEach(item => {
+    subtotal += item.price * item.qty;
+    
+    itemsList.innerHTML += `
       <div class="checkout-item">
-        ${item.title} × ${item.qty}
-        <strong>${(item.price * item.qty).toLocaleString()} so'm</strong>
+        <img src="${item.image}">
+        <div class="checkout-item-info">
+          <div class="checkout-item-title">${item.title}</div>
+          <div class="checkout-item-qty">${item.qty} dona</div>
+          <div class="checkout-item-price">${(item.price * item.qty).toLocaleString()} so'm</div>
+        </div>
       </div>
     `;
   });
-
-  totalEl.textContent = total.toLocaleString();
+  
+  // Суммы
+  document.getElementById('checkout-subtotal').textContent = subtotal.toLocaleString() + " so'm";
+  document.getElementById('checkout-total').textContent = subtotal.toLocaleString() + " so'm";
+  
+  // Заполняем данные профиля
+  const profile = JSON.parse(localStorage.getItem('profile') || '{}');
+  
+  if (profile.name && profile.surname) {
+    document.getElementById('checkout-name').value = `${profile.name} ${profile.surname}`;
+  }
+  if (profile.phone) {
+    document.getElementById('checkout-phone').value = profile.phone;
+  }
+  if (profile.address) {
+    document.getElementById('checkout-address').value = profile.address;
+  }
 }
 
-function payOrder() {
-  alert('Buyurtma qabul qilindi ✅');
-  localStorage.removeItem('cart');
-  location.reload();
+function submitOrder() {
+  const name = document.getElementById('checkout-name').value.trim();
+  const phone = document.getElementById('checkout-phone').value.trim();
+  const address = document.getElementById('checkout-address').value.trim();
+  
+  // Валидация
+  if (!name || !phone || !address) {
+    tg.showAlert('Iltimos, barcha maydonlarni to\'ldiring!');
+    return;
+  }
+  
+  const cart = getCart();
+  const selected = cart.filter(item => item.selected);
+  const total = selected.reduce((sum, item) => sum + item.price * item.qty, 0);
+  
+  // Формируем данные заказа
+  const orderData = {
+    items: selected,
+    customer: { name, phone, address },
+    total: total,
+    timestamp: new Date().toISOString()
+  };
+  
+  // Отправляем в бота
+  tg.sendData(JSON.stringify(orderData));
+  
+  // Очищаем корзину
+  const remaining = cart.filter(item => !item.selected);
+  saveCart(remaining);
+  
+  // Закрываем Mini App
+  tg.close();
 }
+
 
 function openCheckout() {
   // переключаем страницы
@@ -644,6 +717,4 @@ function openCheckout() {
   totalEl.textContent = total.toLocaleString();
 }
 
-function payOrder() {
-  alert('Buyurtma qabul qilindi ✅');
-}
+

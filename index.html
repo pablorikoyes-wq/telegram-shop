@@ -98,78 +98,74 @@
 
   <!-- 🛒 CART -->
 <section id="page-cart" class="page">
-  <!-- 💳 CHECKOUT -->
-<section id="page-checkout" class="page">
-  <h2>Buyurtma</h2>
-
-  <div class="profile-card">
-    <label>
-      Ism
-      <input id="checkout-name" type="text">
-    </label>
-
-    <label>
-      Familiya
-      <input id="checkout-surname" type="text">
-    </label>
-
-    <label>
-      Telefon
-      <input id="checkout-phone" type="tel">
-    </label>
-
-    <label>
-      Manzil
-      <input id="checkout-address" type="text">
-    </label>
-  </div>
-
-  <h3 style="margin:16px 0">Tovarlar</h3>
-  <div id="checkout-items"></div>
-
-  <button class="checkout-btn" onclick="payOrder()">
-    To‘lash · <span id="checkout-total">0</span> so'm
-  </button>
-</section>
-
   <h2>Savat</h2>
 
-  <p id="cart-empty">Hozircha bo‘sh</p>
+  <p id="cart-empty">Hozircha bo'sh</p>
 
   <div id="cart-items"></div>
 
-  <!-- 💳 CHECKOUT -->
+  <button id="checkout-btn" class="checkout-btn">
+    Buyurtmaga o'tish · <span id="total-sum">0</span> so'm
+  </button>
+</section>
+
+<!-- 💳 CHECKOUT PAGE -->
 <section id="page-checkout" class="page">
-  <h2>Buyurtmani rasmiylashtirish</h2>
+  <div class="checkout-header">
+    <button onclick="backToCart()">← Orqaga</button>
+    <h2>Buyurtma</h2>
+  </div>
 
-  <div class="checkout-card">
+  <div class="checkout-content">
+    
+    <!-- ТОВАРЫ -->
+    <div class="checkout-products">
+      <h3>Tanlangan mahsulotlar</h3>
+      <div id="checkout-items"></div>
+    </div>
 
-    <label>Ism</label>
-    <input id="checkout-name" type="text">
+    <!-- ФОРМА -->
+    <div class="checkout-form">
+      <h3>Ma'lumotlar</h3>
+      
+      <label>
+        Ism va familiya *
+        <input id="checkout-name" type="text" placeholder="Ismingiz va familiyangiz">
+      </label>
 
-    <label>Familiya</label>
-    <input id="checkout-surname" type="text">
+      <label>
+        Telefon *
+        <input id="checkout-phone" type="tel" placeholder="+998 __ ___ __ __">
+      </label>
 
-    <label>Telefon</label>
-    <input id="checkout-phone" type="tel">
+      <label>
+        Manzil *
+        <input id="checkout-address" type="text" placeholder="Shahar, tuman, ko'cha">
+      </label>
+    </div>
 
-    <label>Manzil</label>
-    <input id="checkout-address" type="text">
-
-    <h3>Tovarlar</h3>
-    <div id="checkout-items"></div>
-
-    <div class="checkout-footer">
-      <strong>
-        Jami: <span id="checkout-total">0</span> so'm
-      </strong>
-
-      <button class="buy-btn" onclick="payOrder()">
-        To‘lash
-      </button>
+    <!-- ИТОГО -->
+    <div class="checkout-total">
+      <div class="total-line">
+        <span>Mahsulotlar:</span>
+        <strong id="checkout-subtotal">0 so'm</strong>
+      </div>
+      <div class="total-line">
+        <span>Yetkazib berish:</span>
+        <strong>Bepul</strong>
+      </div>
+      <div class="total-line total-main">
+        <span>Jami:</span>
+        <strong id="checkout-total">0 so'm</strong>
+      </div>
     </div>
 
   </div>
+
+  <!-- КНОПКА -->
+  <button class="submit-order-btn" onclick="submitOrder()">
+    Sotib olish
+  </button>
 </section>
 
   <!-- 🔥 К ОФОРМЛЕНИЮ -->
