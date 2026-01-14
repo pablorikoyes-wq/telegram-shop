@@ -396,10 +396,7 @@ body {
   position: relative;
 }
 
-.add-btn.disabled {
-  background: #e0e0e0;
-  color: #777;
-}
+
 
 .cart-icon {
   position: relative;
@@ -417,13 +414,27 @@ body {
 
 
 
+/* КНОПКА В КОРЗИНЕ - СЕРАЯ */
 .add-btn.savatchada {
   background: #e0e0e0 !important;
-  color: #fff !important;
+  color: white !important;
+}
+
+.add-btn.savatchada .delivery-text {
+  color: white !important;
 }
 
 .add-btn.savatchada .cart-svg {
-  stroke: #fff !important;
+  stroke: white !important;
+}
+
+/* БАЗОВАЯ КНОПКА - ФИОЛЕТОВАЯ */
+.add-btn .delivery-text {
+  color: white;
+}
+
+.add-btn .cart-svg {
+  stroke: white;
 }
 
 
