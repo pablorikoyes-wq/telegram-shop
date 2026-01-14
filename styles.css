@@ -415,26 +415,9 @@ body {
   fill: none;
 }
 
-.add-btn.savatchada {
-  background: #e0e0e0;
-  color: #777;
-}
 
-.add-btn.savatchada::after {
-  content: "1";
-  position: absolute;
-  top: 6px;
-  left: 38px;
-  background: red;
-  color: white;
-  font-size: 10px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
+
 
 
 

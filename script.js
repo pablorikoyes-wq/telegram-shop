@@ -280,32 +280,32 @@ function openProduct() {
   updateMainPageButton(); // Добавьте эту строку
 }
 
-// Добавьте новую функцию
 function updateMainPageButton() {
   const cart = getCart();
-  const btn = document.querySelector('.add-to-cart');
-  if (!btn) return;
+  const buttons = document.querySelectorAll('.add-btn');
   
-  const text = btn.querySelector('.delivery-text');
-  const item = cart.find(i => i.id === 'sofa-1');
-  
-  // Удаляем старый бейдж
-  const oldBadge = btn.querySelector('.cart-badge');
-  if (oldBadge) oldBadge.remove();
-  
-  if (item) {
-    text.textContent = 'Savatchada';
-    btn.classList.add('savatchada');
+  buttons.forEach(btn => {
+    const text = btn.querySelector('.delivery-text');
+    if (!text) return;
     
-    // Добавляем новый бейдж
-    const badge = document.createElement('span');
-    badge.className = 'cart-badge';
-    badge.textContent = item.qty;
-    btn.appendChild(badge);
-  } else {
-    text.textContent = 'Ertaga';
-    btn.classList.remove('savatchada');
-  }
+    const item = cart.find(i => i.id === 'sofa-1');
+    
+    // Удаляем все старые бейджи
+    const oldBadges = btn.querySelectorAll('.cart-badge');
+    oldBadges.forEach(badge => badge.remove());
+    
+    if (item) {
+      text.textContent = 'Savatchada';
+      
+      // Добавляем ОДИН новый бейдж
+      const badge = document.createElement('span');
+      badge.className = 'cart-badge';
+      badge.textContent = item.qty;
+      btn.appendChild(badge);
+    } else {
+      text.textContent = 'Ertaga';
+    }
+  });
 }
 
 // Вызывайте при загрузке страницы
@@ -428,28 +428,24 @@ function quickAddToCart(event) {
   
   const existingIndex = cart.findIndex(item => item.id === product.id);
   
+  // Убираем старый бейдж если есть
+  const oldBadge = btn.querySelector('.cart-badge');
+  if (oldBadge) oldBadge.remove();
+  
   if (existingIndex !== -1) {
     // Удаляем из корзины
     cart.splice(existingIndex, 1);
     text.textContent = 'Ertaga';
-    btn.classList.remove('savatchada');
-    
-    // Убираем бейдж
-    const badge = btn.querySelector('.cart-badge');
-    if (badge) badge.remove();
   } else {
     // Добавляем в корзину
     cart.push(product);
     text.textContent = 'Savatchada';
-    btn.classList.add('savatchada');
     
-    // Добавляем бейдж
-    if (!btn.querySelector('.cart-badge')) {
-      const badge = document.createElement('span');
-      badge.className = 'cart-badge';
-      badge.textContent = '1';
-      btn.appendChild(badge);
-    }
+    // Добавляем ОДИН бейдж
+    const badge = document.createElement('span');
+    badge.className = 'cart-badge';
+    badge.textContent = '1';
+    btn.appendChild(badge);
   }
   
   saveCart(cart);
