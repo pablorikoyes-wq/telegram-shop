@@ -418,12 +418,12 @@ body {
 
 
 .add-btn.savatchada {
-  background: #e0e0e0;
-  color: #fff;  /* БЕЛЫЙ текст! */
+  background: #e0e0e0 !important;
+  color: #fff !important;
 }
 
 .add-btn.savatchada .cart-svg {
-  stroke: #fff;  /* БЕЛАЯ иконка! */
+  stroke: #fff !important;
 }
 
 
