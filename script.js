@@ -570,3 +570,37 @@ function payOrder() {
   localStorage.removeItem('cart');
   location.reload();
 }
+
+function renderCheckout() {
+  const profile = JSON.parse(localStorage.getItem('profile')) || {};
+  const cart = getCart().filter(i => i.selected);
+
+  document.getElementById('checkout-name').value = profile.name || '';
+  document.getElementById('checkout-surname').value = profile.surname || '';
+  document.getElementById('checkout-phone').value = profile.phone || '';
+  document.getElementById('checkout-address').value = profile.address || '';
+
+  const list = document.getElementById('checkout-items');
+  const totalEl = document.getElementById('checkout-total');
+
+  list.innerHTML = '';
+  let total = 0;
+
+  cart.forEach(item => {
+    total += item.price * item.qty;
+    list.innerHTML += `
+      <div class="checkout-item">
+        ${item.title} × ${item.qty}
+        <strong>${(item.price * item.qty).toLocaleString()} so'm</strong>
+      </div>
+    `;
+  });
+
+  totalEl.textContent = total.toLocaleString();
+}
+
+function payOrder() {
+  alert('Buyurtma qabul qilindi ✅');
+  localStorage.removeItem('cart');
+  location.reload();
+}
