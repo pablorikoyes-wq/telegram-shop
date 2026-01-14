@@ -604,3 +604,46 @@ function payOrder() {
   localStorage.removeItem('cart');
   location.reload();
 }
+
+function openCheckout() {
+  // переключаем страницы
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-checkout').classList.add('active');
+
+  // данные профиля
+  const profile = JSON.parse(localStorage.getItem('profile')) || {};
+  document.getElementById('checkout-name').value = profile.name || '';
+  document.getElementById('checkout-surname').value = profile.surname || '';
+  document.getElementById('checkout-phone').value = profile.phone || '';
+  document.getElementById('checkout-address').value = profile.address || '';
+
+  // товары
+  const cart = getCart();
+  const list = document.getElementById('checkout-items');
+  const totalEl = document.getElementById('checkout-total');
+
+  list.innerHTML = '';
+  let total = 0;
+
+  cart.forEach(item => {
+    if (!item.selected) return;
+
+    total += item.price * item.qty;
+
+    list.innerHTML += `
+      <div class="cart-item">
+        <img src="${item.image}">
+        <div>
+          <div>${item.title}</div>
+          <strong>${(item.price * item.qty).toLocaleString()} so'm</strong>
+        </div>
+      </div>
+    `;
+  });
+
+  totalEl.textContent = total.toLocaleString();
+}
+
+function payOrder() {
+  alert('Buyurtma qabul qilindi ✅');
+}

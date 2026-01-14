@@ -98,6 +98,40 @@
 
   <!-- 🛒 CART -->
 <section id="page-cart" class="page">
+  <!-- 💳 CHECKOUT -->
+<section id="page-checkout" class="page">
+  <h2>Buyurtma</h2>
+
+  <div class="profile-card">
+    <label>
+      Ism
+      <input id="checkout-name" type="text">
+    </label>
+
+    <label>
+      Familiya
+      <input id="checkout-surname" type="text">
+    </label>
+
+    <label>
+      Telefon
+      <input id="checkout-phone" type="tel">
+    </label>
+
+    <label>
+      Manzil
+      <input id="checkout-address" type="text">
+    </label>
+  </div>
+
+  <h3 style="margin:16px 0">Tovarlar</h3>
+  <div id="checkout-items"></div>
+
+  <button class="checkout-btn" onclick="payOrder()">
+    To‘lash · <span id="checkout-total">0</span> so'm
+  </button>
+</section>
+
   <h2>Savat</h2>
 
   <p id="cart-empty">Hozircha bo‘sh</p>
@@ -139,9 +173,10 @@
 </section>
 
   <!-- 🔥 К ОФОРМЛЕНИЮ -->
-  <button id="checkout-btn" class="checkout-btn">
+  <button id="checkout-btn" class="checkout-btn" onclick="openCheckout()">
     Buyurtmaga o‘tish · <span id="total-sum">0</span> so'm
   </button>
+  
 </section>
 
 
