@@ -521,6 +521,152 @@ function backToCart() {
   renderCart();
 }
 
+/* ===== PAYMENT PAGE ===== */
+let paymentTimer;
+let timeLeft = 1800; // 30 минут в секундах
+
+function openPaymentPage() {
+  const name = document.getElementById('checkout-name').value.trim();
+  const phone = document.getElementById('checkout-phone').value.trim();
+  const address = document.getElementById('checkout-address').value.trim();
+  
+  if (!name || !phone || !address) {
+    tg.showAlert('Iltimos, barcha maydonlarni to\'ldiring!');
+    return;
+  }
+
+  // Сохраняем данные заказа
+  const cart = getCart();
+  const selected = cart.filter(item => item.selected);
+  const total = selected.reduce((sum, item) => sum + item.price * item.qty, 0);
+  
+  localStorage.setItem('currentOrder', JSON.stringify({
+    customer: { name, phone, address },
+    items: selected,
+    total: total
+  }));
+
+  // Открываем страницу оплаты
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-payment').classList.add('active');
+
+  // Устанавливаем сумму
+  document.getElementById('payment-amount').textContent = total.toLocaleString() + ' so\'m';
+
+  // Запускаем таймер
+  startPaymentTimer();
+}
+
+function startPaymentTimer() {
+  // Сбрасываем предыдущий таймер если был
+  if (paymentTimer) {
+    clearInterval(paymentTimer);
+  }
+
+  timeLeft = 1800; // 30 минут
+  updateTimerDisplay();
+
+  paymentTimer = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+
+    if (timeLeft <= 0) {
+      clearInterval(paymentTimer);
+      tg.showAlert('Vaqt tugadi! Iltimos, qaytadan urinib ko\'ring.');
+      backToCheckout();
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  document.getElementById('timer').textContent = display;
+}
+
+function copyCardNumber() {
+  const cardNumber = '9860100126145935';
+  
+  // Копируем в буфер обмена
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(cardNumber).then(() => {
+      tg.showAlert('Karta raqami nusxalandi!');
+    });
+  } else {
+    // Fallback для старых браузеров
+    const input = document.createElement('input');
+    input.value = cardNumber;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+    tg.showAlert('Karta raqami nusxalandi!');
+  }
+}
+
+function backToCheckout() {
+  if (paymentTimer) {
+    clearInterval(paymentTimer);
+  }
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-checkout').classList.add('active');
+}
+
+function confirmPayment() {
+  // Останавливаем таймер
+  if (paymentTimer) {
+    clearInterval(paymentTimer);
+  }
+
+  // Открываем страницу отправки чека
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-receipt').classList.add('active');
+}
+
+/* ===== RECEIPT PAGE ===== */
+function openManagerChat() {
+  // ВАЖНО: Замените на ваш username или ID менеджера
+  const managerUsername = 'uzumbox_support'; // Например: 'uzumbox_manager'
+  // const managerUserId = '123456789'; // Или ID менеджера
+  
+  // Получаем данные заказа
+  const order = JSON.parse(localStorage.getItem('currentOrder') || '{}');
+  
+  // Формируем сообщение для менеджера
+  const message = `
+🛒 Yangi buyurtma!
+
+👤 Mijoz: ${order.customer?.name || ''}
+📞 Telefon: ${order.customer?.phone || ''}
+📍 Manzil: ${order.customer?.address || ''}
+
+💰 Summa: ${order.total?.toLocaleString() || '0'} so'm
+
+✅ To'lov amalga oshirildi
+  `.trim();
+
+  // Открываем чат с менеджером
+  // Вариант 1: По username
+  const url = `https://t.me/${managerUsername}?text=${encodeURIComponent(message)}`;
+  
+  // Вариант 2: По ID (раскомментируйте если используете ID)
+  // const url = `tg://user?id=${managerUserId}`;
+  
+  // Открываем ссылку
+  window.open(url, '_blank');
+  
+  // Очищаем корзину
+  const cart = getCart();
+  const remaining = cart.filter(item => !item.selected);
+  saveCart(remaining);
+  
+  // Показываем уведомление
+  setTimeout(() => {
+    tg.showAlert('Chekni menejerga yuboring!');
+  }, 500);
+}
+
 function submitOrder() {
   const name = document.getElementById('checkout-name').value.trim();
   const phone = document.getElementById('checkout-phone').value.trim();

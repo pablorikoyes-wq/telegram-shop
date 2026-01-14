@@ -163,8 +163,93 @@
   </div>
 
   <!-- КНОПКА -->
-  <button class="submit-order-btn" onclick="submitOrder()">
+  <button class="submit-order-btn" onclick="openPaymentPage()">
     Kartadan to'lash
+  </button>
+</section>
+
+<!-- 💳 PAYMENT PAGE -->
+<section id="page-payment" class="page">
+  <div class="checkout-header">
+    <button onclick="backToCheckout()">← Orqaga</button>
+    <h2>To'lov</h2>
+  </div>
+
+  <div class="payment-content">
+    
+    <!-- TIMER -->
+    <div class="payment-timer">
+      <div class="timer-icon">⏱️</div>
+      <div class="timer-text">To'lov uchun vaqt:</div>
+      <div class="timer-display" id="timer">30:00</div>
+    </div>
+
+    <!-- CARD INFO -->
+    <div class="payment-card-info">
+      <h3>Karta raqamiga pul o'tkazing</h3>
+      
+      <div class="card-number-box" onclick="copyCardNumber()">
+        <div class="card-label">Karta raqami</div>
+        <div class="card-number">9860 1001 2614 5935</div>
+        <div class="copy-icon">📋</div>
+      </div>
+
+      <div class="card-owner">
+        <div class="owner-label">Karta egasi:</div>
+        <div class="owner-name">Asadbek Raximov</div>
+      </div>
+
+      <div class="payment-amount">
+        <div>To'lov miqdori:</div>
+        <div class="amount-value" id="payment-amount">250 000 so'm</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- КНОПКА -->
+  <button class="submit-order-btn" onclick="confirmPayment()">
+    To'lovni amalga oshirdim
+  </button>
+</section>
+
+<!-- 📸 RECEIPT PAGE -->
+<section id="page-receipt" class="page">
+  <div class="checkout-header">
+    <h2>Chek yuborish</h2>
+  </div>
+
+  <div class="receipt-content">
+    
+    <div class="receipt-icon">✅</div>
+    
+    <h3>To'lov tasdiqlandi!</h3>
+    
+    <p class="receipt-text">
+      Iltimos, to'lov chekini menejerga yuboring. 
+      Menejer sizning buyurtmangizni tez orada tasdiqlaydi.
+    </p>
+
+    <div class="receipt-instructions">
+      <div class="instruction-item">
+        <span class="instruction-number">1</span>
+        <span>Pastdagi tugmani bosing</span>
+      </div>
+      <div class="instruction-item">
+        <span class="instruction-number">2</span>
+        <span>Menejer bilan suhbat ochiladi</span>
+      </div>
+      <div class="instruction-item">
+        <span class="instruction-number">3</span>
+        <span>To'lov chekini yuboring</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- КНОПКА -->
+  <button class="submit-order-btn" onclick="openManagerChat()">
+    📸 Menejerga chek yuborish
   </button>
 </section>
 
