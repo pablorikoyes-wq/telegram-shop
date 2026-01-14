@@ -436,10 +436,12 @@ function quickAddToCart(event) {
     // Удаляем из корзины
     cart.splice(existingIndex, 1);
     text.textContent = 'Ertaga';
+    btn.classList.remove('savatchada'); // ← ВАЖНО!
   } else {
     // Добавляем в корзину
     cart.push(product);
     text.textContent = 'Savatchada';
+    btn.classList.add('savatchada'); // ← ВАЖНО!
     
     // Добавляем ОДИН бейдж
     const badge = document.createElement('span');
@@ -451,6 +453,7 @@ function quickAddToCart(event) {
   saveCart(cart);
   renderCart();
 }
+
 /* ===== OPEN REVIEWS PAGE ===== */
 function openReviews() {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
