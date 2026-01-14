@@ -392,3 +392,80 @@ function quickAddToCart(event) {
   saveCart(cart);
   renderCart();
 }
+/* ===== OPEN REVIEWS PAGE ===== */
+function openReviews() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-reviews').classList.add('active');
+}
+
+function backToProduct() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-product').classList.add('active');
+}
+
+/* ===== UPDATE ADD TO CART BUTTON ===== */
+function addToCartFromProduct() {
+  let cart = getCart();
+  
+  const product = {
+    id: 'sofa-1',
+    title: 'Uglovoy arab divan (16 narsa)',
+    price: 250000,
+    image: 'assets/products/sofa/sofa-1.jpg',
+    qty: 1,
+    selected: true
+  };
+  
+  const existingIndex = cart.findIndex(item => item.id === product.id);
+  const btn = document.getElementById('product-add-btn');
+  const btnText = btn.querySelector('.btn-text');
+  const btnCount = btn.querySelector('.btn-count');
+  
+  if (existingIndex !== -1) {
+    cart[existingIndex].qty += 1;
+    btnCount.textContent = cart[existingIndex].qty;
+    btnCount.style.display = 'flex';
+    btn.classList.add('in-cart');
+    btnText.textContent = 'Savatchada';
+  } else {
+    cart.push(product);
+    btnCount.textContent = '1';
+    btnCount.style.display = 'flex';
+    btn.classList.add('in-cart');
+    btnText.textContent = 'Savatchada';
+  }
+  
+  saveCart(cart);
+}
+
+/* ===== CHECK IF IN CART ON OPEN ===== */
+function checkProductInCart() {
+  const cart = getCart();
+  const btn = document.getElementById('product-add-btn');
+  const btnText = btn.querySelector('.btn-text');
+  const btnCount = btn.querySelector('.btn-count');
+  
+  const item = cart.find(i => i.id === 'sofa-1');
+  
+  if (item) {
+    btn.classList.add('in-cart');
+    btnText.textContent = 'Savatchada';
+    btnCount.textContent = item.qty;
+    btnCount.style.display = 'flex';
+  } else {
+    btn.classList.remove('in-cart');
+    btnText.textContent = 'Savatga';
+    btnCount.style.display = 'none';
+  }
+}
+
+/* UPDATE OPEN PRODUCT FUNCTION */
+function openProduct() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-product').classList.add('active');
+  
+  document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
+  
+  initProductSlider();
+  checkProductInCart();
+}

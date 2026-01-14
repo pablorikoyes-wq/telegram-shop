@@ -1137,3 +1137,139 @@ body {
   cursor: pointer;
   margin-left: 16px;
 }
+/* ===== PRODUCT BACK BUTTON (НА КАРТИНКЕ) ===== */
+.product-back-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.product-back-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: #000;
+}
+
+/* DOTS PURPLE */
+#product-dots .dot {
+  background: rgba(106, 0, 255, 0.3);
+}
+
+#product-dots .dot.active {
+  background: #6a00ff;
+}
+
+/* STAR ICON */
+.star-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.star-icon-small {
+  width: 16px;
+  height: 16px;
+}
+
+.rate-text {
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+/* REMOVE EMOJI STYLE */
+.review-rating {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+/* PAYMENT ICONS REMOVED */
+.payment-icons {
+  display: none;
+}
+
+/* BUTTON WITH COUNTER */
+.add-cart-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #FF3B30;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-cart-btn.in-cart {
+  background: #e0e0e0;
+  color: #666;
+}
+
+/* DESCRIPTION TITLE */
+.desc-title {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #6a00ff;
+}
+
+/* ===== REVIEWS PAGE ===== */
+.reviews-page-header {
+  position: sticky;
+  top: 0;
+  background: white;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid #e5e5e5;
+  z-index: 100;
+}
+
+.back-btn-reviews {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.back-btn-reviews svg {
+  width: 24px;
+  height: 24px;
+  stroke: #000;
+}
+
+.reviews-page-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.reviews-list {
+  padding: 16px;
+  padding-bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
