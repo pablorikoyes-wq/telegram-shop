@@ -104,6 +104,40 @@
 
   <div id="cart-items"></div>
 
+  <!-- 💳 CHECKOUT -->
+<section id="page-checkout" class="page">
+  <h2>Buyurtmani rasmiylashtirish</h2>
+
+  <div class="checkout-card">
+
+    <label>Ism</label>
+    <input id="checkout-name" type="text">
+
+    <label>Familiya</label>
+    <input id="checkout-surname" type="text">
+
+    <label>Telefon</label>
+    <input id="checkout-phone" type="tel">
+
+    <label>Manzil</label>
+    <input id="checkout-address" type="text">
+
+    <h3>Tovarlar</h3>
+    <div id="checkout-items"></div>
+
+    <div class="checkout-footer">
+      <strong>
+        Jami: <span id="checkout-total">0</span> so'm
+      </strong>
+
+      <button class="buy-btn" onclick="payOrder()">
+        To‘lash
+      </button>
+    </div>
+
+  </div>
+</section>
+
   <!-- 🔥 К ОФОРМЛЕНИЮ -->
   <button id="checkout-btn" class="checkout-btn">
     Buyurtmaga o‘tish · <span id="total-sum">0</span> so'm
