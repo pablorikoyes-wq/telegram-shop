@@ -1441,7 +1441,7 @@ body {
 /* КНОПКА - ФИОЛЕТОВАЯ */
 .submit-order-btn {
   position: fixed;
-  bottom: 16px;
+  bottom: 110px; /* 🔥 ВЫШЕ нижней панели (96px + отступ) */
   left: 16px;
   right: 16px;
   height: 56px;
