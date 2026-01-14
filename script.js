@@ -19,6 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
     splash.style.display = "none";
     app.style.display = "block";
   }
+  
+  // Обновляем кнопку при загрузке
+  updateMainPageButton();
 });
 
 /* ===== SLIDER ===== */
@@ -109,8 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     localStorage.setItem("profile", JSON.stringify(profile));
-
-   
+    tg.showAlert('Saqlandi!');
   });
 });
 
@@ -208,7 +210,7 @@ function renderCart() {
     `;
   });
 
-  totalEl.textContent = total.toLocaleString() + " so'm";
+  totalEl.textContent = total.toLocaleString();
   checkout.style.display = cart.length ? 'block' : 'none';
 }
 
@@ -238,14 +240,6 @@ function removeFromCart(id) {
   saveCart(cart);
 }
 
-function getCart() {
-  return JSON.parse(localStorage.getItem('cart')) || [];
-}
-
-function saveCart(cart) {
-  localStorage.setItem('cart', JSON.stringify(cart));
-}
-
 
 
 
@@ -259,6 +253,8 @@ function openProduct() {
   document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
   
   initProductSlider();
+  checkProductInCart();
+  updateMainPageButton();
 }
 
 function goToHome() {
@@ -267,17 +263,6 @@ function goToHome() {
   
   document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
   document.querySelector('[data-page="home"]').classList.add('active');
-}
-
-function openProduct() {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-product').classList.add('active');
-  
-  document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
-  
-  initProductSlider();
-  checkProductInCart();
-  updateMainPageButton(); // Добавьте эту строку
 }
 
 function updateMainPageButton() {
@@ -296,6 +281,7 @@ function updateMainPageButton() {
     
     if (item) {
       text.textContent = 'Savatchada';
+      btn.classList.add('savatchada');
       
       // Добавляем ОДИН новый бейдж
       const badge = document.createElement('span');
@@ -304,14 +290,10 @@ function updateMainPageButton() {
       btn.appendChild(badge);
     } else {
       text.textContent = 'Ertaga';
+      btn.classList.remove('savatchada');
     }
   });
 }
-
-// Вызывайте при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
-  updateMainPageButton();
-});
 
 /* ===== PRODUCT SLIDER ===== */
 let productSliderIndex = 0;
@@ -398,15 +380,8 @@ function addToCartFromProduct() {
   }
   
   saveCart(cart);
-  
-  const btn = document.querySelector('.add-cart-btn');
-  btn.textContent = 'Qo\'shildi ✓';
-  btn.style.background = '#4CAF50';
-  
-  setTimeout(() => {
-    btn.textContent = 'Savatga';
-    btn.style.background = '#6a00ff';
-  }, 1500);
+  checkProductInCart();
+  updateMainPageButton();
 }
 
 /* ===== QUICK ADD (НА ГЛАВНОЙ) ===== */
@@ -436,12 +411,12 @@ function quickAddToCart(event) {
     // Удаляем из корзины
     cart.splice(existingIndex, 1);
     text.textContent = 'Ertaga';
-    btn.classList.remove('savatchada'); // ← ВАЖНО!
+    btn.classList.remove('savatchada');
   } else {
     // Добавляем в корзину
     cart.push(product);
     text.textContent = 'Savatchada';
-    btn.classList.add('savatchada'); // ← ВАЖНО!
+    btn.classList.add('savatchada');
     
     // Добавляем ОДИН бейдж
     const badge = document.createElement('span');
@@ -465,41 +440,6 @@ function backToProduct() {
   document.getElementById('page-product').classList.add('active');
 }
 
-/* ===== UPDATE ADD TO CART BUTTON ===== */
-function addToCartFromProduct() {
-  let cart = getCart();
-  
-  const product = {
-    id: 'sofa-1',
-    title: 'Uglovoy arab divan (16 narsa)',
-    price: 250000,
-    image: 'assets/products/sofa/sofa-1.jpg',
-    qty: 1,
-    selected: true
-  };
-  
-  const existingIndex = cart.findIndex(item => item.id === product.id);
-  const btn = document.getElementById('product-add-btn');
-  const btnText = btn.querySelector('.btn-text');
-  const btnCount = btn.querySelector('.btn-count');
-  
-  if (existingIndex !== -1) {
-    cart[existingIndex].qty += 1;
-    btnCount.textContent = cart[existingIndex].qty;
-    btnCount.style.display = 'flex';
-    btn.classList.add('in-cart');
-    btnText.textContent = 'Savatchada';
-  } else {
-    cart.push(product);
-    btnCount.textContent = '1';
-    btnCount.style.display = 'flex';
-    btn.classList.add('in-cart');
-    btnText.textContent = 'Savatchada';
-  }
-  
-  saveCart(cart);
-}
-
 /* ===== CHECK IF IN CART ON OPEN ===== */
 function checkProductInCart() {
   const cart = getCart();
@@ -521,57 +461,8 @@ function checkProductInCart() {
   }
 }
 
-/* UPDATE OPEN PRODUCT FUNCTION */
-function openProduct() {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-product').classList.add('active');
-  
-  document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
-  
-  initProductSlider();
-  checkProductInCart();
-}
-document.getElementById('checkout-btn')?.addEventListener('click', () => {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-checkout').classList.add('active');
-  renderCheckout();
-});
-
-function renderCheckout() {
-  const profile = JSON.parse(localStorage.getItem('profile')) || {};
-  const cart = getCart().filter(i => i.selected);
-
-  document.getElementById('checkout-name').value = profile.name || '';
-  document.getElementById('checkout-surname').value = profile.surname || '';
-  document.getElementById('checkout-phone').value = profile.phone || '';
-  document.getElementById('checkout-address').value = profile.address || '';
-
-  const list = document.getElementById('checkout-items');
-  const totalEl = document.getElementById('checkout-total');
-
-  list.innerHTML = '';
-  let total = 0;
-
-  cart.forEach(item => {
-    total += item.price * item.qty;
-    list.innerHTML += `
-      <div class="checkout-item">
-        ${item.title} × ${item.qty}
-        <strong>${(item.price * item.qty).toLocaleString()} so'm</strong>
-      </div>
-    `;
-  });
-
-  totalEl.textContent = total.toLocaleString();
-}
-
-
-
-
-
 /* ===== CHECKOUT ===== */
-
-document.getElementById('checkout-btn')?.addEventListener('click', () => {
+function openCheckout() {
   const cart = getCart();
   const selected = cart.filter(item => item.selected);
   
@@ -580,40 +471,31 @@ document.getElementById('checkout-btn')?.addEventListener('click', () => {
     return;
   }
 
-  openCheckout();
-});
-
-function openCheckout() {
+  // переключаем страницы
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-checkout').classList.add('active');
-  
-  fillCheckoutData();
-}
 
-function backToCart() {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-cart').classList.add('active');
+  // данные профиля
+  const profile = JSON.parse(localStorage.getItem('profile')) || {};
   
-  document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
-  document.querySelector('[data-page="cart"]').classList.add('active');
-  
-  renderCart();
-}
+  // Объединяем имя и фамилию
+  const fullName = [profile.name, profile.surname].filter(Boolean).join(' ');
+  document.getElementById('checkout-name').value = fullName;
+  document.getElementById('checkout-phone').value = profile.phone || '';
+  document.getElementById('checkout-address').value = profile.address || '';
 
-function fillCheckoutData() {
-  const cart = getCart();
-  const selected = cart.filter(item => item.selected);
-  
-  // Товары
-  const itemsList = document.getElementById('checkout-items');
-  itemsList.innerHTML = '';
-  
-  let subtotal = 0;
-  
+  // товары
+  const list = document.getElementById('checkout-items');
+  const subtotalEl = document.getElementById('checkout-subtotal');
+  const totalEl = document.getElementById('checkout-total');
+
+  list.innerHTML = '';
+  let total = 0;
+
   selected.forEach(item => {
-    subtotal += item.price * item.qty;
-    
-    itemsList.innerHTML += `
+    total += item.price * item.qty;
+
+    list.innerHTML += `
       <div class="checkout-item">
         <img src="${item.image}">
         <div class="checkout-item-info">
@@ -624,23 +506,19 @@ function fillCheckoutData() {
       </div>
     `;
   });
+
+  subtotalEl.textContent = total.toLocaleString() + ' so\'m';
+  totalEl.textContent = total.toLocaleString() + ' so\'m';
+}
+
+function backToCart() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-cart').classList.add('active');
   
-  // Суммы
-  document.getElementById('checkout-subtotal').textContent = subtotal.toLocaleString() + " so'm";
-  document.getElementById('checkout-total').textContent = subtotal.toLocaleString() + " so'm";
+  document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
+  document.querySelector('[data-page="cart"]').classList.add('active');
   
-  // Заполняем данные профиля
-  const profile = JSON.parse(localStorage.getItem('profile') || '{}');
-  
-  if (profile.name && profile.surname) {
-    document.getElementById('checkout-name').value = `${profile.name} ${profile.surname}`;
-  }
-  if (profile.phone) {
-    document.getElementById('checkout-phone').value = profile.phone;
-  }
-  if (profile.address) {
-    document.getElementById('checkout-address').value = profile.address;
-  }
+  renderCart();
 }
 
 function submitOrder() {
@@ -676,45 +554,3 @@ function submitOrder() {
   // Закрываем Mini App
   tg.close();
 }
-
-
-function openCheckout() {
-  // переключаем страницы
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-checkout').classList.add('active');
-
-  // данные профиля
-  const profile = JSON.parse(localStorage.getItem('profile')) || {};
-  document.getElementById('checkout-name').value = profile.name || '';
-  document.getElementById('checkout-surname').value = profile.surname || '';
-  document.getElementById('checkout-phone').value = profile.phone || '';
-  document.getElementById('checkout-address').value = profile.address || '';
-
-  // товары
-  const cart = getCart();
-  const list = document.getElementById('checkout-items');
-  const totalEl = document.getElementById('checkout-total');
-
-  list.innerHTML = '';
-  let total = 0;
-
-  cart.forEach(item => {
-    if (!item.selected) return;
-
-    total += item.price * item.qty;
-
-    list.innerHTML += `
-      <div class="cart-item">
-        <img src="${item.image}">
-        <div>
-          <div>${item.title}</div>
-          <strong>${(item.price * item.qty).toLocaleString()} so'm</strong>
-        </div>
-      </div>
-    `;
-  });
-
-  totalEl.textContent = total.toLocaleString();
-}
-
-

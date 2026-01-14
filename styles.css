@@ -674,7 +674,7 @@ body {
 
 .checkout-btn {
   position: fixed;
-  bottom: 120px; /* 👈 ЧУТЬ ВЫШЕ */
+  bottom: 110px; /* 👈 ВЫШЕ нижней панели */
   left: 16px;
   right: 16px;
   height: 56px;
@@ -685,6 +685,7 @@ body {
   font-size: 16px;
   font-weight: 700;
   z-index: 999;
+  display: none; /* по умолчанию скрыта */
 }
 
 .cart-actions {
@@ -1437,14 +1438,14 @@ body {
   font-size: 20px;
 }
 
-/* КНОПКА */
+/* КНОПКА - ФИОЛЕТОВАЯ */
 .submit-order-btn {
   position: fixed;
   bottom: 16px;
   left: 16px;
   right: 16px;
   height: 56px;
-  background: #6a00ff;
+  background: #6a00ff; /* 🟣 ФИОЛЕТОВАЯ */
   color: white;
   border: none;
   border-radius: 16px;
