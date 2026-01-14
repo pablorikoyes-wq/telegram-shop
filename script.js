@@ -269,6 +269,50 @@ function goToHome() {
   document.querySelector('[data-page="home"]').classList.add('active');
 }
 
+function openProduct() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-product').classList.add('active');
+  
+  document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
+  
+  initProductSlider();
+  checkProductInCart();
+  updateMainPageButton(); // Добавьте эту строку
+}
+
+// Добавьте новую функцию
+function updateMainPageButton() {
+  const cart = getCart();
+  const btn = document.querySelector('.add-to-cart');
+  if (!btn) return;
+  
+  const text = btn.querySelector('.delivery-text');
+  const item = cart.find(i => i.id === 'sofa-1');
+  
+  // Удаляем старый бейдж
+  const oldBadge = btn.querySelector('.cart-badge');
+  if (oldBadge) oldBadge.remove();
+  
+  if (item) {
+    text.textContent = 'Savatchada';
+    btn.classList.add('savatchada');
+    
+    // Добавляем новый бейдж
+    const badge = document.createElement('span');
+    badge.className = 'cart-badge';
+    badge.textContent = item.qty;
+    btn.appendChild(badge);
+  } else {
+    text.textContent = 'Ertaga';
+    btn.classList.remove('savatchada');
+  }
+}
+
+// Вызывайте при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+  updateMainPageButton();
+});
+
 /* ===== PRODUCT SLIDER ===== */
 let productSliderIndex = 0;
 
@@ -370,6 +414,9 @@ function quickAddToCart(event) {
   event.stopPropagation();
   
   let cart = getCart();
+  const btn = event.target.closest('button');
+  const text = btn.querySelector('.delivery-text');
+  
   const product = {
     id: 'sofa-1',
     title: 'Uglovoy arab divan (16 narsa)',
@@ -382,11 +429,27 @@ function quickAddToCart(event) {
   const existingIndex = cart.findIndex(item => item.id === product.id);
   
   if (existingIndex !== -1) {
+    // Удаляем из корзины
     cart.splice(existingIndex, 1);
-    event.target.closest('button').querySelector('.delivery-text').textContent = 'Ertaga';
+    text.textContent = 'Ertaga';
+    btn.classList.remove('savatchada');
+    
+    // Убираем бейдж
+    const badge = btn.querySelector('.cart-badge');
+    if (badge) badge.remove();
   } else {
+    // Добавляем в корзину
     cart.push(product);
-    event.target.closest('button').querySelector('.delivery-text').textContent = 'Savatchada';
+    text.textContent = 'Savatchada';
+    btn.classList.add('savatchada');
+    
+    // Добавляем бейдж
+    if (!btn.querySelector('.cart-badge')) {
+      const badge = document.createElement('span');
+      badge.className = 'cart-badge';
+      badge.textContent = '1';
+      btn.appendChild(badge);
+    }
   }
   
   saveCart(cart);

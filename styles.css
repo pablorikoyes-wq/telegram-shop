@@ -643,11 +643,12 @@ body {
   position: absolute;
   top: -6px;
   right: -6px;
-  background: red;
+  background: #FF3B30;
   color: white;
   font-size: 10px;
-  width: 16px;
-  height: 16px;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -868,19 +869,8 @@ body {
   margin-bottom: 12px;
 }
 
-.payment-icons {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
 
-.payment-icon {
-  padding: 6px 12px;
-  border-radius: 6px;
-  color: white;
-  font-size: 11px;
-  font-weight: 600;
-}
+
 
 .return-info h4 {
   font-size: 15px;
@@ -1193,9 +1183,18 @@ body {
   align-items: center;
 }
 
-/* PAYMENT ICONS REMOVED */
 .payment-icons {
-  display: none;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.payment-icon {
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 /* BUTTON WITH COUNTER */
