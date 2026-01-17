@@ -102,7 +102,11 @@ const products = [
       'assets/products/projector/main-1.jpg',
       'assets/products/projector/main-2.jpg',
       'assets/products/projector/main-3.jpg',
-      'assets/products/projector/main-4.jpg'
+      'assets/products/projector/main-4.jpg',
+      'assets/products/projector/main-5.jpg',
+      'assets/products/projector/main-6.jpg',
+      'assets/products/projector/main-7.jpg',
+      'assets/products/projector/main-8.jpg'
     ],
     description: {
       title: "Proyektor — oilaviy film tomosha qilish uchun qulay",
