@@ -102,11 +102,7 @@ const products = [
       'assets/products/projector/main-1.jpg',
       'assets/products/projector/main-2.jpg',
       'assets/products/projector/main-3.jpg',
-      'assets/products/projector/main-4.jpg',
-      'assets/products/projector/main-5.jpg',
-      'assets/products/projector/main-6.jpg',
-      'assets/products/projector/main-7.jpg',
-      'assets/products/projector/main-8.jpg'
+      'assets/products/projector/main-4.jpg'
     ],
     description: {
       title: "Proyektor — oilaviy film tomosha qilish uchun qulay",
@@ -690,26 +686,45 @@ function initProductSlider() {
   updateProductSlider();
   
   const slider = document.getElementById('product-slider-images');
+  const track = document.querySelector('#page-product .product-slider-track');
   const dots = document.querySelectorAll('#product-dots .dot');
   let startX = 0;
-  if (!slider) return;
+  if (!slider || !track) return;
 
-  slider.ontouchstart = (e) => {
-    startX = e.touches[0].clientX;
-  };
+  track.style.touchAction = 'pan-y';
 
-  slider.ontouchend = (e) => {
-    const diff = startX - e.changedTouches[0].clientX;
+  const handleSwipe = (endX) => {
+    const diff = startX - endX;
     const totalSlides = slider.querySelectorAll('img').length;
-    
-    if (diff > 50 && productSliderIndex < totalSlides - 1) {
+
+    if (Math.abs(diff) < 40) return;
+
+    if (diff > 0 && productSliderIndex < totalSlides - 1) {
       productSliderIndex += 1;
-    } else if (diff < -50 && productSliderIndex > 0) {
+    } else if (diff < 0 && productSliderIndex > 0) {
       productSliderIndex -= 1;
     }
-    
+
     updateProductSlider();
   };
+
+  if ('PointerEvent' in window) {
+    track.onpointerdown = (e) => {
+      startX = e.clientX;
+    };
+
+    track.onpointerup = (e) => {
+      handleSwipe(e.clientX);
+    };
+  } else {
+    track.ontouchstart = (e) => {
+      startX = e.touches[0].clientX;
+    };
+
+    track.ontouchend = (e) => {
+      handleSwipe(e.changedTouches[0].clientX);
+    };
+  }
   
   dots.forEach((dot, index) => {
     dot.onclick = () => {
