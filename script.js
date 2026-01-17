@@ -174,6 +174,70 @@ const products = [
         text: 'Qizimga oldim, juda xursand.'
       }
     ]
+  },
+  {
+    id: 'water-stand-1',
+    title: "19 litr suv bochkasi qopqog'i",
+    price: 230000,
+    oldPrice: 850000,
+    discount: '-73%',
+    rating: 5.0,
+    deliveryText: 'Ertaga',
+    images: [
+      'assets/products/water-stand/main-1.jpg',
+      'assets/products/water-stand/main-2.jpg',
+      'assets/products/water-stand/main-3.jpg',
+      'assets/products/water-stand/main-4.jpg'
+    ],
+    description: {
+      title: "19 litr shisha qopqog'i",
+      lines: [
+        "Stol usti-qora porloq sun'iy tosh.",
+        "Faqat bizda, suvdan qo'rqmaydigan, namlikdan shishib ketmaydigan va vaqt o'tishi bilan deformatsiyalanmaydigan, yog'ochdan farqli o'laroq, sun'iy toshdan yasalgan stol usti bor.",
+        "Stol usti shunchalik kuchliki, chiplar va tirnalishlar qo'rqinchli emas.",
+        'Diqqat! Qora nasos kiritilgan!',
+        "19 litrli shisha qopqog'i aylanadigan g'ildiraklarda turadi, bu og'ir to'ldirilgan idishning oson harakatlanishini anglatadi, hatto bola ham bardosh bera oladi.",
+        "Mahsulot yog'ochdan qilingan."
+      ]
+    },
+    specs: [
+      { label: "Ob'ektning balandligi", value: '35 sm' },
+      { label: 'Element kengligi', value: '35 sm' },
+      { label: 'Mavzu chuqurligi', value: '55 sm' },
+      { label: 'Paket bilan vazn', value: '9 Kg' },
+      { label: 'Paket bilan vazn', value: '60 sm' },
+      { label: 'Paket balandligi', value: '40 sm' },
+      { label: 'Paket kengligi', value: '40 sm' }
+    ],
+    reviews: [
+      {
+        name: 'Aziza',
+        date: '16 yanvar 2026',
+        text: 'Bizning uyimizga juda mos keldi 😍😍😍 raxmat',
+        images: [
+          'assets/products/water-stand/reviews/review-1-1.jpg',
+          'assets/products/water-stand/reviews/review-1-2.jpg'
+        ]
+      },
+      {
+        name: 'Sardor',
+        date: '15 yanvar 2026',
+        text: "Bir marta bosish uchun juda qulay nasos, bir stakan suv oladi, juda zamonaviy, men sotib olganimdan xursandman.",
+        images: ['assets/products/water-stand/reviews/review-2-1.jpg']
+      },
+      {
+        name: 'Madina',
+        date: '14 yanvar 2026',
+        text: "Chiroyli mahsulot va tez yetkazib berish uchun sotuvchiga rahmat.",
+        images: ['assets/products/water-stand/reviews/review-3-1.jpg']
+      },
+      {
+        name: 'Javohir',
+        date: '13 yanvar 2026',
+        text: "Xarid qilishdan juda mamnunman, juda chiroyli va zamonaviy ko'rinadi.",
+        images: ['assets/products/water-stand/reviews/review-4-1.jpg']
+      }
+    ]
   }
 ];
 
