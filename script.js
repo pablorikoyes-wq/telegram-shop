@@ -1,6 +1,409 @@
 const tg = window.Telegram.WebApp;
 tg.ready();
 
+const products = [
+  {
+    id: 'sofa-1',
+    title: 'Uglovoy arab divan (16 narsa)',
+    price: 250000,
+    oldPrice: 990000,
+    discount: '-75%',
+    rating: 4.8,
+    deliveryText: 'Ertaga',
+    images: [
+      'assets/products/sofa/sofa-1.jpg',
+      'assets/products/sofa/sofa-2.jpg',
+      'assets/products/sofa/sofa-3.jpg',
+      'assets/products/sofa/sofa-4.jpg',
+      'assets/products/sofa/sofa-5.jpg',
+      'assets/products/sofa/sofa-6.jpg'
+    ],
+    description: {
+      title: 'L shaklidagi arabcha divan',
+      lines: [
+        "Biz O'zbekiston bo'ylab yetkazib beramiz",
+        '<strong>Narxga nimalar kiradi:</strong>',
+        "Yopishqoq qoplamalar + gubka",
+        "U 16 ta qismdan iborat va polga mo'ljallangan gilamchani o'z ichiga oladi.",
+        '<strong>Narxga nimalar kiradi?</strong>',
+        '4 ta 190*70*10 sm pol yostiqchalari',
+        '4 ta 95*45*10 sm orqa yostiqchalar',
+        "3 ta qo'ltiqtayanchlar",
+        '1 ta 60*45*10 sm burchak yostiqchalari',
+        "1 ta 120*180 sm polga mo'ljallangan gilamcha",
+        '1 ta kofe stoli',
+        '3 ta bolalar yostiqchalari',
+        'Jami 16 ta'
+      ]
+    },
+    specs: [
+      { label: 'Xususiyati', value: 'Buklanadigan' },
+      { label: 'Material', value: 'Mato' },
+      { label: "Qo'llanilishi", value: "Mehmonxona, ochiq joy, vino sovutgichi, zal, yerto'la" },
+      { label: 'Dizayn uslubi', value: "An'anaviy" },
+      { label: "Tashqi ko'rinishi", value: 'Antikvar buyum' }
+    ],
+    reviews: [
+      {
+        name: 'Aziza',
+        date: '12 yanvar 2026',
+        text: "Aytishga hojat yo'q, bu ajoyib, chinakamiga hayratlanarli, yuqori sifatli matodan tikilgan, kuchli ekzotik uslubga ega!",
+        images: [
+          'assets/products/sofa/sofa-1.jpg',
+          'assets/products/sofa/sofa-2.jpg',
+          'assets/products/sofa/sofa-3.jpg'
+        ]
+      },
+      {
+        name: 'Bekzod',
+        date: '10 yanvar 2026',
+        text: "Divan juda qulay, uzun o'tirganda ham belga og'riq bermaydi. Yostiqchalari yumshoq va shinam."
+      },
+      {
+        name: 'Malika',
+        date: '09 yanvar 2026',
+        text: "Matosi juda sifatli, rangi ham chiroyli. Mehmonlarimiz ham divanni maqtashdi, juda qulay.",
+        images: [
+          'assets/products/sofa/malika-1.jpg',
+          'assets/products/sofa/malika-2.jpg',
+          'assets/products/sofa/malika-3.jpg'
+        ]
+      },
+      {
+        name: 'Jasur',
+        date: '08 yanvar 2026',
+        text: "Uy uchun ideal, buklanadiganligi juda qulay va joyni tejaydi. Oila bilan dam olishga zo'r."
+      },
+      {
+        name: 'Nodira',
+        date: '07 yanvar 2026',
+        text: "Keng va shinam, uyquga ham yaroqli. Bolalar ham divanda o'ynashni yaxshi ko'radi."
+      },
+      {
+        name: 'Sardor',
+        date: '06 yanvar 2026',
+        text: "Qulayligi va dizayni yoqdi, yig'ish oson bo'ldi. Divan mustahkam, kundalik foydalanish uchun zo'r."
+      },
+      {
+        name: 'Zarina',
+        date: '05 yanvar 2026',
+        text: "Mehmonxona uchun ayni muddao, divan juda qulay va keng. Gilamchasi ham foydali chiqdi."
+      }
+    ]
+  },
+  {
+    id: 'projector-1',
+    title: 'Проектор для фильмов с телефона 4К',
+    price: 0,
+    priceLabel: 'Narxi kelishiladi',
+    rating: 4.9,
+    deliveryText: 'Ertaga',
+    images: [
+      'assets/products/projector/main-1.jpg',
+      'assets/products/projector/main-2.jpg',
+      'assets/products/projector/main-3.jpg',
+      'assets/products/projector/main-4.jpg'
+    ],
+    description: {
+      title: "Proyektor — oilaviy film tomosha qilish uchun qulay",
+      lines: [
+        "Mini-proyektor xonangizni to'liq uy kinoteatriga aylantiradi.",
+        "U kino, sevimli seriallar, sport translyatsiyalari va multfilmlarni uyda ko'rish uchun ko'plab imkoniyatlarga ega.",
+        "Asosiy afzalliklaridan biri — Bluetooth va Wi-Fi orqali simsiz ulanish. Android asosidagi dasturiy ta'minot turli ilova va o'yinlarni o'rnatishga imkon beradi.",
+        "Proyektorga sichqoncha, klaviatura va kolonkani ulab, telefon yoki planshetdan video uzatish mumkin.",
+        "Proyektorni devor, shift yoki rulon ekran kabi tekis yuzaga yo'naltirsangiz, katta ekranda video namoyish etiladi.",
+        "Ixcham o'lchami uni olib yurish va saqlashni qulay qiladi. Pult va ichki giroskop yordamida tasvir burchagi avtomatik moslanadi.",
+        "Uyda sifatli tasvir va tovush bilan sevimli filmlarni tomosha qilish uchun a'lo tanlov!"
+      ]
+    },
+    specs: [
+      { label: 'Ekran formati', value: '16:9' },
+      { label: 'Ekran ruxsati', value: '1280*720 HD' },
+      { label: 'Kontrast', value: '1500:1' },
+      { label: 'Ichki xotira (GB)', value: '8' },
+      { label: 'Kuchlanish', value: '5' },
+      { label: 'Simsiz interfeyslar', value: 'Bluetooth; Wi-Fi' },
+      { label: 'Karnay quvvati', value: '5 vt' }
+    ],
+    reviews: [
+      {
+        name: 'Dilshod',
+        date: '15 yanvar 2026',
+        text: "Proyektor juda zo'r ekan, men o'ylagandim sifati yaxshi bo'lmaydi, lekin hammasi zo'r ekan ☺️",
+        images: [
+          'assets/products/projector/reviews/review-1-1.jpg',
+          'assets/products/projector/reviews/review-1-2.jpg'
+        ]
+      },
+      {
+        name: 'Madina',
+        date: '14 yanvar 2026',
+        text: "Sifati zo'r, hammaga tavsiya qilaman.",
+        images: ['assets/products/projector/reviews/review-2-1.jpg']
+      },
+      {
+        name: 'Rustam',
+        date: '13 yanvar 2026',
+        text: "Hammasi juda yaxshi, sifati kinoteatrdagidek.",
+        images: ['assets/products/projector/reviews/review-3-1.jpg']
+      },
+      {
+        name: 'Zuhra',
+        date: '12 yanvar 2026',
+        text: "Vaaau, bunday arzon narx uchun juda sifatli proyektor 😍😍😍",
+        images: ['assets/products/projector/reviews/review-4-1.jpg']
+      },
+      {
+        name: 'Aziz',
+        date: '11 yanvar 2026',
+        text: 'Tavsiya qilaman 👍🏻'
+      },
+      {
+        name: 'Diyor',
+        date: '10 yanvar 2026',
+        text: "Minuslari yo'q, dostavka juda tez, raxmat."
+      },
+      {
+        name: 'Gulnoza',
+        date: '09 yanvar 2026',
+        text: 'Qizimga oldim, juda xursand.'
+      }
+    ]
+  }
+];
+
+const productsById = new Map(products.map(product => [product.id, product]));
+let currentProductId = products[0]?.id;
+
+const starIconMarkup = `
+  <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
+    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+  </svg>
+`;
+
+function formatPrice(value) {
+  return Number(value || 0).toLocaleString();
+}
+
+function getPriceLabel(product) {
+  if (product.priceLabel) return product.priceLabel;
+  return `${formatPrice(product.price)} so'm`;
+}
+
+function getProduct(productId) {
+  return productsById.get(productId);
+}
+
+function renderStars() {
+  return `${starIconMarkup.repeat(5)}`;
+}
+
+function renderReviewImages(images = []) {
+  if (!images.length) return '';
+  const imagesMarkup = images.map(src => `<img src="${src}">`).join('');
+  return `<div class="review-images">${imagesMarkup}</div>`;
+}
+
+function renderReviewCard(review) {
+  return `
+    <div class="review-card">
+      <div class="review-rating">
+        ${renderStars()}
+      </div>
+      ${review.date ? `<div class="review-date">${review.date}</div>` : ''}
+      <p class="review-text">
+        <strong>${review.name}:</strong> ${review.text}
+      </p>
+      ${renderReviewImages(review.images)}
+    </div>
+  `;
+}
+
+function renderProductCards() {
+  const grid = document.getElementById('products-grid');
+  if (!grid) return;
+
+  grid.innerHTML = products.map(product => {
+    const slidesMarkup = product.images.map(src => `<img src="${src}">`).join('');
+    const dotsMarkup = product.images
+      .map((_, index) => `<span${index === 0 ? ' class="active"' : ''}></span>`)
+      .join('');
+    const oldPriceMarkup = product.oldPrice
+      ? `<div class="price-old">${formatPrice(product.oldPrice)} so'm</div>`
+      : '';
+    const priceLabel = getPriceLabel(product);
+    const reviewsLabel = `(${product.reviews.length} ta sharh)`;
+
+    return `
+      <div class="product-card" data-product-id="${product.id}">
+        <div class="slider">
+          <div class="slides">
+            ${slidesMarkup}
+          </div>
+        </div>
+
+        <div class="dots">
+          ${dotsMarkup}
+        </div>
+
+        <div class="price">
+          <div class="price-new">${priceLabel}</div>
+          ${oldPriceMarkup}
+        </div>
+
+        <div class="title">${product.title}</div>
+
+        <div class="rating">
+          <span class="star"></span>
+          <span class="rate">${product.rating.toFixed(1)}</span>
+          <span class="reviews">${reviewsLabel}</span>
+        </div>
+
+        <button
+          class="add-btn"
+          data-id="${product.id}"
+          data-title="${product.title}"
+          data-price="${Number(product.price) || 0}"
+          data-image="${product.images[0]}"
+          data-delivery-text="${product.deliveryText || 'Ertaga'}"
+          onclick="event.stopPropagation(); quickAddToCart(event)"
+        >
+          <span class="cart-icon">
+            <svg viewBox="0 0 24 24" class="cart-svg">
+              <path d="M6 8h12l-1.2 11H7.2L6 8Z"/>
+              <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
+            </svg>
+          </span>
+          <span class="delivery-text">${product.deliveryText || 'Ertaga'}</span>
+        </button>
+      </div>
+    `;
+  }).join('');
+
+  bindProductCardEvents();
+  initCardSliders();
+}
+
+function bindProductCardEvents() {
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', () => {
+      openProduct(card.dataset.productId);
+    });
+  });
+}
+
+function initCardSliders() {
+  document.querySelectorAll('.slider').forEach(slider => {
+    const slides = slider.querySelector('.slides');
+    const images = slides.querySelectorAll('img');
+    const dots = slider.parentElement.querySelectorAll('.dots span');
+
+    let index = 0;
+    let startX = 0;
+
+    const updateSlider = () => {
+      slides.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[index]?.classList.add('active');
+    };
+
+    slider.ontouchstart = (e) => {
+      startX = e.touches[0].clientX;
+    };
+
+    slider.ontouchend = (e) => {
+      const diff = startX - e.changedTouches[0].clientX;
+
+      if (diff > 40 && index < images.length - 1) index += 1;
+      if (diff < -40 && index > 0) index -= 1;
+
+      updateSlider();
+    };
+
+    updateSlider();
+  });
+}
+
+function renderProductPage(productId) {
+  const product = getProduct(productId);
+  if (!product) return;
+
+  const title = document.getElementById('product-title');
+  const rate = document.getElementById('product-rate');
+  const reviewsCount = document.getElementById('product-reviews-count');
+  const priceCurrent = document.getElementById('product-price-current');
+  const priceOld = document.getElementById('product-price-old');
+  const discount = document.getElementById('product-discount');
+  const reviewCountTitle = document.getElementById('product-review-count');
+  const reviewPreview = document.getElementById('product-review-preview');
+  const description = document.getElementById('product-description');
+  const specs = document.getElementById('product-specs');
+  const bottomPrice = document.getElementById('product-bottom-price');
+  const bottomDelivery = document.getElementById('product-bottom-delivery');
+  const sliderImages = document.getElementById('product-slider-images');
+  const sliderDots = document.getElementById('product-dots');
+
+  title.textContent = product.title;
+  rate.textContent = product.rating.toFixed(1);
+  reviewsCount.textContent = `(${product.reviews.length} ta sharh)`;
+  priceCurrent.textContent = getPriceLabel(product);
+
+  if (product.oldPrice) {
+    priceOld.textContent = `${formatPrice(product.oldPrice)} so'm`;
+    priceOld.style.display = 'block';
+  } else {
+    priceOld.textContent = '';
+    priceOld.style.display = 'none';
+  }
+
+  if (product.discount) {
+    discount.textContent = product.discount;
+    discount.style.display = 'inline-flex';
+  } else {
+    discount.textContent = '';
+    discount.style.display = 'none';
+  }
+
+  reviewCountTitle.textContent = `${product.reviews.length} ta sharh`;
+  reviewPreview.innerHTML = product.reviews.length
+    ? renderReviewCard(product.reviews[0])
+    : "<p class='review-text'>Hozircha sharh yo'q</p>";
+
+  description.innerHTML = `
+    <h3>${product.description.title}</h3>
+    ${product.description.lines.map(line => `<p>${line}</p>`).join('')}
+  `;
+
+  specs.innerHTML = product.specs
+    .map(spec => `<p><strong>${spec.label}:</strong> ${spec.value}</p>`)
+    .join('');
+
+  bottomPrice.textContent = getPriceLabel(product);
+  bottomDelivery.textContent = product.deliveryText || 'Ertaga';
+
+  sliderImages.innerHTML = product.images
+    .map(src => `<img src="${src}" alt="${product.title}">`)
+    .join('');
+  sliderDots.innerHTML = product.images
+    .map((_, index) => `<span class="dot${index === 0 ? ' active' : ''}"></span>`)
+    .join('');
+
+  productSliderIndex = 0;
+  initProductSlider();
+  switchTab(0);
+}
+
+function renderReviewsPage(productId) {
+  const product = getProduct(productId);
+  if (!product) return;
+
+  const title = document.getElementById('reviews-page-title');
+  const list = document.getElementById('reviews-list');
+
+  title.textContent = `Sharhlar (${product.reviews.length})`;
+  list.innerHTML = product.reviews.map(review => renderReviewCard(review)).join('');
+}
+
 /* ===== SPLASH (один раз) ===== */
 document.addEventListener("DOMContentLoaded", () => {
   const splash = document.getElementById("splash");
@@ -20,40 +423,13 @@ document.addEventListener("DOMContentLoaded", () => {
     app.style.display = "block";
   }
   
-  // Обновляем кнопку при загрузке
+  renderProductCards();
+  if (currentProductId) {
+    renderProductPage(currentProductId);
+  }
   updateMainPageButton();
 });
 
-/* ===== SLIDER ===== */
-document.querySelectorAll(".slider").forEach(slider => {
-  const slides = slider.querySelector(".slides");
-  const images = slides.querySelectorAll("img");
-  const dots = slider.parentElement.querySelectorAll(".dots span");
-
-  let index = 0;
-  let startX = 0;
-
-  function updateSlider() {
-    slides.style.transform = `translateX(-${index * 100}%)`;
-    dots.forEach(dot => dot.classList.remove("active"));
-    dots[index]?.classList.add("active");
-  }
-
-  slider.addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
-  });
-
-  slider.addEventListener("touchend", e => {
-    const diff = startX - e.changedTouches[0].clientX;
-
-    if (diff > 40 && index < images.length - 1) index++;
-    else if (diff < -40 && index > 0) index--;
-
-    updateSlider();
-  });
-
-  updateSlider();
-});
 
 /* ===== PAGE SWITCH (SPA) ===== */
 document.querySelectorAll('.bottom-nav a').forEach(link => {
@@ -246,13 +622,17 @@ function removeFromCart(id) {
 /* ===== BUTTON STATES ===== */
 
 /* ===== OPEN PRODUCT PAGE ===== */
-function openProduct() {
+function openProduct(productId = currentProductId) {
+  const product = getProduct(productId);
+  if (!product) return;
+  currentProductId = product.id;
+
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-product').classList.add('active');
   
   document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
-  
-  initProductSlider();
+
+  renderProductPage(product.id);
   checkProductInCart();
   updateMainPageButton();
 }
@@ -270,10 +650,12 @@ function updateMainPageButton() {
   const buttons = document.querySelectorAll('.add-btn');
   
   buttons.forEach(btn => {
+    const productId = btn.dataset.id;
     const text = btn.querySelector('.delivery-text');
-    if (!text) return;
-    
-    const item = cart.find(i => i.id === 'sofa-1');
+    if (!text || !productId) return;
+    const defaultText = btn.dataset.deliveryText || 'Ertaga';
+
+    const item = cart.find(i => i.id === productId);
     
     // Удаляем все старые бейджи
     const oldBadges = btn.querySelectorAll('.cart-badge');
@@ -289,7 +671,7 @@ function updateMainPageButton() {
       badge.textContent = item.qty;
       btn.appendChild(badge);
     } else {
-      text.textContent = 'Ertaga';
+      text.textContent = defaultText;
       btn.classList.remove('savatchada');
     }
   });
@@ -305,29 +687,30 @@ function initProductSlider() {
   const slider = document.getElementById('product-slider-images');
   const dots = document.querySelectorAll('#product-dots .dot');
   let startX = 0;
-  
-  slider.addEventListener('touchstart', (e) => {
+  if (!slider) return;
+
+  slider.ontouchstart = (e) => {
     startX = e.touches[0].clientX;
-  });
-  
-  slider.addEventListener('touchend', (e) => {
+  };
+
+  slider.ontouchend = (e) => {
     const diff = startX - e.changedTouches[0].clientX;
     const totalSlides = slider.querySelectorAll('img').length;
     
     if (diff > 50 && productSliderIndex < totalSlides - 1) {
-      productSliderIndex++;
+      productSliderIndex += 1;
     } else if (diff < -50 && productSliderIndex > 0) {
-      productSliderIndex--;
+      productSliderIndex -= 1;
     }
     
     updateProductSlider();
-  });
+  };
   
   dots.forEach((dot, index) => {
-    dot.addEventListener('click', () => {
+    dot.onclick = () => {
       productSliderIndex = index;
       updateProductSlider();
-    });
+    };
   });
 }
 
@@ -359,15 +742,8 @@ function switchTab(tabIndex) {
 /* ===== ADD TO CART FROM PRODUCT ===== */
 function addToCartFromProduct() {
   let cart = getCart();
-  
-  const product = {
-    id: 'sofa-1',
-    title: 'Uglovoy arab divan (16 narsa)',
-    price: 250000,
-    image: 'assets/products/sofa/sofa-1.jpg',
-    qty: 1,
-    selected: true
-  };
+  const product = getProduct(currentProductId);
+  if (!product) return;
   
   const existingIndex = cart.findIndex(item => item.id === product.id);
   
@@ -375,7 +751,14 @@ function addToCartFromProduct() {
     cart[existingIndex].qty += 1;
     tg.showAlert('Miqdor oshirildi!');
   } else {
-    cart.push(product);
+    cart.push({
+      id: product.id,
+      title: product.title,
+      price: Number(product.price) || 0,
+      image: product.images[0],
+      qty: 1,
+      selected: true
+    });
     tg.showAlert('Savatga qo\'shildi!');
   }
   
@@ -390,49 +773,39 @@ function quickAddToCart(event) {
   
   let cart = getCart();
   const btn = event.target.closest('button');
-  const text = btn.querySelector('.delivery-text');
-  
-  const product = {
-    id: 'sofa-1',
-    title: 'Uglovoy arab divan (16 narsa)',
-    price: 250000,
-    image: 'assets/products/sofa/sofa-1.jpg',
-    qty: 1,
-    selected: true
-  };
+  if (!btn) return;
+  const productId = btn.dataset.id;
+  const product = getProduct(productId);
+  if (!product) return;
   
   const existingIndex = cart.findIndex(item => item.id === product.id);
-  
-  // Убираем старый бейдж если есть
-  const oldBadge = btn.querySelector('.cart-badge');
-  if (oldBadge) oldBadge.remove();
   
   if (existingIndex !== -1) {
     // Удаляем из корзины
     cart.splice(existingIndex, 1);
-    text.textContent = 'Ertaga';
-    btn.classList.remove('savatchada');
   } else {
     // Добавляем в корзину
-    cart.push(product);
-    text.textContent = 'Savatchada';
-    btn.classList.add('savatchada');
-    
-    // Добавляем ОДИН бейдж
-    const badge = document.createElement('span');
-    badge.className = 'cart-badge';
-    badge.textContent = '1';
-    btn.appendChild(badge);
+    cart.push({
+      id: product.id,
+      title: product.title,
+      price: Number(product.price) || 0,
+      image: product.images[0],
+      qty: 1,
+      selected: true
+    });
   }
   
   saveCart(cart);
   renderCart();
+  updateMainPageButton();
+  checkProductInCart();
 }
 
 /* ===== OPEN REVIEWS PAGE ===== */
 function openReviews() {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-reviews').classList.add('active');
+  renderReviewsPage(currentProductId);
 }
 
 function backToProduct() {
@@ -444,10 +817,10 @@ function backToProduct() {
 function checkProductInCart() {
   const cart = getCart();
   const btn = document.getElementById('product-add-btn');
+  if (!btn) return;
   const btnText = btn.querySelector('.btn-text');
   const btnCount = btn.querySelector('.btn-count');
-  
-  const item = cart.find(i => i.id === 'sofa-1');
+  const item = cart.find(i => i.id === currentProductId);
   
   if (item) {
     btn.classList.add('in-cart');

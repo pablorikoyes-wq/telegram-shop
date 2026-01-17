@@ -39,61 +39,7 @@
 
   <!-- 🟣 HOME -->
   <section id="page-home" class="page active">
-    <div class="products-grid">
-
-      <div class="product-card" onclick="openProduct()">
-
-        <!-- SLIDER -->
-        <div class="slider">
-          <div class="slides">
-            <img src="assets/products/sofa/sofa-1.jpg">
-            <img src="assets/products/sofa/sofa-2.jpg">
-            <img src="assets/products/sofa/sofa-3.jpg">
-            <img src="assets/products/sofa/sofa-4.jpg">
-            <img src="assets/products/sofa/sofa-5.jpg">
-            <img src="assets/products/sofa/sofa-6.jpg">
-          </div>
-        </div>
-      
-        <!-- DOTS -->
-        <div class="dots">
-          <span class="active"></span>
-          <span></span><span></span><span></span><span></span><span></span>
-        </div>
-      
-        <!-- PRICE -->
-        <div class="price">
-          <div class="price-new">250 000 so'm</div>
-          <div class="price-old">990 000 so'm</div>
-        </div>
-      
-        <!-- TITLE -->
-        <div class="title">Uglovoy arab divan (16 narsa)</div>
-      
-        <!-- RATING -->
-        <div class="rating">
-          <span class="star"></span>
-          <span class="rate">4.8</span>
-          <span class="reviews">(7 ta sharh)</span>
-        </div>
-      
-        <!-- BUTTON -->
-        <button 
-          class="add-btn"
-          onclick="event.stopPropagation(); quickAddToCart(event)"
-        >
-          <span class="cart-icon">
-            <svg viewBox="0 0 24 24" class="cart-svg">
-              <path d="M6 8h12l-1.2 11H7.2L6 8Z"/>
-              <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
-            </svg>
-          </span>
-      
-          <span class="delivery-text">Ertaga</span>
-        </button>
-      
-      </div>
-    </div>
+    <div class="products-grid" id="products-grid"></div>
   </section>
 
   <!-- 🛒 CART -->
@@ -292,43 +238,29 @@
 
   <!-- SLIDER -->
   <div class="product-slider">
-    <div class="slider-images" id="product-slider-images">
-      <img src="assets/products/sofa/sofa-1.jpg">
-      <img src="assets/products/sofa/sofa-2.jpg">
-      <img src="assets/products/sofa/sofa-3.jpg">
-      <img src="assets/products/sofa/sofa-4.jpg">
-      <img src="assets/products/sofa/sofa-5.jpg">
-      <img src="assets/products/sofa/sofa-6.jpg">
-    </div>
-    <div class="slider-dots" id="product-dots">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
+    <div class="slider-images" id="product-slider-images"></div>
+    <div class="slider-dots" id="product-dots"></div>
   </div>
 
   <div class="product-content">
     
     <!-- TITLE -->
-    <h1 class="product-title">Uglovoy arab divan (16 narsa)</h1>
+    <h1 class="product-title" id="product-title"></h1>
     
     <!-- RATING -->
     <div class="product-rating">
       <svg class="star-icon" viewBox="0 0 24 24" fill="#FFA500">
         <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
       </svg>
-      <span class="rate-text">4.8</span>
-      <span class="reviews-count">(7 ta sharh)</span>
+      <span class="rate-text" id="product-rate"></span>
+      <span class="reviews-count" id="product-reviews-count"></span>
     </div>
 
     <!-- PRICE -->
     <div class="product-price">
-      <div class="price-current">250 000 so'm</div>
-      <div class="price-old">990 000 so'm</div>
-      <div class="discount-badge">-75%</div>
+      <div class="price-current" id="product-price-current"></div>
+      <div class="price-old" id="product-price-old"></div>
+      <div class="discount-badge" id="product-discount"></div>
     </div>
 
     <!-- DELIVERY -->
@@ -357,39 +289,11 @@
     <!-- REVIEWS -->
     <div class="reviews-section">
       <div class="reviews-header">
-        <h3>7 ta sharh</h3>
+        <h3 id="product-review-count"></h3>
         <a href="#" class="view-all" onclick="event.preventDefault(); openReviews()">Barchasi →</a>
       </div>
 
-      <div class="review-card">
-        <div class="review-rating">
-          <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-          <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-          <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-          <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-          <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-        </div>
-        <div class="review-date">12 yanvar 2026</div>
-        <p class="review-text">
-          <strong>Aziza:</strong> Aytishga hojat yo'q, bu ajoyib, chinakamiga hayratlanarli, yuqori sifatli matodan tikilgan, kuchli ekzotik uslubga ega!
-        </p>
-        <div class="review-images">
-          <img src="assets/products/sofa/sofa-1.jpg">
-          <img src="assets/products/sofa/sofa-2.jpg">
-          <img src="assets/products/sofa/sofa-3.jpg">
-          <span class="more-images">+3</span>
-        </div>
-      </div>
+      <div id="product-review-preview"></div>
     </div>
 
   <!-- DESCRIPTION -->
@@ -399,30 +303,9 @@
     <button class="tab" onclick="switchTab(1)">Tavsiflar</button>
   </div>
 
-  <div class="tab-content active">
-    <h3>L shaklidagi arabcha divan</h3>
-    <p>Biz O'zbekiston bo'ylab yetkazib beramiz</p>
-    <p><strong>Narxga nimalar kiradi:</strong></p>
-    <p>Yopishqoq qoplamalar + gubka</p>
-    <p>U 16 ta qismdan iborat va polga mo'ljallangan gilamchani o'z ichiga oladi.</p>
-    <p><strong>Narxga nimalar kiradi?</strong></p>
-    <p>4 ta 190*70*10 sm pol yostiqchalari</p>
-    <p>4 ta 95*45*10 sm orqa yostiqchalar</p>
-    <p>3 ta qo'ltiqtayanchlar</p>
-    <p>1 ta 60*45*10 sm burchak yostiqchalari</p>
-    <p>1 ta 120*180 sm polga mo'ljallangan gilamcha</p>
-    <p>1 ta kofe stoli</p>
-    <p>3 ta bolalar yostiqchalari</p>
-    <p>Jami 16 ta</p>
-  </div>
+  <div class="tab-content active" id="product-description"></div>
 
-  <div class="tab-content">
-    <p><strong>Xususiyati:</strong> Buklanadigan</p>
-    <p><strong>Material:</strong> Mato</p>
-    <p><strong>Qo'llanilishi:</strong> Mehmonxona, ochiq joy, vino sovutgichi, zal, yerto'la</p>
-    <p><strong>Dizayn uslubi:</strong> An'anaviy</p>
-    <p><strong>Tashqi ko'rinishi:</strong> Antikvar buyum</p>
-  </div>
+  <div class="tab-content" id="product-specs"></div>
 </div>
 
   </div>
@@ -430,8 +313,8 @@
   <!-- BOTTOM BAR -->
   <div class="product-bottom-bar">
     <div class="price-info">
-      <div class="price-main">250 000 so'm</div>
-      <div class="delivery-text">Ertaga</div>
+      <div class="price-main" id="product-bottom-price"></div>
+      <div class="delivery-text" id="product-bottom-delivery"></div>
     </div>
     <button class="add-cart-btn" id="product-add-btn" onclick="addToCartFromProduct()">
       <span class="btn-text">Savatga</span>
@@ -449,192 +332,10 @@
         <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
       </svg>
     </button>
-    <h2>Sharhlar (7)</h2>
+    <h2 id="reviews-page-title"></h2>
   </div>
 
-  <div class="reviews-list">
-    
-    <div class="review-card">
-      <div class="review-rating">
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-      </div>
-      <div class="review-date">12 yanvar 2026</div>
-      <p class="review-text">
-        <strong>Aziza:</strong> Aytishga hojat yo'q, bu ajoyib, chinakamiga hayratlanarli, yuqori sifatli matodan tikilgan, kuchli ekzotik uslubga ega!
-      </p>
-      <div class="review-images">
-        <img src="assets/products/sofa/sofa-1.jpg">
-        <img src="assets/products/sofa/sofa-2.jpg">
-        <img src="assets/products/sofa/sofa-3.jpg">
-        <span class="more-images">+3</span>
-      </div>
-    </div>
-
-    <div class="review-card">
-      <div class="review-rating">
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-      </div>
-      <div class="review-date">10 yanvar 2026</div>
-      <p class="review-text">
-        <strong>Bekzod:</strong> Divan juda qulay, uzun o'tirganda ham belga og'riq bermaydi. Yostiqchalari yumshoq va shinam.
-      </p>
-    </div>
-
-    <div class="review-card">
-      <div class="review-rating">
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-      </div>
-      <div class="review-date">09 yanvar 2026</div>
-      <p class="review-text">
-        <strong>Malika:</strong> Matosi juda sifatli, rangi ham chiroyli. Mehmonlarimiz ham divanni maqtashdi, juda qulay.
-      </p>
-    <div class="review-images">
-      <img src="assets/products/sofa/malika-1.jpg">
-      <img src="assets/products/sofa/malika-2.jpg">
-      <img src="assets/products/sofa/malika-3.jpg">
-      <img src="assets/products/sofa/malika-4.jpg">
-    </div>
-    </div>
-
-    <div class="review-card">
-      <div class="review-rating">
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-      </div>
-      <div class="review-date">08 yanvar 2026</div>
-      <p class="review-text">
-        <strong>Jasur:</strong> Uy uchun ideal, buklanadiganligi juda qulay va joyni tejaydi. Oila bilan dam olishga zo'r.
-      </p>
-    </div>
-
-    <div class="review-card">
-      <div class="review-rating">
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-      </div>
-      <div class="review-date">07 yanvar 2026</div>
-      <p class="review-text">
-        <strong>Nodira:</strong> Keng va shinam, uyquga ham yaroqli. Bolalar ham divanda o'ynashni yaxshi ko'radi.
-      </p>
-    </div>
-
-    <div class="review-card">
-      <div class="review-rating">
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-      </div>
-      <div class="review-date">06 yanvar 2026</div>
-      <p class="review-text">
-        <strong>Sardor:</strong> Qulayligi va dizayni yoqdi, yig'ish oson bo'ldi. Divan mustahkam, kundalik foydalanish uchun zo'r.
-      </p>
-    </div>
-
-    <div class="review-card">
-      <div class="review-rating">
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-        <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-        </svg>
-      </div>
-      <div class="review-date">05 yanvar 2026</div>
-      <p class="review-text">
-        <strong>Zarina:</strong> Mehmonxona uchun ayni muddao, divan juda qulay va keng. Gilamchasi ham foydali chiqdi.
-      </p>
-    </div>
-
-  </div>
+  <div class="reviews-list" id="reviews-list"></div>
 </section>
 
 </main>
