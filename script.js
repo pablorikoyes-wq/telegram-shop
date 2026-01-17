@@ -93,9 +93,9 @@ const products = [
   },
   {
     id: 'projector-1',
-    title: 'Проектор для фильмов с телефона 4К',
-    price: 0,
-    priceLabel: 'Narxi kelishiladi',
+    title: 'Telefon uchun 4K kino proyektori',
+    price: 210000,
+    oldPrice: 1200000,
     rating: 4.9,
     deliveryText: 'Ertaga',
     images: [
@@ -107,13 +107,14 @@ const products = [
     description: {
       title: "Proyektor — oilaviy film tomosha qilish uchun qulay",
       lines: [
-        "Mini-proyektor xonangizni to'liq uy kinoteatriga aylantiradi.",
-        "U kino, sevimli seriallar, sport translyatsiyalari va multfilmlarni uyda ko'rish uchun ko'plab imkoniyatlarga ega.",
+        "Proyektor oilaviy film tomoshalari uchun juda mos! Mini-proyektor xonangizni uy kinoteatriga aylantiradi.",
+        "U kino, sevimli seriallar, sport translyatsiyalari va multfilmlarni uyda qulay tomosha qilish imkonini beradi.",
         "Asosiy afzalliklaridan biri — Bluetooth va Wi-Fi orqali simsiz ulanish. Android asosidagi dasturiy ta'minot turli ilova va o'yinlarni o'rnatishga imkon beradi.",
-        "Proyektorga sichqoncha, klaviatura va kolonkani ulab, telefon yoki planshetdan video uzatish mumkin.",
-        "Proyektorni devor, shift yoki rulon ekran kabi tekis yuzaga yo'naltirsangiz, katta ekranda video namoyish etiladi.",
-        "Ixcham o'lchami uni olib yurish va saqlashni qulay qiladi. Pult va ichki giroskop yordamida tasvir burchagi avtomatik moslanadi.",
-        "Uyda sifatli tasvir va tovush bilan sevimli filmlarni tomosha qilish uchun a'lo tanlov!"
+        "Proyektorga sichqoncha, klaviatura, kolonkani ulab, telefon yoki planshetdan videoni uzatish mumkin.",
+        "Proyektorni devor, shift yoki rulonli ekran kabi tekis yuzaga yo'naltirsangiz, katta ekranda video ko'rsatadi.",
+        "Kichik o'lchami sababli uni olib yurish va saqlash juda qulay. Safarga olib borish yoki uyning turli xonalarida ishlatish mumkin.",
+        "Proyektor pult orqali boshqariladi va ichki giroskop yordamida tasvirni burchakka moslab avtomatik sozlaydi.",
+        "Uyda sifatli tasvir va tovush bilan sevimli filmlar va multfilmlarni tomosha qilish uchun a'lo tanlov!"
       ]
     },
     specs: [
