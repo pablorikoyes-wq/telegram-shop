@@ -620,6 +620,12 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("profile", JSON.stringify(profile));
     tg.showAlert('Saqlandi!');
   });
+
+  if (contactBtn) {
+    contactBtn.addEventListener("click", () => {
+      openManagerContact();
+    });
+  }
 });
 
 
@@ -1176,7 +1182,11 @@ function openManagerChat() {
   // const url = `tg://user?id=${managerUserId}`;
   
   // Открываем ссылку
-  window.open(url, '_blank');
+  if (tg && typeof tg.openTelegramLink === 'function') {
+    tg.openTelegramLink(url);
+  } else {
+    window.open(url, '_blank');
+  }
   
   // Очищаем корзину
   const cart = getCart();
@@ -1192,7 +1202,11 @@ function openManagerChat() {
 function openManagerContact() {
   const managerUsername = 'uzumbox_support';
   const url = `https://t.me/${managerUsername}`;
-  window.open(url, '_blank');
+  if (tg && typeof tg.openTelegramLink === 'function') {
+    tg.openTelegramLink(url);
+  } else {
+    window.open(url, '_blank');
+  }
 }
 
 function submitOrder() {
