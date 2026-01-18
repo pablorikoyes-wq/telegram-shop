@@ -238,6 +238,41 @@ const products = [
         images: ['assets/products/water-stand/reviews/review-4-1.jpg']
       }
     ]
+  },
+  {
+    id: 'dishwasher-1',
+    title: 'Idish yuvish mashinasi mini ixcham',
+    price: 350000,
+    oldPrice: 1210000,
+    discount: '-71%',
+    rating: 4.9,
+    deliveryText: 'Ertaga',
+    images: [
+      'assets/products/dishwasher/main-1.jpg',
+      'assets/products/dishwasher/main-2.jpg',
+      'assets/products/dishwasher/main-3.jpg',
+      'assets/products/dishwasher/main-4.jpg'
+    ],
+    description: {
+      title: 'Idish yuvish mashinasi mini ixcham',
+      lines: [
+        "Zamonaviy yoki minimalist oshxonalarga mos keladigan ajoyib qora korpusli 6 to'plamli stol idish yuvish mashinasi.",
+        "Beshta dastur ifloslanish darajasiga qarab jarayonni moslashuvchan sozlash imkonini beradi: intensiv, normal, Eko, shisha va tez rejimlar.",
+        "Sensorli boshqaruv paneli texnika bilan o'zaro aloqani osonlashtiradi va suv yumshatgich barqaror samaradorlikni saqlashga g'amxo'rlik qiladi va shkalaning oldini oladi.",
+        "Kondensatsiyani quritish tufayli idishlar tomchilarsiz qoladi va qurilmaning o'zi minimal joyni egallaydi, bu uni kichik kvartiralar va studiyalar uchun ideal qiladi."
+      ]
+    },
+    specs: [
+      { label: "Ob'ektning balandligi", value: '45 sm' },
+      { label: 'Element kengligi', value: '55 sm' },
+      { label: 'Mavzu chuqurligi', value: '50 sm' },
+      { label: 'Paketsiz vazn', value: '19 Kg' },
+      { label: 'Paket bilan vazn', value: '22 Kg' },
+      { label: 'Paket bilan vazn', value: '59 sm' },
+      { label: 'Paket balandligi', value: '53 sm' },
+      { label: 'Paket kengligi', value: '58 sm' }
+    ],
+    reviews: []
   }
 ];
 
