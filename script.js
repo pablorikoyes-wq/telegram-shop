@@ -275,16 +275,27 @@ const products = [
     ],
     reviews: [
       {
-        name: 'Nilufar',
+        name: 'Shahnoza',
         date: '16 yanvar 2026',
-        text: "Idish yuvish moshinasi juda daxshat, hech minuslari yo'q, 5 kun ishlatyapman hech minuslarini topolmadim, dastavla juda tez edi😊",
+        text: "Idish yuvish moshinasi juda daxshat, hech minuslari yo'q, 5 kun ishlatvoman hech minuslarini topomadim, dastavla juda tez edi😊",
         images: ['assets/products/dishwasher/reviews/review-1-1.jpg']
       },
       {
-        name: 'Dilshod',
+        name: 'Farrux',
         date: '15 yanvar 2026',
-        text: "Dastavkasi juda tez kelgan, mashinasi zo'r, hali minus tomonlarini topolmadim, gap yo'q.",
+        text: "Dastavkasi juda tez kelgan, mashinasi zo'r, xali minus tomonlarini topomadim, gap yo'q.",
         images: ['assets/products/dishwasher/reviews/review-2-1.jpg']
+      },
+      {
+        name: 'Madina',
+        date: '14 yanvar 2026',
+        text: "Yaxshi yuvadi va sifatli, endi xotinim umuman charchamaydi va bu narxdan mamnun bo'lib yuradi, faqat eng yaxshi topilma."
+      },
+      {
+        name: 'Javohir',
+        date: '13 yanvar 2026',
+        text: 'Juda daxshat narsa ekan 😍',
+        images: ['assets/products/dishwasher/reviews/review-4-1.jpg']
       }
     ]
   }
