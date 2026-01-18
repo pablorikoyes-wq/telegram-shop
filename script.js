@@ -596,6 +596,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const phoneInput = document.getElementById("profile-phone");
   const addressInput = document.getElementById("profile-address");
   const saveBtn = document.getElementById("save-profile");
+  const contactBtn = document.getElementById("contact-us");
 
   // загрузка профиля
   const savedProfile = localStorage.getItem("profile");
@@ -1186,6 +1187,12 @@ function openManagerChat() {
   setTimeout(() => {
     tg.showAlert('Chekni menejerga yuboring!');
   }, 500);
+}
+
+function openManagerContact() {
+  const managerUsername = 'uzumbox_support';
+  const url = `https://t.me/${managerUsername}`;
+  window.open(url, '_blank');
 }
 
 function submitOrder() {
