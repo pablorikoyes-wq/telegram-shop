@@ -251,7 +251,8 @@ const products = [
       'assets/products/dishwasher/main-1.jpg',
       'assets/products/dishwasher/main-2.jpg',
       'assets/products/dishwasher/main-3.jpg',
-      'assets/products/dishwasher/main-4.jpg'
+      'assets/products/dishwasher/main-4.jpg',
+      'assets/products/dishwasher/main-5.jpg'
     ],
     description: {
       title: 'Idish yuvish mashinasi mini ixcham',
@@ -272,7 +273,20 @@ const products = [
       { label: 'Paket balandligi', value: '53 sm' },
       { label: 'Paket kengligi', value: '58 sm' }
     ],
-    reviews: []
+    reviews: [
+      {
+        name: 'Nilufar',
+        date: '16 yanvar 2026',
+        text: "Idish yuvish moshinasi juda daxshat, hech minuslari yo'q, 5 kun ishlatyapman hech minuslarini topolmadim, dastavla juda tez edi😊",
+        images: ['assets/products/dishwasher/reviews/review-1-1.jpg']
+      },
+      {
+        name: 'Dilshod',
+        date: '15 yanvar 2026',
+        text: "Dastavkasi juda tez kelgan, mashinasi zo'r, hali minus tomonlarini topolmadim, gap yo'q.",
+        images: ['assets/products/dishwasher/reviews/review-2-1.jpg']
+      }
+    ]
   }
 ];
 
