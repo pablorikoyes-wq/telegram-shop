@@ -298,6 +298,76 @@ const products = [
         images: ['assets/products/dishwasher/reviews/review-4-1.jpg']
       }
     ]
+  },
+  {
+    id: 'a4-printer-1',
+    title: 'A4 chop etish uchun mini printer',
+    price: 240000,
+    oldPrice: 1340000,
+    discount: '-82%',
+    rating: 5.0,
+    deliveryText: 'Ertaga',
+    images: [
+      'assets/products/a4-printer/main-1.jpg',
+      'assets/products/a4-printer/main-2.jpg',
+      'assets/products/a4-printer/main-3.jpg'
+    ],
+    description: {
+      title: 'A4 chop etish uchun mini printer',
+      lines: [
+        "Hujjatlar, eslatmalar yoki rasmlarni istalgan joyda va qulay vaqtda chop etish uchun universal echimni qidiryapsizmi? Sizning e'tiboringizga siyoh ishlatmasdan chop etish imkoniyati beruvchi portativ simsiz A4 printerini taqdim etamiz.",
+        "Ushbu ajoyib A4 printeri ilg'or texnologiyalar va foydalanish qulayligini birlashtirib, uni turli vazifalar uchun mukammal tanlov qiladi.",
+        "Rangli sahifani, muhim hujjatni, hatto tatuirovkalarni chop etishingiz kerakmi yoki yo'qmi, bu termal printer har qanday vazifani bajaradi.",
+        "Siz printerga osongina ulanishingiz mumkin. Bluetooth va hujjatlarni to'g'ridan-to'g'ri smartfon yoki planshetdan chop eting.",
+        "Siyohsiz chop etish imkoniyati bilan siz kartridjlarni almashtirishda tejaysiz va printerdan istalgan vaqtda, istalgan joyda foydalanishingiz mumkin.",
+        "Ushbu mini A4 printeri ixcham o'lcham va engil vaznga ega bo'lib, uni sayohat, maktab yoki ish uchun ideal qiladi.",
+        "Mini simsiz printerda yorliqlar yoki stikerlarni chop etish ham mavjud."
+      ]
+    },
+    specs: [
+      { label: "Ob'ektning balandligi", value: '26 sm' },
+      { label: 'Element kengligi', value: '8 sm' },
+      { label: 'Mavzu chuqurligi', value: '4.7 sm' },
+      { label: 'Paketsiz vazn', value: '0.73 Kg' },
+      { label: 'Paket bilan vazn', value: '1.36 Kg' },
+      { label: 'Paket bilan vazn', value: '30 sm' },
+      { label: 'Paket balandligi', value: '12 sm' },
+      { label: 'Paket kengligi', value: '13 sm' }
+    ],
+    reviews: [
+      {
+        name: 'Kamola',
+        date: '16 yanvar 2026',
+        text: "Bosib chiqarish sifati juda yaxshi, men 5 yulduzni qo'ydim.",
+        images: ['assets/products/a4-printer/reviews/review-1-1.jpg']
+      },
+      {
+        name: 'Sherzod',
+        date: '15 yanvar 2026',
+        text: "1 kun ichida etib keldi, raxmat, juda zo'r narsa.",
+        images: ['assets/products/a4-printer/reviews/review-2-1.jpg']
+      },
+      {
+        name: 'Dilnoza',
+        date: '14 yanvar 2026',
+        text: "Gap yo'q, printer juda zo'r, tavsiya qilaman.",
+        images: ['assets/products/a4-printer/reviews/review-3-1.jpg']
+      },
+      {
+        name: 'Jasur',
+        date: '13 yanvar 2026',
+        text: "😍😍😍 zo'r narsa, telfon orqali pechat qilish oson, olinglar, minuslarini topolmadim.",
+        images: [
+          'assets/products/a4-printer/reviews/review-4-1.jpg',
+          'assets/products/a4-printer/reviews/review-4-2.jpg'
+        ]
+      },
+      {
+        name: 'Malika',
+        date: '12 yanvar 2026',
+        text: 'Printerga gap yo\'q, hammasi ishlayapti, talabalar uchun zarur narsa 😊'
+      }
+    ]
   }
 ];
 
