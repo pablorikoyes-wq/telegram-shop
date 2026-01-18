@@ -238,6 +238,66 @@ const products = [
         images: ['assets/products/water-stand/reviews/review-4-1.jpg']
       }
     ]
+  },
+  {
+    id: 'dishwasher-1',
+    title: 'Idish yuvish mashinasi mini ixcham',
+    price: 350000,
+    oldPrice: 1210000,
+    discount: '-71%',
+    rating: 4.9,
+    deliveryText: 'Ertaga',
+    images: [
+      'assets/products/dishwasher/main-1.jpg',
+      'assets/products/dishwasher/main-2.jpg',
+      'assets/products/dishwasher/main-3.jpg',
+      'assets/products/dishwasher/main-4.jpg',
+      'assets/products/dishwasher/main-5.jpg'
+    ],
+    description: {
+      title: 'Idish yuvish mashinasi mini ixcham',
+      lines: [
+        "Zamonaviy yoki minimalist oshxonalarga mos keladigan ajoyib qora korpusli 6 to'plamli stol idish yuvish mashinasi.",
+        "Beshta dastur ifloslanish darajasiga qarab jarayonni moslashuvchan sozlash imkonini beradi: intensiv, normal, Eko, shisha va tez rejimlar.",
+        "Sensorli boshqaruv paneli texnika bilan o'zaro aloqani osonlashtiradi va suv yumshatgich barqaror samaradorlikni saqlashga g'amxo'rlik qiladi va shkalaning oldini oladi.",
+        "Kondensatsiyani quritish tufayli idishlar tomchilarsiz qoladi va qurilmaning o'zi minimal joyni egallaydi, bu uni kichik kvartiralar va studiyalar uchun ideal qiladi."
+      ]
+    },
+    specs: [
+      { label: "Ob'ektning balandligi", value: '45 sm' },
+      { label: 'Element kengligi', value: '55 sm' },
+      { label: 'Mavzu chuqurligi', value: '50 sm' },
+      { label: 'Paketsiz vazn', value: '19 Kg' },
+      { label: 'Paket bilan vazn', value: '22 Kg' },
+      { label: 'Paket bilan vazn', value: '59 sm' },
+      { label: 'Paket balandligi', value: '53 sm' },
+      { label: 'Paket kengligi', value: '58 sm' }
+    ],
+    reviews: [
+      {
+        name: 'Shahnoza',
+        date: '16 yanvar 2026',
+        text: "Idish yuvish moshinasi juda daxshat, hech minuslari yo'q, 5 kun ishlatvoman hech minuslarini topomadim, dastavla juda tez edi😊",
+        images: ['assets/products/dishwasher/reviews/review-1-1.jpg']
+      },
+      {
+        name: 'Farrux',
+        date: '15 yanvar 2026',
+        text: "Dastavkasi juda tez kelgan, mashinasi zo'r, xali minus tomonlarini topomadim, gap yo'q.",
+        images: ['assets/products/dishwasher/reviews/review-2-1.jpg']
+      },
+      {
+        name: 'Madina',
+        date: '14 yanvar 2026',
+        text: "Yaxshi yuvadi va sifatli, endi xotinim umuman charchamaydi va bu narxdan mamnun bo'lib yuradi, faqat eng yaxshi topilma."
+      },
+      {
+        name: 'Javohir',
+        date: '13 yanvar 2026',
+        text: 'Juda daxshat narsa ekan 😍',
+        images: ['assets/products/dishwasher/reviews/review-4-1.jpg']
+      }
+    ]
   }
 ];
 

@@ -728,6 +728,13 @@ body {
 }
 
 .product-slider-track {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-slider-track {
   position: relative;
   width: 100%;
   height: 400px;
