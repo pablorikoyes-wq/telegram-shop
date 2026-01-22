@@ -1386,6 +1386,16 @@ function openManagerChat() {
   
   // Получаем данные заказа
   const order = JSON.parse(localStorage.getItem('currentOrder') || '{}');
+  const items = Array.isArray(order.items) ? order.items : [];
+  const itemsText = items.length
+    ? items
+        .map(item => {
+          const colorText = item.colorLabel ? `, rangi: ${item.colorLabel}` : '';
+          const lineTotal = (Number(item.price) || 0) * (Number(item.qty) || 0);
+          return `• ${item.title}${colorText} — ${item.qty || 1} dona — ${lineTotal.toLocaleString()} so'm`;
+        })
+        .join('\n')
+    : '—';
   
   // Формируем сообщение для менеджера
   const message = `
@@ -1394,6 +1404,9 @@ function openManagerChat() {
 👤 Mijoz: ${order.customer?.name || ''}
 📞 Telefon: ${order.customer?.phone || ''}
 📍 Manzil: ${order.customer?.address || ''}
+
+📦 Buyurtma:
+${itemsText}
 
 💰 Summa: ${order.total?.toLocaleString() || '0'} so'm
 
