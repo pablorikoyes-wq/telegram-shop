@@ -18,6 +18,11 @@ const products = [
       'assets/products/sofa/sofa-5.jpg',
       'assets/products/sofa/sofa-6.jpg'
     ],
+    colors: [
+      { label: 'Qizil', value: 'qizil', imageIndex: 0 },
+      { label: 'Yashil', value: 'yashil', imageIndex: 2 },
+      { label: "Ko'k", value: 'kok', imageIndex: 4 }
+    ],
     description: {
       title: 'L shaklidagi arabcha divan',
       lines: [
@@ -373,6 +378,14 @@ const products = [
 
 const productsById = new Map(products.map(product => [product.id, product]));
 let currentProductId = products[0]?.id;
+let currentProductColor = null;
+const selectedColors = new Map();
+
+const stockRanges = [
+  { min: 15, max: 20 },
+  { min: 7, max: 15 },
+  { min: 1, max: 5 }
+];
 
 const starIconMarkup = `
   <svg class="star-icon-small" viewBox="0 0 24 24" fill="#FFA500">
@@ -391,6 +404,50 @@ function getPriceLabel(product) {
 
 function getProduct(productId) {
   return productsById.get(productId);
+}
+
+function hashString(value) {
+  let hash = 0;
+  for (let i = 0; i < value.length; i += 1) {
+    hash = (hash << 5) - hash + value.charCodeAt(i);
+    hash |= 0;
+  }
+  return hash;
+}
+
+function seededRandom(seed) {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
+
+function getStockCount(productId) {
+  const dayIndex = Math.floor(Date.now() / 86400000);
+  const range = stockRanges[dayIndex % stockRanges.length];
+  const seed = dayIndex + hashString(productId);
+  const rnd = seededRandom(seed);
+  return range.min + Math.floor(rnd * (range.max - range.min + 1));
+}
+
+function getStockLabel(productId) {
+  const count = getStockCount(productId);
+  return `Qoldi ${count} dona`;
+}
+
+function getDefaultColor(product) {
+  return product?.colors?.[0] || null;
+}
+
+function getProductColor(product) {
+  if (!product?.colors?.length) return null;
+  return selectedColors.get(product.id) || getDefaultColor(product);
+}
+
+function getColorImage(product, color) {
+  if (!product?.images?.length) return '';
+  if (color && Number.isInteger(color.imageIndex)) {
+    return product.images[color.imageIndex] || product.images[0];
+  }
+  return product.images[0];
 }
 
 function renderStars() {
@@ -418,6 +475,59 @@ function renderReviewCard(review) {
   `;
 }
 
+function renderProductColors(product) {
+  const container = document.getElementById('product-colors');
+  if (!container) return;
+
+  if (!product?.colors?.length) {
+    container.innerHTML = '';
+    container.style.display = 'none';
+    currentProductColor = null;
+    return;
+  }
+
+  const selectedColor = getProductColor(product);
+  currentProductColor = selectedColor;
+  selectedColors.set(product.id, selectedColor);
+  container.style.display = 'block';
+  container.innerHTML = `
+    <div class="color-title">Rangi</div>
+    <div class="color-options">
+      ${product.colors
+        .map(
+          (color) =>
+            `<button class="color-option" type="button" data-color-value="${color.value}">${color.label}</button>`
+        )
+        .join('')}
+    </div>
+  `;
+
+  if (Number.isInteger(selectedColor?.imageIndex)) {
+    productSliderIndex = Math.min(selectedColor.imageIndex, product.images.length - 1);
+    updateProductSlider();
+  }
+
+  const buttons = container.querySelectorAll('.color-option');
+  buttons.forEach((button) => {
+    const isActive = button.dataset.colorValue === selectedColor?.value;
+    if (isActive) button.classList.add('active');
+    button.addEventListener('click', () => {
+      const nextColor = product.colors.find(
+        (color) => color.value === button.dataset.colorValue
+      );
+      if (!nextColor) return;
+      selectedColors.set(product.id, nextColor);
+      currentProductColor = nextColor;
+      buttons.forEach((btn) => btn.classList.remove('active'));
+      button.classList.add('active');
+      if (Number.isInteger(nextColor.imageIndex)) {
+        productSliderIndex = Math.min(nextColor.imageIndex, product.images.length - 1);
+        updateProductSlider();
+      }
+    });
+  });
+}
+
 function renderProductCards() {
   const grid = document.getElementById('products-grid');
   if (!grid) return;
@@ -432,6 +542,11 @@ function renderProductCards() {
       : '';
     const priceLabel = getPriceLabel(product);
     const reviewsLabel = `(${product.reviews.length} ta sharh)`;
+    const stockLabel = getStockLabel(product.id);
+    const defaultColor = getDefaultColor(product);
+    const colorLabel = defaultColor?.label || '';
+    const colorValue = defaultColor?.value || '';
+    const colorImage = getColorImage(product, defaultColor);
 
     return `
       <div class="product-card" data-product-id="${product.id}">
@@ -458,23 +573,33 @@ function renderProductCards() {
           <span class="reviews">${reviewsLabel}</span>
         </div>
 
-        <button
-          class="add-btn"
-          data-id="${product.id}"
-          data-title="${product.title}"
-          data-price="${Number(product.price) || 0}"
-          data-image="${product.images[0]}"
-          data-delivery-text="${product.deliveryText || 'Ertaga'}"
-          onclick="event.stopPropagation(); quickAddToCart(event)"
-        >
-          <span class="cart-icon">
-            <svg viewBox="0 0 24 24" class="cart-svg">
-              <path d="M6 8h12l-1.2 11H7.2L6 8Z"/>
-              <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
-            </svg>
-          </span>
-          <span class="delivery-text">${product.deliveryText || 'Ertaga'}</span>
-        </button>
+        <div class="stock-text">${stockLabel}</div>
+
+        <div class="card-actions">
+          <button
+            class="buy-now-btn"
+            data-id="${product.id}"
+            data-color-label="${colorLabel}"
+            data-color-value="${colorValue}"
+            onclick="event.stopPropagation(); buyNowFromCard(event)"
+          >
+            Hozir sotib olish
+          </button>
+          <button
+            class="add-btn card-add-btn"
+            data-id="${product.id}"
+            data-title="${product.title}"
+            data-price="${Number(product.price) || 0}"
+            data-image="${colorImage}"
+            data-color-label="${colorLabel}"
+            data-color-value="${colorValue}"
+            data-default-text="Savatga"
+            data-added-text="Savatchada"
+            onclick="event.stopPropagation(); addToCartFromCard(event)"
+          >
+            <span class="btn-label">Savatga</span>
+          </button>
+        </div>
       </div>
     `;
   }).join('');
@@ -589,6 +714,7 @@ function renderProductPage(productId) {
 
   productSliderIndex = 0;
   initProductSlider();
+  renderProductColors(product);
   switchTab(0);
 }
 
@@ -708,6 +834,21 @@ function saveCart(cart) {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
+function buildCartItem(product, color) {
+  const colorLabel = color?.label || '';
+  const colorValue = color?.value || '';
+  return {
+    id: product.id,
+    title: product.title,
+    price: Number(product.price) || 0,
+    image: getColorImage(product, color),
+    qty: 1,
+    selected: true,
+    colorLabel,
+    colorValue
+  };
+}
+
 document.querySelectorAll('.add-to-cart').forEach(btn => {
   btn.addEventListener('click', () => {
     const id = btn.dataset.id;
@@ -764,6 +905,9 @@ function renderCart() {
     }
 
     empty.style.display = cart.length === 0 ? 'block' : 'none';
+    const colorMarkup = item.colorLabel
+      ? `<div class="cart-color">Rangi: ${item.colorLabel}</div>`
+      : '';
 
 
     list.innerHTML += `
@@ -775,6 +919,7 @@ function renderCart() {
 
         <div class="cart-info">
           <div>${item.title}</div>
+          ${colorMarkup}
           <strong>${(item.price * item.qty).toLocaleString()} so'm</strong>
 
           <div class="cart-actions">
@@ -857,9 +1002,10 @@ function updateMainPageButton() {
   
   buttons.forEach(btn => {
     const productId = btn.dataset.id;
-    const text = btn.querySelector('.delivery-text');
+    const text = btn.querySelector('.btn-label') || btn.querySelector('.delivery-text');
     if (!text || !productId) return;
-    const defaultText = btn.dataset.deliveryText || 'Ertaga';
+    const defaultText = btn.dataset.defaultText || btn.dataset.deliveryText || 'Ertaga';
+    const addedText = btn.dataset.addedText || 'Savatchada';
 
     const item = cart.find(i => i.id === productId);
     
@@ -868,7 +1014,7 @@ function updateMainPageButton() {
     oldBadges.forEach(badge => badge.remove());
     
     if (item) {
-      text.textContent = 'Savatchada';
+      text.textContent = addedText;
       btn.classList.add('savatchada');
       
       // Добавляем ОДИН новый бейдж
@@ -970,20 +1116,19 @@ function addToCartFromProduct() {
   const product = getProduct(currentProductId);
   if (!product) return;
   
+  const color = getProductColor(product);
   const existingIndex = cart.findIndex(item => item.id === product.id);
   
   if (existingIndex !== -1) {
     cart[existingIndex].qty += 1;
+    if (color) {
+      cart[existingIndex].colorLabel = color.label;
+      cart[existingIndex].colorValue = color.value;
+      cart[existingIndex].image = getColorImage(product, color);
+    }
     tg.showAlert('Miqdor oshirildi!');
   } else {
-    cart.push({
-      id: product.id,
-      title: product.title,
-      price: Number(product.price) || 0,
-      image: product.images[0],
-      qty: 1,
-      selected: true
-    });
+    cart.push(buildCartItem(product, color));
     tg.showAlert('Savatga qo\'shildi!');
   }
   
@@ -993,37 +1138,64 @@ function addToCartFromProduct() {
 }
 
 /* ===== QUICK ADD (НА ГЛАВНОЙ) ===== */
-function quickAddToCart(event) {
+function addToCartFromCard(event) {
   event.stopPropagation();
-  
+
   let cart = getCart();
   const btn = event.target.closest('button');
   if (!btn) return;
   const productId = btn.dataset.id;
   const product = getProduct(productId);
   if (!product) return;
-  
+
+  const color = getDefaultColor(product);
   const existingIndex = cart.findIndex(item => item.id === product.id);
-  
+
   if (existingIndex !== -1) {
     // Удаляем из корзины
     cart.splice(existingIndex, 1);
   } else {
     // Добавляем в корзину
-    cart.push({
-      id: product.id,
-      title: product.title,
-      price: Number(product.price) || 0,
-      image: product.images[0],
-      qty: 1,
-      selected: true
-    });
+    cart.push(buildCartItem(product, color));
   }
-  
+
   saveCart(cart);
   renderCart();
   updateMainPageButton();
   checkProductInCart();
+}
+
+function quickAddToCart(event) {
+  addToCartFromCard(event);
+}
+
+function buyNowFromCard(event) {
+  event.stopPropagation();
+
+  const btn = event.target.closest('button');
+  if (!btn) return;
+  const productId = btn.dataset.id;
+  const product = getProduct(productId);
+  if (!product) return;
+
+  const color = getDefaultColor(product);
+  let cart = getCart().map(item => ({ ...item, selected: false }));
+  const existingIndex = cart.findIndex(item => item.id === product.id);
+
+  if (existingIndex !== -1) {
+    cart[existingIndex] = {
+      ...cart[existingIndex],
+      ...buildCartItem(product, color),
+      selected: true
+    };
+  } else {
+    cart.push(buildCartItem(product, color));
+  }
+
+  saveCart(cart);
+  renderCart();
+  updateMainPageButton();
+  openCheckout();
 }
 
 /* ===== OPEN REVIEWS PAGE ===== */
@@ -1092,12 +1264,16 @@ function openCheckout() {
 
   selected.forEach(item => {
     total += item.price * item.qty;
+    const colorInfo = item.colorLabel
+      ? `<div class="checkout-item-color">Rangi: ${item.colorLabel}</div>`
+      : '';
 
     list.innerHTML += `
       <div class="checkout-item">
         <img src="${item.image}">
         <div class="checkout-item-info">
           <div class="checkout-item-title">${item.title}</div>
+          ${colorInfo}
           <div class="checkout-item-qty">${item.qty} dona</div>
           <div class="checkout-item-price">${(item.price * item.qty).toLocaleString()} so'm</div>
         </div>

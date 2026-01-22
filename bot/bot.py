@@ -1,7 +1,10 @@
+import asyncio
 import os
+
 from aiogram import Bot, Dispatcher, types
-from aiogram.utils import executor
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.filters import CommandStart
+from aiogram.types import InlineKeyboardButton
+from aiogram.utils.keyboard import InlineKeyboardBuilder
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -12,10 +15,10 @@ if not BOT_TOKEN:
     raise ValueError("❌ BOT_TOKEN не найден в .env")
 
 bot = Bot(token=BOT_TOKEN)
-dp = Dispatcher(bot)
+dp = Dispatcher()
 
 
-@dp.message_handler(commands=["start"])
+@dp.message(CommandStart())
 async def start_handler(message: types.Message):
     user_name = message.from_user.first_name or "Do'st"
 
@@ -24,23 +27,25 @@ async def start_handler(message: types.Message):
         f"Do'konga kirish uchun tugmani bosing 👇"
     )
 
-    keyboard = InlineKeyboardMarkup()
-    keyboard.add(
-        InlineKeyboardButton(
-            text="🛒 UzumBox ochish",
-            web_app=types.WebAppInfo(
-                url="https://pablorikoyes-wq.github.io/telegram-shop/"
-            )
+    builder = InlineKeyboardBuilder()
+    builder.button(
+        text="🛒 UzumBox ochish",
+        web_app=types.WebAppInfo(
+            url="https://pablorikoyes-wq.github.io/telegram-shop/"
         )
     )
 
     await message.answer(
         text=text,
-        reply_markup=keyboard,
+        reply_markup=builder.as_markup(),
         parse_mode="Markdown"
     )
 
 
+async def main() -> None:
+    await dp.start_polling(bot)
+
+
 if __name__ == "__main__":
     print("🚀 Bot ishga tushmoqda...")
-    executor.start_polling(dp, skip_updates=True)
+    asyncio.run(main())
