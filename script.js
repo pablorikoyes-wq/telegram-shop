@@ -430,7 +430,7 @@ function getStockCount(productId) {
 
 function getStockLabel(productId) {
   const count = getStockCount(productId);
-  return `Осталось ${count} шт`;
+  return `Qoldi ${count} dona`;
 }
 
 function getDefaultColor(product) {
@@ -583,7 +583,7 @@ function renderProductCards() {
             data-color-value="${colorValue}"
             onclick="event.stopPropagation(); buyNowFromCard(event)"
           >
-            Купить сейчас
+            Hozir sotib olish
           </button>
           <button
             class="add-btn card-add-btn"
@@ -593,11 +593,11 @@ function renderProductCards() {
             data-image="${colorImage}"
             data-color-label="${colorLabel}"
             data-color-value="${colorValue}"
-            data-default-text="В корзину"
+            data-default-text="Savatga"
             data-added-text="Savatchada"
             onclick="event.stopPropagation(); addToCartFromCard(event)"
           >
-            <span class="btn-label">В корзину</span>
+            <span class="btn-label">Savatga</span>
           </button>
         </div>
       </div>
