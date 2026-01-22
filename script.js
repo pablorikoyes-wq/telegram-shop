@@ -5,7 +5,7 @@ const products = [
   {
     id: 'sofa-1',
     title: 'Uglovoy arab divan (16 narsa)',
-    price: 250000,
+    price: 480000,
     oldPrice: 990000,
     discount: '-75%',
     rating: 4.8,
@@ -1386,13 +1386,29 @@ function openManagerChat() {
   
   // Получаем данные заказа
   const order = JSON.parse(localStorage.getItem('currentOrder') || '{}');
-  const items = Array.isArray(order.items) ? order.items : [];
+  const fallbackItems = getCart().filter(item => item.selected);
+  const items = Array.isArray(order.items) && order.items.length ? order.items : fallbackItems;
+  const itemsTotal = items.reduce((sum, item) => {
+    const qty = Number(item.qty) || 1;
+    const price = Number(item.price) || 0;
+    return sum + qty * price;
+  }, 0);
+  const totalValue = Number(order.total);
+  const total = Number.isFinite(totalValue) && totalValue > 0 ? totalValue : itemsTotal;
   const itemsText = items.length
     ? items
         .map(item => {
-          const colorText = item.colorLabel ? `, rangi: ${item.colorLabel}` : '';
-          const lineTotal = (Number(item.price) || 0) * (Number(item.qty) || 0);
-          return `• ${item.title}${colorText} — ${item.qty || 1} dona — ${lineTotal.toLocaleString()} so'm`;
+          const product = getProduct(item.id);
+          const title = item.title || product?.title || 'Mahsulot';
+          let colorLabel = item.colorLabel || '';
+          if (!colorLabel && item.colorValue && product?.colors?.length) {
+            colorLabel =
+              product.colors.find(color => color.value === item.colorValue)?.label || '';
+          }
+          const colorText = colorLabel ? `, rangi: ${colorLabel}` : '';
+          const qty = Number(item.qty) || 1;
+          const lineTotal = (Number(item.price) || 0) * qty;
+          return `• ${title}${colorText} — ${qty} dona — ${lineTotal.toLocaleString()} so'm`;
         })
         .join('\n')
     : '—';
@@ -1408,7 +1424,7 @@ function openManagerChat() {
 📦 Buyurtma:
 ${itemsText}
 
-💰 Summa: ${order.total?.toLocaleString() || '0'} so'm
+💰 Summa: ${total.toLocaleString()} so'm
 
 ✅ To'lov amalga oshirildi
   `.trim();
