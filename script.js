@@ -542,10 +542,7 @@ function renderProductCards() {
       : '';
     const priceLabel = getPriceLabel(product);
     const reviewsLabel = `(${product.reviews.length} ta sharh)`;
-    const stockLabel = getStockLabel(product.id);
     const defaultColor = getDefaultColor(product);
-    const colorLabel = defaultColor?.label || '';
-    const colorValue = defaultColor?.value || '';
     const colorImage = getColorImage(product, defaultColor);
 
     return `
@@ -573,33 +570,23 @@ function renderProductCards() {
           <span class="reviews">${reviewsLabel}</span>
         </div>
 
-        <div class="stock-text">${stockLabel}</div>
-
-        <div class="card-actions">
-          <button
-            class="buy-now-btn"
-            data-id="${product.id}"
-            data-color-label="${colorLabel}"
-            data-color-value="${colorValue}"
-            onclick="event.stopPropagation(); buyNowFromCard(event)"
-          >
-            Hozir sotib olish
-          </button>
-          <button
-            class="add-btn card-add-btn"
-            data-id="${product.id}"
-            data-title="${product.title}"
-            data-price="${Number(product.price) || 0}"
-            data-image="${colorImage}"
-            data-color-label="${colorLabel}"
-            data-color-value="${colorValue}"
-            data-default-text="Savatga"
-            data-added-text="Savatchada"
-            onclick="event.stopPropagation(); addToCartFromCard(event)"
-          >
-            <span class="btn-label">Savatga</span>
-          </button>
-        </div>
+        <button
+          class="add-btn"
+          data-id="${product.id}"
+          data-title="${product.title}"
+          data-price="${Number(product.price) || 0}"
+          data-image="${colorImage}"
+          data-delivery-text="${product.deliveryText || 'Ertaga'}"
+          onclick="event.stopPropagation(); quickAddToCart(event)"
+        >
+          <span class="cart-icon">
+            <svg viewBox="0 0 24 24" class="cart-svg">
+              <path d="M6 8h12l-1.2 11H7.2L6 8Z"/>
+              <path d="M9 8V6a3 3 0 0 1 6 0v2"/>
+            </svg>
+          </span>
+          <span class="delivery-text">${product.deliveryText || 'Ertaga'}</span>
+        </button>
       </div>
     `;
   }).join('');
@@ -664,6 +651,7 @@ function renderProductPage(productId) {
   const specs = document.getElementById('product-specs');
   const bottomPrice = document.getElementById('product-bottom-price');
   const bottomDelivery = document.getElementById('product-bottom-delivery');
+  const stock = document.getElementById('product-stock');
   const sliderImages = document.getElementById('product-slider-images');
   const sliderDots = document.getElementById('product-dots');
 
@@ -702,8 +690,9 @@ function renderProductPage(productId) {
     .map(spec => `<p><strong>${spec.label}:</strong> ${spec.value}</p>`)
     .join('');
 
-  bottomPrice.textContent = getPriceLabel(product);
-  bottomDelivery.textContent = product.deliveryText || 'Ertaga';
+  if (bottomPrice) bottomPrice.textContent = getPriceLabel(product);
+  if (bottomDelivery) bottomDelivery.textContent = product.deliveryText || 'Ertaga';
+  if (stock) stock.textContent = getStockLabel(product.id);
 
   sliderImages.innerHTML = product.images
     .map(src => `<img src="${src}" alt="${product.title}">`)
@@ -1018,10 +1007,12 @@ function updateMainPageButton() {
       btn.classList.add('savatchada');
       
       // Добавляем ОДИН новый бейдж
-      const badge = document.createElement('span');
-      badge.className = 'cart-badge';
-      badge.textContent = item.qty;
-      btn.appendChild(badge);
+      if (!btn.classList.contains('no-badge')) {
+        const badge = document.createElement('span');
+        badge.className = 'cart-badge';
+        badge.textContent = item.qty;
+        btn.appendChild(badge);
+      }
     } else {
       text.textContent = defaultText;
       btn.classList.remove('savatchada');
@@ -1120,16 +1111,9 @@ function addToCartFromProduct() {
   const existingIndex = cart.findIndex(item => item.id === product.id);
   
   if (existingIndex !== -1) {
-    cart[existingIndex].qty += 1;
-    if (color) {
-      cart[existingIndex].colorLabel = color.label;
-      cart[existingIndex].colorValue = color.value;
-      cart[existingIndex].image = getColorImage(product, color);
-    }
-    tg.showAlert('Miqdor oshirildi!');
+    cart.splice(existingIndex, 1);
   } else {
     cart.push(buildCartItem(product, color));
-    tg.showAlert('Savatga qo\'shildi!');
   }
   
   saveCart(cart);
@@ -1169,32 +1153,29 @@ function quickAddToCart(event) {
   addToCartFromCard(event);
 }
 
-function buyNowFromCard(event) {
-  event.stopPropagation();
-
-  const btn = event.target.closest('button');
-  if (!btn) return;
-  const productId = btn.dataset.id;
-  const product = getProduct(productId);
+function buyNowFromProduct() {
+  const product = getProduct(currentProductId);
   if (!product) return;
 
-  const color = getDefaultColor(product);
+  const color = getProductColor(product);
   let cart = getCart().map(item => ({ ...item, selected: false }));
   const existingIndex = cart.findIndex(item => item.id === product.id);
+  const nextItem = buildCartItem(product, color);
 
   if (existingIndex !== -1) {
     cart[existingIndex] = {
       ...cart[existingIndex],
-      ...buildCartItem(product, color),
+      ...nextItem,
       selected: true
     };
   } else {
-    cart.push(buildCartItem(product, color));
+    cart.push(nextItem);
   }
 
   saveCart(cart);
   renderCart();
   updateMainPageButton();
+  checkProductInCart();
   openCheckout();
 }
 
@@ -1215,19 +1196,18 @@ function checkProductInCart() {
   const cart = getCart();
   const btn = document.getElementById('product-add-btn');
   if (!btn) return;
-  const btnText = btn.querySelector('.btn-text');
+  const btnText = btn.querySelector('.btn-label') || btn.querySelector('.btn-text');
   const btnCount = btn.querySelector('.btn-count');
   const item = cart.find(i => i.id === currentProductId);
   
   if (item) {
     btn.classList.add('in-cart');
-    btnText.textContent = 'Savatchada';
-    btnCount.textContent = item.qty;
-    btnCount.style.display = 'flex';
+    if (btnText) btnText.textContent = 'Savatchada';
+    if (btnCount) btnCount.style.display = 'none';
   } else {
     btn.classList.remove('in-cart');
-    btnText.textContent = 'Savatga';
-    btnCount.style.display = 'none';
+    if (btnText) btnText.textContent = 'Savatga';
+    if (btnCount) btnCount.style.display = 'none';
   }
 }
 

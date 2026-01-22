@@ -324,14 +324,15 @@
 
   <!-- BOTTOM BAR -->
   <div class="product-bottom-bar">
-    <div class="price-info">
-      <div class="price-main" id="product-bottom-price"></div>
-      <div class="delivery-text" id="product-bottom-delivery"></div>
+    <div class="stock-text" id="product-stock"></div>
+    <div class="product-action-row">
+      <button class="buy-now-btn product-buy-btn" onclick="buyNowFromProduct()">
+        Hozir sotib olish
+      </button>
+      <button class="add-btn product-add-btn no-badge" id="product-add-btn" onclick="addToCartFromProduct()">
+        <span class="btn-label">Savatga</span>
+      </button>
     </div>
-    <button class="add-cart-btn" id="product-add-btn" onclick="addToCartFromProduct()">
-      <span class="btn-text">Savatga</span>
-      <span class="btn-count" style="display:none;">1</span>
-    </button>
   </div>
 
 </section>
