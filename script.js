@@ -594,7 +594,7 @@ function renderProductCards() {
             data-color-label="${colorLabel}"
             data-color-value="${colorValue}"
             data-default-text="В корзину"
-            data-added-text="В корзине"
+            data-added-text="Savatchada"
             onclick="event.stopPropagation(); addToCartFromCard(event)"
           >
             <span class="btn-label">В корзину</span>
