@@ -1606,12 +1606,12 @@ function openManagerChat() {
     : '—';
   const creditText = credit
     ? `
+💳 To'lov turi: Kredit (${credit.months || ''} oy)
 🧾 Kredit ma'lumotlari:
 • Pasport: ${credit.passport?.series || ''}
 • Ism: ${credit.passport?.name || ''}
 • Tug'ilgan sana: ${credit.passport?.birthDate || ''}
 • Amal qilish muddati: ${credit.passport?.expiryDate || ''}
-• Muddat: ${credit.months || ''} oy
 • Oyiga: ${formatPrice(credit.monthlyPayment)} so'm
 • Jami: ${formatPrice(credit.fullPrice)} so'm
 `
