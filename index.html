@@ -114,6 +114,76 @@
   </button>
 </section>
 
+<!-- 💳 CREDIT CHECKOUT PAGE -->
+<section id="page-credit" class="page">
+  <div class="checkout-header">
+    <button onclick="backToProduct()">← Orqaga</button>
+    <h2>Kredit buyurtma</h2>
+  </div>
+
+  <div class="checkout-content">
+    <div class="checkout-products">
+      <h3>Tanlangan mahsulot</h3>
+      <div id="credit-item"></div>
+    </div>
+
+    <div class="checkout-form">
+      <h3>Pasport ma'lumotlari</h3>
+
+      <label>
+        Pasportdagi ism va familiya *
+        <input id="credit-passport-name" type="text" placeholder="Ism Familiya">
+      </label>
+
+      <label>
+        Tug'ilgan sana *
+        <input id="credit-birth-date" type="date">
+      </label>
+
+      <label>
+        Pasport amal qilish muddati *
+        <input id="credit-passport-expiry" type="date">
+      </label>
+
+      <label>
+        Pasport seriyasi va raqami *
+        <input id="credit-passport-series" type="text" placeholder="AA1234567">
+      </label>
+    </div>
+
+    <div class="checkout-form">
+      <h3>Aloqa ma'lumotlari</h3>
+
+      <label>
+        Telefon *
+        <input id="credit-phone" type="tel" placeholder="+998 __ ___ __ __">
+      </label>
+
+      <label>
+        Manzil *
+        <input id="credit-address" type="text" placeholder="Shahar, tuman, ko'cha">
+      </label>
+    </div>
+
+    <div class="checkout-total credit-plans">
+      <h3>To'lov muddatini tanlang</h3>
+      <div id="credit-plans"></div>
+      <div class="total-line">
+        <span>Jami summa:</span>
+        <strong id="credit-total">0 so'm</strong>
+      </div>
+      <div class="total-line total-main">
+        <span>Oyiga to'lov:</span>
+        <strong id="credit-monthly">0 so'm</strong>
+      </div>
+    </div>
+  </div>
+
+  <button class="submit-order-btn" onclick="openCreditPaymentPage()">
+    Kredit buyurtmasini yuborish
+  </button>
+</section>
+
 <!-- 💳 PAYMENT PAGE -->
 <section id="page-payment" class="page">
   <div class="checkout-header">
@@ -326,7 +396,7 @@
   <div class="product-bottom-bar">
     <div class="stock-text" id="product-stock"></div>
     <div class="product-action-row">
-      <button class="buy-now-btn product-buy-btn" onclick="buyNowFromProduct()">
+      <button class="buy-now-btn product-buy-btn" id="product-primary-btn" onclick="handlePrimaryPurchase()">
         Hozir sotib olish
       </button>
       <button class="add-btn product-add-btn no-badge" id="product-add-btn" data-default-text="Savatga" data-added-text="Savatchada" onclick="addToCartFromProduct()">

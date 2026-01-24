@@ -1802,3 +1802,52 @@ body {
   color: #333;
   line-height: 1.4;
 }
+
+/* ===== CREDIT PLANS ===== */
+#credit-plans {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.credit-plan {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+  cursor: pointer;
+}
+
+.credit-plan input {
+  width: 18px;
+  height: 18px;
+  accent-color: #6a00ff;
+}
+
+.credit-plan.active {
+  border-color: #6a00ff;
+  background: #f4ecff;
+}
+
+.credit-plan-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.credit-plan-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+}
+
+.credit-plan-amount {
+  font-size: 13px;
+  color: #6a00ff;
+  font-weight: 700;
+}
