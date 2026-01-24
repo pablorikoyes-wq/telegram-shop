@@ -380,6 +380,12 @@ const productsById = new Map(products.map(product => [product.id, product]));
 let currentProductId = products[0]?.id;
 let currentProductColor = null;
 const selectedColors = new Map();
+const creditEligibleProductId = 'sofa-1';
+const creditPlanMonths = [4, 3, 2];
+let selectedCreditPlan = creditPlanMonths[0];
+let currentCreditItem = null;
+let currentCreditBasePrice = 0;
+let currentPaymentSource = 'checkout';
 
 const stockRanges = [
   { min: 15, max: 20 },
@@ -404,6 +410,20 @@ function getPriceLabel(product) {
 
 function getProduct(productId) {
   return productsById.get(productId);
+}
+
+function isCreditEligible(productId) {
+  return productId === creditEligibleProductId;
+}
+
+function getCreditBasePrice(product) {
+  if (!product) return 0;
+  return Number(product.creditPrice || product.oldPrice || product.price) || 0;
+}
+
+function getCreditMonthlyPayment(basePrice, months) {
+  if (!basePrice || !months) return 0;
+  return Math.round(basePrice / months);
 }
 
 function hashString(value) {
@@ -704,7 +724,20 @@ function renderProductPage(productId) {
   productSliderIndex = 0;
   initProductSlider();
   renderProductColors(product);
+  updateProductPrimaryButton(product);
   switchTab(0);
+}
+
+function updateProductPrimaryButton(product) {
+  const button = document.getElementById('product-primary-btn');
+  if (!button || !product) return;
+  if (isCreditEligible(product.id)) {
+    button.textContent = 'Kreditga olish';
+    button.dataset.mode = 'credit';
+  } else {
+    button.textContent = 'Hozir sotib olish';
+    button.dataset.mode = 'buy';
+  }
 }
 
 function renderReviewsPage(productId) {
@@ -1179,6 +1212,111 @@ function buyNowFromProduct() {
   openCheckout();
 }
 
+function handlePrimaryPurchase() {
+  const product = getProduct(currentProductId);
+  if (!product) return;
+  if (isCreditEligible(product.id)) {
+    openCreditCheckout(product.id);
+  } else {
+    buyNowFromProduct();
+  }
+}
+
+function renderCreditItem(item, basePrice) {
+  const container = document.getElementById('credit-item');
+  if (!container || !item) return;
+  const colorInfo = item.colorLabel
+    ? `<div class="checkout-item-color">Rangi: ${item.colorLabel}</div>`
+    : '';
+  container.innerHTML = `
+    <div class="checkout-item">
+      <img src="${item.image}">
+      <div class="checkout-item-info">
+        <div class="checkout-item-title">${item.title}</div>
+        ${colorInfo}
+        <div class="checkout-item-qty">${item.qty} dona</div>
+        <div class="checkout-item-price">${formatPrice(basePrice)} so'm</div>
+      </div>
+    </div>
+  `;
+}
+
+function updateCreditTotals(basePrice) {
+  const totalEl = document.getElementById('credit-total');
+  const monthlyEl = document.getElementById('credit-monthly');
+  const monthly = getCreditMonthlyPayment(basePrice, selectedCreditPlan);
+  if (totalEl) totalEl.textContent = `${formatPrice(basePrice)} so'm`;
+  if (monthlyEl) monthlyEl.textContent = `${formatPrice(monthly)} so'm`;
+}
+
+function renderCreditPlans(basePrice) {
+  const container = document.getElementById('credit-plans');
+  if (!container) return;
+  container.innerHTML = creditPlanMonths
+    .map((months) => {
+      const monthly = getCreditMonthlyPayment(basePrice, months);
+      const isActive = months === selectedCreditPlan;
+      return `
+        <label class="credit-plan${isActive ? ' active' : ''}">
+          <input type="radio" name="credit-plan" value="${months}" ${isActive ? 'checked' : ''}>
+          <div class="credit-plan-info">
+            <div class="credit-plan-title">${months} oyga bo'lib to'lash</div>
+            <div class="credit-plan-amount">${formatPrice(monthly)} so'm / oy</div>
+          </div>
+        </label>
+      `;
+    })
+    .join('');
+
+  container.querySelectorAll('input[name="credit-plan"]').forEach((input) => {
+    input.addEventListener('change', () => {
+      selectedCreditPlan = Number(input.value) || creditPlanMonths[0];
+      container.querySelectorAll('.credit-plan').forEach((plan) => {
+        plan.classList.toggle(
+          'active',
+          plan.querySelector('input')?.value === String(selectedCreditPlan)
+        );
+      });
+      updateCreditTotals(basePrice);
+    });
+  });
+
+  updateCreditTotals(basePrice);
+}
+
+function openCreditCheckout(productId = currentProductId) {
+  const product = getProduct(productId);
+  if (!product) return;
+  if (!isCreditEligible(product.id)) {
+    buyNowFromProduct();
+    return;
+  }
+
+  const color = getProductColor(product);
+  const basePrice = getCreditBasePrice(product);
+  currentCreditBasePrice = basePrice;
+  currentCreditItem = {
+    ...buildCartItem(product, color),
+    price: basePrice
+  };
+  selectedCreditPlan = creditPlanMonths[0];
+
+  renderCreditItem(currentCreditItem, basePrice);
+  renderCreditPlans(basePrice);
+
+  const profile = JSON.parse(localStorage.getItem('profile')) || {};
+  const fullName = [profile.name, profile.surname].filter(Boolean).join(' ');
+  const nameInput = document.getElementById('credit-passport-name');
+  const phoneInput = document.getElementById('credit-phone');
+  const addressInput = document.getElementById('credit-address');
+  if (nameInput) nameInput.value = fullName;
+  if (phoneInput) phoneInput.value = profile.phone || '';
+  if (addressInput) addressInput.value = profile.address || '';
+
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-credit').classList.add('active');
+}
+
 /* ===== OPEN REVIEWS PAGE ===== */
 function openReviews() {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -1279,6 +1417,14 @@ function backToCart() {
 let paymentTimer;
 let timeLeft = 1800; // 30 минут в секундах
 
+function openPaymentPageWithTotal(total) {
+  const paymentAmount = Number(total) || 0;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-payment').classList.add('active');
+  document.getElementById('payment-amount').textContent = `${formatPrice(paymentAmount)} so'm`;
+  startPaymentTimer();
+}
+
 function openPaymentPage() {
   const name = document.getElementById('checkout-name').value.trim();
   const phone = document.getElementById('checkout-phone').value.trim();
@@ -1301,14 +1447,55 @@ function openPaymentPage() {
   }));
 
   // Открываем страницу оплаты
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-payment').classList.add('active');
+  currentPaymentSource = 'checkout';
+  openPaymentPageWithTotal(total);
+}
 
-  // Устанавливаем сумму
-  document.getElementById('payment-amount').textContent = total.toLocaleString() + ' so\'m';
+function openCreditPaymentPage() {
+  const product = getProduct(currentProductId);
+  if (!product || !isCreditEligible(product.id)) return;
 
-  // Запускаем таймер
-  startPaymentTimer();
+  const passportName = document.getElementById('credit-passport-name').value.trim();
+  const birthDate = document.getElementById('credit-birth-date').value.trim();
+  const passportExpiry = document.getElementById('credit-passport-expiry').value.trim();
+  const passportSeries = document.getElementById('credit-passport-series').value.trim();
+  const phone = document.getElementById('credit-phone').value.trim();
+  const address = document.getElementById('credit-address').value.trim();
+
+  if (!passportName || !birthDate || !passportExpiry || !passportSeries || !phone || !address) {
+    tg.showAlert('Iltimos, barcha maydonlarni to\'ldiring!');
+    return;
+  }
+
+  const basePrice = currentCreditBasePrice || getCreditBasePrice(product);
+  const months = selectedCreditPlan || creditPlanMonths[0];
+  const monthlyPayment = getCreditMonthlyPayment(basePrice, months);
+  const color = getProductColor(product);
+  const item = currentCreditItem || {
+    ...buildCartItem(product, color),
+    price: basePrice
+  };
+
+  localStorage.setItem('currentOrder', JSON.stringify({
+    customer: { name: passportName, phone, address },
+    items: [item],
+    total: monthlyPayment,
+    credit: {
+      months,
+      monthlyPayment,
+      fullPrice: basePrice,
+      passport: {
+        name: passportName,
+        birthDate,
+        expiryDate: passportExpiry,
+        series: passportSeries
+      }
+    },
+    source: 'credit'
+  }));
+
+  currentPaymentSource = 'credit';
+  openPaymentPageWithTotal(monthlyPayment);
 }
 
 function startPaymentTimer() {
@@ -1364,7 +1551,11 @@ function backToCheckout() {
     clearInterval(paymentTimer);
   }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-checkout').classList.add('active');
+  if (currentPaymentSource === 'credit') {
+    document.getElementById('page-credit').classList.add('active');
+  } else {
+    document.getElementById('page-checkout').classList.add('active');
+  }
 }
 
 function confirmPayment() {
@@ -1395,6 +1586,7 @@ function openManagerChat() {
   }, 0);
   const totalValue = Number(order.total);
   const total = Number.isFinite(totalValue) && totalValue > 0 ? totalValue : itemsTotal;
+  const credit = order && typeof order === 'object' ? order.credit : null;
   const itemsText = items.length
     ? items
         .map(item => {
@@ -1412,6 +1604,18 @@ function openManagerChat() {
         })
         .join('\n')
     : '—';
+  const creditText = credit
+    ? `
+🧾 Kredit ma'lumotlari:
+• Pasport: ${credit.passport?.series || ''}
+• Ism: ${credit.passport?.name || ''}
+• Tug'ilgan sana: ${credit.passport?.birthDate || ''}
+• Amal qilish muddati: ${credit.passport?.expiryDate || ''}
+• Muddat: ${credit.months || ''} oy
+• Oyiga: ${formatPrice(credit.monthlyPayment)} so'm
+• Jami: ${formatPrice(credit.fullPrice)} so'm
+`
+    : '';
   
   // Формируем сообщение для менеджера
   const message = `
@@ -1425,6 +1629,7 @@ function openManagerChat() {
 ${itemsText}
 
 💰 Summa: ${total.toLocaleString()} so'm
+${creditText}
 
 ✅ To'lov amalga oshirildi
   `.trim();
@@ -1445,7 +1650,13 @@ ${itemsText}
   
   // Очищаем корзину
   const cart = getCart();
-  const remaining = cart.filter(item => !item.selected);
+  let remaining = cart;
+  if (items.length) {
+    const orderedIds = new Set(items.map(item => item.id));
+    remaining = cart.filter(item => !orderedIds.has(item.id));
+  } else {
+    remaining = cart.filter(item => !item.selected);
+  }
   saveCart(remaining);
   
   // Показываем уведомление
