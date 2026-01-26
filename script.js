@@ -97,6 +97,122 @@ const products = [
     ]
   },
   {
+    id: 'retro-sofa-1',
+    title: 'Retro buklanadigan vakuumli divan-karavot 2-in-1',
+    price: 500000,
+    oldPrice: 2000000,
+    discount: '-75%',
+    rating: 5.0,
+    deliveryText: 'Ertaga',
+    images: [
+      'assets/products/retro-sofa/retro-1.jpg',
+      'assets/products/retro-sofa/retro-2.jpg',
+      'assets/products/retro-sofa/retro-3.jpg',
+      'assets/products/retro-sofa/retro-4.jpg',
+      'assets/products/retro-sofa/retro-5.jpg',
+      'assets/products/retro-sofa/retro-6.jpg',
+      'assets/products/retro-sofa/retro-7.jpg',
+      'assets/products/retro-sofa/retro-8.jpg'
+    ],
+    colors: [
+      { label: "To'q sariq", value: 'orange', imageIndex: 0 },
+      { label: 'Yashil', value: 'green', imageIndex: 2 },
+      { label: 'Sariq', value: 'yellow', imageIndex: 4 },
+      { label: 'Qora', value: 'black', imageIndex: 5 },
+      { label: 'Oq', value: 'white', imageIndex: 6 }
+    ],
+    description: {
+      title: 'Retro vakuumli divan-karavot',
+      lines: [
+        "Kichik kvartira, mehmonxona va studiyalar uchun ixcham divan-karavot.",
+        "Kunduz kuni qulay divan, kechasi esa to'liq yotoq sifatida foydalaniladi.",
+        "Vakuum qadoqda yetkaziladi — tashishda joy tejaydi.",
+        "G'ilofi olinadi va yuviladi.",
+        "Xotirali ko'pik (memory foam) to'ldirgichi qulaylik va shaklni uzoq saqlashni ta'minlaydi.",
+        "2-3 kishi uchun mos."
+      ]
+    },
+    specs: [
+      { label: 'Turi', value: 'divan-karavot, buklanadigan' },
+      { label: 'Uslub', value: 'retro' },
+      { label: 'Qoplama materiali', value: "paxta + zig'ir" },
+      { label: "To'ldirgich", value: "memory foam + ko'pik" },
+      { label: 'Qattiqligi', value: "o'rtacha" },
+      { label: "G'ilof", value: 'olinadi, yuviladi' },
+      { label: 'Elektr sozlash', value: "yo'q" },
+      { label: 'Saqlash funksiyasi', value: "yo'q" },
+      { label: 'Rang turi', value: 'bir xil rang' },
+      { label: "Sig'imi", value: '2-3 kishi' },
+      { label: 'Ishlab chiqarilgan joyi', value: 'Xitoy (Zhejiang, Huzhou)' },
+      { label: 'Uzunligi (divan)', value: '100 / 150 / 180 / 200 sm' },
+      { label: 'Kengligi', value: '90 sm' },
+      { label: 'Balandligi (divan)', value: '60 sm' },
+      { label: "O'rindiq balandligi", value: '30 sm' },
+      { label: "O'rindiq chuqurligi", value: '61 sm' },
+      { label: 'Uzunligi (yotoq)', value: '100 / 150 / 180 / 200 sm' },
+      { label: 'Yotoq kengligi', value: '120 sm' },
+      { label: 'Balandligi (yotoq)', value: '30 sm' }
+    ],
+    reviews: [
+      {
+        name: 'Azizbek',
+        date: '16 yanvar 2026',
+        text: "Divan juda qulay va chiroyli ko'rinadi.",
+        images: [
+          'assets/products/retro-sofa/reviews/review-1-1.jpg',
+          'assets/products/retro-sofa/reviews/review-1-2.jpg'
+        ]
+      },
+      {
+        name: 'Dilnoza',
+        date: '15 yanvar 2026',
+        text: 'Divan juda yoqdi, menga hammaga tavsiya qilaman.'
+      },
+      {
+        name: 'Javohir',
+        date: '14 yanvar 2026',
+        text: 'Men hammaga juda ajoyib divanni tavsiya qilaman.',
+        images: ['assets/products/retro-sofa/reviews/review-3-1.jpg']
+      },
+      {
+        name: 'Sevara',
+        date: '13 yanvar 2026',
+        text: "Bu juda yaxshi divan, men 5 yulduz qo'ydim.",
+        images: ['assets/products/retro-sofa/reviews/review-4-1.jpg']
+      },
+      {
+        name: 'Sardor',
+        date: '12 yanvar 2026',
+        text: "Divanga 5 ta yulduz, dastavkasi juda tez keldi Andijonga."
+      },
+      {
+        name: 'Malika',
+        date: '11 yanvar 2026',
+        text: "Judayam qulay! Tez shishadi, dam olish uchun zo'r variant."
+      },
+      {
+        name: 'Umid',
+        date: '10 yanvar 2026',
+        text: "Sifati yaxshi, yumshoq va mustahkam. Tavsiya qilaman."
+      },
+      {
+        name: 'Gulbahor',
+        date: '09 yanvar 2026',
+        text: 'Uy uchun ham, sayohat uchun ham juda qulay divan.'
+      },
+      {
+        name: 'Rustam',
+        date: '08 yanvar 2026',
+        text: "Dizayni chiroyli, o'tirishga ham yotishga ham mos."
+      },
+      {
+        name: 'Nodira',
+        date: '07 yanvar 2026',
+        text: ''
+      }
+    ]
+  },
+  {
     id: 'projector-1',
     title: 'Telefon uchun 4K kino proyektori',
     price: 210000,
@@ -492,9 +608,11 @@ function renderReviewCard(review) {
         ${renderStars()}
       </div>
       ${review.date ? `<div class="review-date">${review.date}</div>` : ''}
-      <p class="review-text">
-        <strong>${review.name}:</strong> ${review.text}
-      </p>
+      ${
+        review.text
+          ? `<p class="review-text"><strong>${review.name}:</strong> ${review.text}</p>`
+          : `<p class="review-text"><strong>${review.name}</strong></p>`
+      }
       ${renderReviewImages(review.images)}
     </div>
   `;
