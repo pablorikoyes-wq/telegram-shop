@@ -159,8 +159,8 @@ const products = [
         date: '16 yanvar 2026',
         text: "Divan juda qulay va chiroyli ko'rinadi.",
         images: [
-          'assets/products/retro-sofa/retro-1.jpg',
-          'assets/products/retro-sofa/retro-2.jpg'
+          'assets/products/retro-sofa/reviews/review-1-1.jpg',
+          'assets/products/retro-sofa/reviews/review-1-2.jpg'
         ]
       },
       {
@@ -172,13 +172,13 @@ const products = [
         name: 'Javohir',
         date: '14 yanvar 2026',
         text: 'Men hammaga juda ajoyib divanni tavsiya qilaman.',
-        images: ['assets/products/retro-sofa/retro-3.jpg']
+        images: ['assets/products/retro-sofa/reviews/review-3-1.jpg']
       },
       {
         name: 'Sevara',
         date: '13 yanvar 2026',
         text: "Bu juda yaxshi divan, men 5 yulduz qo'ydim.",
-        images: ['assets/products/retro-sofa/retro-4.jpg']
+        images: ['assets/products/retro-sofa/reviews/review-4-1.jpg']
       },
       {
         name: 'Sardor',
