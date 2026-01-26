@@ -388,6 +388,8 @@ let currentCreditBasePrice = 0;
 let currentPaymentSource = 'checkout';
 let reviewLightboxImages = [];
 let reviewLightboxIndex = 0;
+let reviewLightboxStartX = 0;
+let reviewLightboxStartY = 0;
 
 const stockRanges = [
   { min: 15, max: 20 },
@@ -757,10 +759,8 @@ function renderReviewsPage(productId) {
 function updateReviewLightboxView() {
   const lightbox = document.getElementById('review-lightbox');
   const image = document.getElementById('review-lightbox-image');
-  const dots = document.getElementById('review-lightbox-dots');
-  const prevBtn = document.querySelector('.review-lightbox-nav.prev');
-  const nextBtn = document.querySelector('.review-lightbox-nav.next');
-  if (!lightbox || !image || !dots) return;
+  const counter = document.getElementById('review-lightbox-count');
+  if (!lightbox || !image || !counter) return;
 
   const total = reviewLightboxImages.length;
   if (!total) return;
@@ -768,21 +768,7 @@ function updateReviewLightboxView() {
   const index = Math.max(0, Math.min(reviewLightboxIndex, total - 1));
   reviewLightboxIndex = index;
   image.src = reviewLightboxImages[index];
-
-  dots.innerHTML = reviewLightboxImages
-    .map((_, idx) => `<button type="button" data-index="${idx}"${idx === index ? ' class="active"' : ''}></button>`)
-    .join('');
-
-  dots.querySelectorAll('button').forEach((button) => {
-    button.addEventListener('click', () => {
-      const nextIndex = Number(button.dataset.index) || 0;
-      reviewLightboxIndex = nextIndex;
-      updateReviewLightboxView();
-    });
-  });
-
-  if (prevBtn) prevBtn.style.display = total > 1 ? 'flex' : 'none';
-  if (nextBtn) nextBtn.style.display = total > 1 ? 'flex' : 'none';
+  counter.textContent = `${index + 1}/${total}`;
 }
 
 function openReviewLightbox(images, startIndex = 0) {
@@ -794,6 +780,10 @@ function openReviewLightbox(images, startIndex = 0) {
   lightbox.classList.add('active');
   lightbox.setAttribute('aria-hidden', 'false');
   document.body.classList.add('no-scroll');
+  const image = document.getElementById('review-lightbox-image');
+  if (image) {
+    image.style.touchAction = 'pan-y';
+  }
   updateReviewLightboxView();
 }
 
@@ -813,6 +803,24 @@ function changeReviewLightbox(delta) {
   const nextIndex = (reviewLightboxIndex + delta + total) % total;
   reviewLightboxIndex = nextIndex;
   updateReviewLightboxView();
+}
+
+function onReviewLightboxStart(event) {
+  const point = event.touches ? event.touches[0] : event;
+  reviewLightboxStartX = point.clientX;
+  reviewLightboxStartY = point.clientY;
+}
+
+function onReviewLightboxEnd(event) {
+  const point = event.changedTouches ? event.changedTouches[0] : event;
+  const diffX = point.clientX - reviewLightboxStartX;
+  const diffY = point.clientY - reviewLightboxStartY;
+  if (Math.abs(diffX) < 40 || Math.abs(diffY) > 80) return;
+  if (diffX > 0) {
+    changeReviewLightbox(-1);
+  } else {
+    changeReviewLightbox(1);
+  }
 }
 
 /* ===== SPLASH (один раз) ===== */
@@ -1409,6 +1417,26 @@ document.addEventListener('click', (event) => {
   const imageNodes = Array.from(wrapper.querySelectorAll('img'));
   const startIndex = Math.max(0, imageNodes.indexOf(image));
   openReviewLightbox(images, startIndex);
+});
+
+document.addEventListener('touchstart', (event) => {
+  if (!event.target.closest('#review-lightbox-image')) return;
+  onReviewLightboxStart(event);
+});
+
+document.addEventListener('touchend', (event) => {
+  if (!event.target.closest('#review-lightbox-image')) return;
+  onReviewLightboxEnd(event);
+});
+
+document.addEventListener('pointerdown', (event) => {
+  if (!event.target.closest('#review-lightbox-image')) return;
+  onReviewLightboxStart(event);
+});
+
+document.addEventListener('pointerup', (event) => {
+  if (!event.target.closest('#review-lightbox-image')) return;
+  onReviewLightboxEnd(event);
 });
 
 document.addEventListener('keydown', (event) => {
