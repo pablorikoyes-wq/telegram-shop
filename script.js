@@ -386,6 +386,8 @@ let selectedCreditPlan = creditPlanMonths[0];
 let currentCreditItem = null;
 let currentCreditBasePrice = 0;
 let currentPaymentSource = 'checkout';
+let reviewLightboxImages = [];
+let reviewLightboxIndex = 0;
 
 const stockRanges = [
   { min: 15, max: 20 },
@@ -477,7 +479,8 @@ function renderStars() {
 function renderReviewImages(images = []) {
   if (!images.length) return '';
   const imagesMarkup = images.map(src => `<img src="${src}">`).join('');
-  return `<div class="review-images">${imagesMarkup}</div>`;
+  const encodedImages = encodeURIComponent(JSON.stringify(images));
+  return `<div class="review-images" data-images="${encodedImages}">${imagesMarkup}</div>`;
 }
 
 function renderReviewCard(review) {
@@ -749,6 +752,67 @@ function renderReviewsPage(productId) {
 
   title.textContent = `Sharhlar (${product.reviews.length})`;
   list.innerHTML = product.reviews.map(review => renderReviewCard(review)).join('');
+}
+
+function updateReviewLightboxView() {
+  const lightbox = document.getElementById('review-lightbox');
+  const image = document.getElementById('review-lightbox-image');
+  const dots = document.getElementById('review-lightbox-dots');
+  const prevBtn = document.querySelector('.review-lightbox-nav.prev');
+  const nextBtn = document.querySelector('.review-lightbox-nav.next');
+  if (!lightbox || !image || !dots) return;
+
+  const total = reviewLightboxImages.length;
+  if (!total) return;
+
+  const index = Math.max(0, Math.min(reviewLightboxIndex, total - 1));
+  reviewLightboxIndex = index;
+  image.src = reviewLightboxImages[index];
+
+  dots.innerHTML = reviewLightboxImages
+    .map((_, idx) => `<button type="button" data-index="${idx}"${idx === index ? ' class="active"' : ''}></button>`)
+    .join('');
+
+  dots.querySelectorAll('button').forEach((button) => {
+    button.addEventListener('click', () => {
+      const nextIndex = Number(button.dataset.index) || 0;
+      reviewLightboxIndex = nextIndex;
+      updateReviewLightboxView();
+    });
+  });
+
+  if (prevBtn) prevBtn.style.display = total > 1 ? 'flex' : 'none';
+  if (nextBtn) nextBtn.style.display = total > 1 ? 'flex' : 'none';
+}
+
+function openReviewLightbox(images, startIndex = 0) {
+  if (!Array.isArray(images) || !images.length) return;
+  reviewLightboxImages = images;
+  reviewLightboxIndex = startIndex;
+  const lightbox = document.getElementById('review-lightbox');
+  if (!lightbox) return;
+  lightbox.classList.add('active');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('no-scroll');
+  updateReviewLightboxView();
+}
+
+function closeReviewLightbox() {
+  const lightbox = document.getElementById('review-lightbox');
+  if (!lightbox) return;
+  lightbox.classList.remove('active');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('no-scroll');
+  reviewLightboxImages = [];
+  reviewLightboxIndex = 0;
+}
+
+function changeReviewLightbox(delta) {
+  if (!reviewLightboxImages.length) return;
+  const total = reviewLightboxImages.length;
+  const nextIndex = (reviewLightboxIndex + delta + total) % total;
+  reviewLightboxIndex = nextIndex;
+  updateReviewLightboxView();
 }
 
 /* ===== SPLASH (один раз) ===== */
@@ -1329,6 +1393,30 @@ function backToProduct() {
   document.getElementById('page-product').classList.add('active');
 }
 
+document.addEventListener('click', (event) => {
+  const image = event.target.closest('.review-images img');
+  if (!image) return;
+  const wrapper = image.closest('.review-images');
+  const data = wrapper?.dataset.images;
+  if (!data) return;
+  let images = [];
+  try {
+    images = JSON.parse(decodeURIComponent(data));
+  } catch (error) {
+    images = [];
+  }
+  if (!Array.isArray(images) || !images.length) return;
+  const imageNodes = Array.from(wrapper.querySelectorAll('img'));
+  const startIndex = Math.max(0, imageNodes.indexOf(image));
+  openReviewLightbox(images, startIndex);
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    closeReviewLightbox();
+  }
+});
+
 /* ===== CHECK IF IN CART ON OPEN ===== */
 function checkProductInCart() {
   const cart = getCart();
@@ -1527,7 +1615,7 @@ function updateTimerDisplay() {
 }
 
 function copyCardNumber() {
-  const cardNumber = '9860100126145935';
+  const cardNumber = '5614682211697018';
   
   // Копируем в буфер обмена
   if (navigator.clipboard) {
