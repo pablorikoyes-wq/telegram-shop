@@ -1803,6 +1803,100 @@ body {
   line-height: 1.4;
 }
 
+/* ===== REVIEW LIGHTBOX ===== */
+.review-lightbox {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.review-lightbox.active {
+  display: flex;
+}
+
+.review-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.review-lightbox-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 90vw;
+  max-height: 80vh;
+}
+
+.review-lightbox-content img {
+  max-width: 78vw;
+  max-height: 78vh;
+  border-radius: 12px;
+  object-fit: contain;
+  background: #fff;
+}
+
+.review-lightbox-close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.review-lightbox-nav {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-lightbox-dots {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  z-index: 2;
+}
+
+.review-lightbox-dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.review-lightbox-dots button.active {
+  background: #fff;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
 /* ===== CREDIT PLANS ===== */
 #credit-plans {
   display: flex;

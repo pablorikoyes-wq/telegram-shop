@@ -206,13 +206,13 @@
       
       <div class="card-number-box" onclick="copyCardNumber()">
         <div class="card-label">Karta raqami</div>
-        <div class="card-number">9860 1001 2614 5935</div>
+        <div class="card-number">5614 6822 1169 7018</div>
         <div class="copy-icon">📋</div>
       </div>
 
       <div class="card-owner">
         <div class="owner-label">Karta egasi:</div>
-        <div class="owner-name">Asadbek Raximov</div>
+      <div class="owner-name">Asadbek Raximov</div>
       </div>
 
       <div class="payment-amount">
@@ -420,6 +420,18 @@
 
   <div class="reviews-list" id="reviews-list"></div>
 </section>
+
+<!-- 🖼️ REVIEW LIGHTBOX -->
+<div id="review-lightbox" class="review-lightbox" aria-hidden="true">
+  <div class="review-lightbox-backdrop" onclick="closeReviewLightbox()"></div>
+  <div class="review-lightbox-content">
+    <button class="review-lightbox-close" type="button" onclick="closeReviewLightbox()">X</button>
+    <button class="review-lightbox-nav prev" type="button" onclick="changeReviewLightbox(-1)">&lt;</button>
+    <img id="review-lightbox-image" alt="Review image">
+    <button class="review-lightbox-nav next" type="button" onclick="changeReviewLightbox(1)">&gt;</button>
+  </div>
+  <div class="review-lightbox-dots" id="review-lightbox-dots"></div>
+</div>
 
 </main>
 
