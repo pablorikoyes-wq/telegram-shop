@@ -93,6 +93,11 @@ const products = [
         name: 'Zarina',
         date: '05 yanvar 2026',
         text: "Mehmonxona uchun ayni muddao, divan juda qulay va keng. Gilamchasi ham foydali chiqdi."
+      },
+      {
+        name: 'Murod',
+        date: '18 yanvar 2026',
+        text: ''
       }
     ]
   },
@@ -209,6 +214,11 @@ const products = [
         name: 'Nodira',
         date: '07 yanvar 2026',
         text: ''
+      },
+      {
+        name: 'Shirin',
+        date: '18 yanvar 2026',
+        text: ''
       }
     ]
   },
@@ -294,6 +304,86 @@ const products = [
         name: 'Ulugbek',
         date: '11 yanvar 2026',
         text: ''
+      },
+      {
+        name: 'Aziza',
+        date: '18 yanvar 2026',
+        text: ''
+      }
+    ]
+  },
+  {
+    id: 'aerogrill-1',
+    title: 'AEROGRILL DEAMIND',
+    price: 300000,
+    oldPrice: 1450000,
+    rating: 5.0,
+    deliveryText: 'Ertaga',
+    images: [
+      'assets/products/aerogrill/main-1.jpg',
+      'assets/products/aerogrill/main-2.jpg',
+      'assets/products/aerogrill/main-3.jpg'
+    ],
+    description: {
+      title: 'Demiand aerogrill',
+      lines: [
+        'DEMIAND AEROGRILL pishirishni osonlashtirish va yangi oshpazlik imkoniyatlarini ochish uchun yaratilgan.',
+        "Zamonaviy dizayn, puxta o'ylangan ergonomika va aqlli texnologiyalar tezroq, sog'lomroq va natijani to'liq nazorat qilish imkonini beradi.",
+        "DEMIAND masofadan boshqarish pulti ilova orqali to'liq boshqarish.",
+        "AEROGRILNI to'g'ridan-to'g'ri smartfoningizdan boshqaring.",
+        "Harorat va pishirish vaqtini sozlang, bir marta bosish bilan dasturlarni ishga tushiring va to'xtating.",
+        "Demand Wi-Fi masofadan boshqarish pulti dasturi sizga har qanday xonadan jarayonni boshqarish va idishning tayyorligi to'g'risida xabar olish imkonini beradi.",
+        "Boshqaruv intuitiv va bepul - oshxonangizdagi qulaylikning yangi darajasi.",
+        'Telefoningizdagi retseptlar kutubxonasi.',
+        "Demiand retseptlari ilovasida demiand brendi oshpazining yuzlab taomlari mavjud.",
+        "Har bir retsept bosqichma-bosqich foto va video ko'rsatmalar, pishirish bo'yicha maslahatlar va aniq vaqt va harorat sozlamalari bilan birga keladi.",
+        "Retseptlar to'plami doimiy ravishda yangilanib turadi, bu har kuni ishonchli va xilma-xil pishirishga yordam beradi."
+      ]
+    },
+    specs: [
+      { label: "Ob'ektning balandligi", value: '28.5 sm' },
+      { label: 'Element kengligi', value: '38 sm' },
+      { label: 'Mavzu chuqurligi', value: '30 sm' },
+      { label: 'Paket bilan vazn', value: '5.9 Kg' }
+    ],
+    reviews: [
+      {
+        name: 'Shaxlo',
+        date: '18 yanvar 2026',
+        text: "Grillga gap yo'q, daxshat narsa. 5 baho.",
+        images: [
+          'assets/products/aerogrill/reviews/review-1-1.jpg',
+          'assets/products/aerogrill/reviews/review-1-2.jpg'
+        ]
+      },
+      {
+        name: 'Diyor',
+        date: '17 yanvar 2026',
+        text: 'Juda mazali taom chiqadi, bunday narsa uchun rahmat.',
+        images: [
+          'assets/products/aerogrill/reviews/review-2-1.jpg',
+          'assets/products/aerogrill/reviews/review-2-2.jpg'
+        ]
+      },
+      {
+        name: 'Gulruh',
+        date: '16 yanvar 2026',
+        text: 'Juda mazali taom chiqadi, bunday narsa uchun rahmat.',
+        images: [
+          'assets/products/aerogrill/reviews/review-3-1.jpg',
+          'assets/products/aerogrill/reviews/review-3-2.jpg',
+          'assets/products/aerogrill/reviews/review-3-3.jpg'
+        ]
+      },
+      {
+        name: 'Akmal',
+        date: '15 yanvar 2026',
+        text: "Chiroyli paketda keldi va hamma narsa fotosuratlarga o'xshaydi."
+      },
+      {
+        name: 'Nargiza',
+        date: '14 yanvar 2026',
+        text: ''
       }
     ]
   },
@@ -378,6 +468,11 @@ const products = [
         name: 'Gulnoza',
         date: '09 yanvar 2026',
         text: 'Qizimga oldim, juda xursand.'
+      },
+      {
+        name: 'Umida',
+        date: '18 yanvar 2026',
+        text: ''
       }
     ]
   },
@@ -442,6 +537,11 @@ const products = [
         date: '13 yanvar 2026',
         text: "Xarid qilishdan juda mamnunman, juda chiroyli va zamonaviy ko'rinadi.",
         images: ['assets/products/water-stand/reviews/review-4-1.jpg']
+      },
+      {
+        name: 'Shohruh',
+        date: '18 yanvar 2026',
+        text: ''
       }
     ]
   },
@@ -502,6 +602,11 @@ const products = [
         date: '13 yanvar 2026',
         text: 'Juda daxshat narsa ekan 😍',
         images: ['assets/products/dishwasher/reviews/review-4-1.jpg']
+      },
+      {
+        name: 'Komil',
+        date: '18 yanvar 2026',
+        text: ''
       }
     ]
   },
@@ -572,6 +677,11 @@ const products = [
         name: 'Malika',
         date: '12 yanvar 2026',
         text: 'Printerga gap yo\'q, hammasi ishlayapti, talabalar uchun zarur narsa 😊'
+      },
+      {
+        name: 'Shahzod',
+        date: '18 yanvar 2026',
+        text: ''
       }
     ]
   }
