@@ -213,6 +213,91 @@ const products = [
     ]
   },
   {
+    id: 'humidifier-1',
+    title: 'Namlagich',
+    price: 220000,
+    oldPrice: 1300000,
+    discount: '-83%',
+    rating: 5.0,
+    deliveryText: 'Ertaga',
+    images: [
+      'assets/products/humidifier/main-1.jpg',
+      'assets/products/humidifier/main-2.jpg',
+      'assets/products/humidifier/main-3.jpg',
+      'assets/products/humidifier/main-4.jpg'
+    ],
+    description: {
+      title: 'Namlagich 8 litr',
+      lines: [
+        "Namlagich 8 litr. Kvartira, yotoqxona yoki bolalar bog'chasi uchun kuchli qurilma.",
+        "Bu kvartiralarda va bolalar xonalarida foydalanish uchun ideal bo'lgan katta hajmli ultratovushli namlagich.",
+        "Ionizator funktsiyasi bilan u havoni samarali tozalaydi va namlaydi, shovqinsiz qulay mikroiqlimni yaratadi.",
+        "Elektr moslamasi rozetkaga ulanadi va deyarli jim ishlaydi, bu uni yotoq xonalari va yashash joylariga o'rnatishni osonlashtiradi.",
+        "Qurilma tozalovchi va namlagich funktsiyalarini birlashtiradi, havo sifatini sezilarli darajada yaxshilaydi.",
+        "Xushbo'y hid uchun efir moylarini ishlatish mumkin, bu yoqimli muhit yaratadi.",
+        "Zamin dizayni ushbu havo namlagichini zamonaviy ichki qismga aylantiradi.",
+        "Tankning sig'imi 8 litr suv uchun mo'ljallangan bo'lib, u tez-tez to'ldirishga hojat qoldirmasdan uzoq muddatli ishlashni ta'minlaydi.",
+        "Hidratsiya samaradorligi optimal darajada saqlanadi."
+      ]
+    },
+    specs: [
+      { label: "Ob'ektning balandligi", value: '74 sm' },
+      { label: 'Element kengligi', value: '25 sm' },
+      { label: 'Mavzu chuqurligi', value: '25 sm' },
+      { label: 'Paketsiz vazn', value: '1.8 Kg' },
+      { label: 'Paket bilan vazn', value: '3 Kg' },
+      { label: 'Paket bilan vazn', value: '26 sm' },
+      { label: 'Paket balandligi', value: '75 sm' },
+      { label: 'Paket kengligi', value: '26 sm' }
+    ],
+    reviews: [
+      {
+        name: 'Shoxrux',
+        date: '17 yanvar 2026',
+        text: "5 yulduz, o'z vazifasini juda yaxshi bajaradi.",
+        images: [
+          'assets/products/humidifier/reviews/review-1-1.jpg',
+          'assets/products/humidifier/reviews/review-1-2.jpg'
+        ]
+      },
+      {
+        name: 'Zuxra',
+        date: '16 yanvar 2026',
+        text: 'Qanday ajoyib namlagich!',
+        images: [
+          'assets/products/humidifier/reviews/review-2-1.jpg',
+          'assets/products/humidifier/reviews/review-2-2.jpg',
+          'assets/products/humidifier/reviews/review-2-3.jpg'
+        ]
+      },
+      {
+        name: 'Jasur',
+        date: '15 yanvar 2026',
+        text: 'Namlagich zur, xozirgi paytida juda yordam beryapti.'
+      },
+      {
+        name: 'Maftuna',
+        date: '14 yanvar 2026',
+        text: "Toshkentda hammada bo'lishi kerak namlagich va bu narsa juda zo'r."
+      },
+      {
+        name: 'Dilshod',
+        date: '13 yanvar 2026',
+        text: 'Ozimga va qizimga oldim, 2 ta namlagich. Raxmat, dastavka juda tez yetib keldi.'
+      },
+      {
+        name: 'Nigora',
+        date: '12 yanvar 2026',
+        text: ''
+      },
+      {
+        name: 'Ulugbek',
+        date: '11 yanvar 2026',
+        text: ''
+      }
+    ]
+  },
+  {
     id: 'projector-1',
     title: 'Telefon uchun 4K kino proyektori',
     price: 210000,
