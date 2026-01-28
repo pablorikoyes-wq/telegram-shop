@@ -421,8 +421,7 @@ const products = [
       'assets/products/lv-sneaker/main-1.jpg',
       'assets/products/lv-sneaker/main-2.jpg',
       'assets/products/lv-sneaker/main-3.jpg',
-      'assets/products/lv-sneaker/main-4.jpg',
-      'assets/products/lv-sneaker/main-5.jpg'
+      'assets/products/lv-sneaker/main-4.jpg'
     ],
     sizes: [
       { label: '36', value: '36' },
