@@ -313,6 +313,96 @@ const products = [
     ]
   },
   {
+    id: 'modular-sofa-1',
+    title: 'Modulli divan-karavot (2 m gacha ochiladi)',
+    price: 450000,
+    oldPrice: 1700000,
+    rating: 5.0,
+    deliveryText: 'Ertaga',
+    images: [
+      'assets/products/modular-sofa/main-1.jpg',
+      'assets/products/modular-sofa/main-2.jpg',
+      'assets/products/modular-sofa/main-3.jpg',
+      'assets/products/modular-sofa/main-4.jpg',
+      'assets/products/modular-sofa/main-5.jpg',
+      'assets/products/modular-sofa/main-6.jpg',
+      'assets/products/modular-sofa/main-7.jpg'
+    ],
+    description: {
+      title: 'Modulli divan-karavot',
+      lines: [
+        "Yumshoq velyur matoli va yuqori elastik butun ko'pikdan tayyorlangan zamonaviy modulli divan.",
+        "Oson yig'iladi va ochiladi — bir zumda qulay karavotga aylanadi.",
+        "Yostiqlarni erkin joylashtirish mumkin: suyanchiq, qo'ltiqtayanch yoki bosh yostiq sifatida ishlatiladi.",
+        "Zanglamas po'lat ramkasi modullarni mahkam ushlab turadi.",
+        'Kichik xonadonlar, studiya va mehmonxona uchun juda qulay.'
+      ]
+    },
+    specs: [
+      { label: 'Karavot holatida: Umumiy uzunligi', value: '200 sm' },
+      { label: 'Karavot holatida: Yotish qismi', value: '175 sm' },
+      { label: 'Karavot holatida: Matras qalinligi', value: '20 sm' },
+      { label: 'Karavot holatida: Yon suyanchiq balandligi', value: '50 sm' },
+      { label: 'Divan holatida: Uzunligi', value: '150 / 180 / 200 / 220 sm' },
+      { label: 'Divan holatida: Chuqurligi', value: '100 sm' },
+      { label: 'Divan holatida: Umumiy balandligi', value: '70 sm' },
+      { label: "Divan holatida: O'tirg'ich balandligi", value: '40 sm' },
+      { label: "Divan holatida: Qo'ltiqtayanch balandligi", value: '30 sm' },
+      { label: "Divan holatida: Qo'ltiqtayanch qalinligi", value: '25 sm' },
+      { label: "Divan holatida: Ichki o'tirish chuqurligi", value: '75 sm' },
+      { label: 'Material', value: 'yumshoq velyur (kordroy)' },
+      { label: 'Ichki qismi', value: "yuqori elastik butun ko'pik" },
+      { label: 'Karkas', value: "yog'ochsiz" },
+      { label: 'Mahkamlash', value: "zanglamas po'lat ramka" },
+      { label: 'Funksiya', value: 'divan + karavot' },
+      { label: 'Yostiqlar', value: "erkin ko'chiriladi (360°)" },
+      { label: 'Qadoqlash', value: 'vakuumli' }
+    ],
+    reviews: [
+      {
+        name: 'Shahzod',
+        date: '18 yanvar 2026',
+        text: "Xuddi shuni magazinda ko'rdim, shunda yoqdi lekin juda qimmat edi. Sizda esa narxi arzonroq, juda zo'r divan, raxmat.",
+        images: [
+          'assets/products/modular-sofa/reviews/review-1-1.jpg',
+          'assets/products/modular-sofa/reviews/review-1-2.jpg'
+        ]
+      },
+      {
+        name: 'Dilshod',
+        date: '17 yanvar 2026',
+        text: "Zo'r divan raxmat.",
+        images: [
+          'assets/products/modular-sofa/reviews/review-2-1.jpg',
+          'assets/products/modular-sofa/reviews/review-2-2.jpg'
+        ]
+      },
+      {
+        name: 'Nozima',
+        date: '16 yanvar 2026',
+        text: "Yumshoq, qulay va chiroyli ko'rinadi.",
+        images: [
+          'assets/products/modular-sofa/reviews/review-3-1.jpg',
+          'assets/products/modular-sofa/reviews/review-3-2.jpg'
+        ]
+      },
+      {
+        name: 'Otabek',
+        date: '15 yanvar 2026',
+        text: "Menga divan juda yoqdi, men besh yulduz qo'ydim.",
+        images: [
+          'assets/products/modular-sofa/reviews/review-4-1.jpg',
+          'assets/products/modular-sofa/reviews/review-4-2.jpg'
+        ]
+      },
+      {
+        name: 'Madina',
+        date: '14 yanvar 2026',
+        text: ''
+      }
+    ]
+  },
+  {
     id: 'aerogrill-1',
     title: 'AEROGRILL DEAMIND',
     price: 300000,
