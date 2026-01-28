@@ -946,6 +946,39 @@ body {
   background: #f4ecff;
 }
 
+.product-sizes {
+  margin: 8px 0 8px;
+}
+
+.product-sizes .size-title {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.size-option {
+  padding: 6px 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  min-width: 44px;
+  text-align: center;
+}
+
+.size-option.active {
+  border-color: #6a00ff;
+  color: #6a00ff;
+  background: #f4ecff;
+}
+
 .price-current {
   font-size: 28px;
   font-weight: 700;

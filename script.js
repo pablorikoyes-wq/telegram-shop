@@ -411,6 +411,74 @@ const products = [
     ]
   },
   {
+    id: 'lv-sneaker-1',
+    title: 'Louis Vuitton Krossovka',
+    price: 150000,
+    oldPrice: 850000,
+    rating: 4.9,
+    deliveryText: 'Ertaga',
+    images: [
+      'assets/products/lv-sneaker/main-1.jpg',
+      'assets/products/lv-sneaker/main-2.jpg',
+      'assets/products/lv-sneaker/main-3.jpg',
+      'assets/products/lv-sneaker/main-4.jpg',
+      'assets/products/lv-sneaker/main-5.jpg'
+    ],
+    sizes: [
+      { label: '36', value: '36' },
+      { label: '37', value: '37' },
+      { label: '38', value: '38' },
+      { label: '39', value: '39' },
+      { label: '40', value: '40' },
+      { label: '41', value: '41' },
+      { label: '42', value: '42' },
+      { label: '43', value: '43' },
+      { label: '44', value: '44' },
+      { label: '45', value: '45' }
+    ],
+    description: {
+      title: 'Qulay, zamonaviy va ishonchli tanlov',
+      lines: [
+        "Asl sifat 👟. Yuqori sifatli materiallardan tayyorlangan bo'lib, uzoq muddat xizmat qiladi va shaklini yo'qotmaydi.",
+        "Sportda qulay 🏃‍♂️. Yengil vazn, qulay qolip va yumshoq ichki qismi tufayli sport, yurish va kundalik foydalanish uchun juda mos.",
+        "Sovg'a sifatida oqartiruvchi taglik 🎁. Zamonaviy dizayn va oqartiruvchi taglik bilan chiroyli ko'rinishga ega — sovg'a uchun ham a'lo variant."
+      ]
+    },
+    specs: [
+      { label: 'Turi', value: 'Uniseks krossovkalar' },
+      { label: 'Jins', value: 'Erkaklar va ayollar uchun' },
+      { label: 'Material', value: "Nafas oluvchi tekstil + sun'iy charm" },
+      { label: 'Taglik', value: "Mustahkam, sirpanmaydigan, oqartiruvchi effekt bilan" },
+      { label: "Foydalanish", value: "Sport, yurish, kundalik kiyim" },
+      { label: 'Mavsum', value: 'Bahor / Yoz / Kuz' },
+      { label: "Afzalliklari", value: "Zamonaviy dizayn, oyoqqa qulay joylashadi, yengil va mustahkam, kundalik va sport uslubiga mos" }
+    ],
+    reviews: [
+      {
+        name: 'Bekzod',
+        date: '18 yanvar 2026',
+        text: "Ko'p izladim, shularni juda yoqdi, raxmat. Dastavka tez ekan.",
+        images: ['assets/products/lv-sneaker/reviews/review-1-1.jpg']
+      },
+      {
+        name: 'Shaxnoza',
+        date: '17 yanvar 2026',
+        text: 'Hammasi chotki, kachestvasi ham daxshat.',
+        images: ['assets/products/lv-sneaker/reviews/review-2-1.jpg']
+      },
+      {
+        name: 'Rustam',
+        date: '16 yanvar 2026',
+        text: ''
+      },
+      {
+        name: 'Madina',
+        date: '15 yanvar 2026',
+        text: ''
+      }
+    ]
+  },
+  {
     id: 'aerogrill-1',
     title: 'AEROGRILL DEAMIND',
     price: 300000,
@@ -789,6 +857,8 @@ const productsById = new Map(products.map(product => [product.id, product]));
 let currentProductId = products[0]?.id;
 let currentProductColor = null;
 const selectedColors = new Map();
+let currentProductSize = null;
+const selectedSizes = new Map();
 const creditEligibleProductId = 'sofa-1';
 const creditPlanMonths = [4, 3, 2];
 let selectedCreditPlan = creditPlanMonths[0];
@@ -873,6 +943,15 @@ function getDefaultColor(product) {
 function getProductColor(product) {
   if (!product?.colors?.length) return null;
   return selectedColors.get(product.id) || getDefaultColor(product);
+}
+
+function getDefaultSize(product) {
+  return product?.sizes?.[0] || null;
+}
+
+function getProductSize(product) {
+  if (!product?.sizes?.length) return null;
+  return selectedSizes.get(product.id) || getDefaultSize(product);
 }
 
 function getColorImage(product, color) {
@@ -960,6 +1039,50 @@ function renderProductColors(product) {
         productSliderIndex = Math.min(nextColor.imageIndex, product.images.length - 1);
         updateProductSlider();
       }
+    });
+  });
+}
+
+function renderProductSizes(product) {
+  const container = document.getElementById('product-sizes');
+  if (!container) return;
+
+  if (!product?.sizes?.length) {
+    container.innerHTML = '';
+    container.style.display = 'none';
+    currentProductSize = null;
+    return;
+  }
+
+  const selectedSize = getProductSize(product);
+  currentProductSize = selectedSize;
+  selectedSizes.set(product.id, selectedSize);
+  container.style.display = 'block';
+  container.innerHTML = `
+    <div class="size-title">O'lcham</div>
+    <div class="size-options">
+      ${product.sizes
+        .map(
+          (size) =>
+            `<button class="size-option" type="button" data-size-value="${size.value}">${size.label}</button>`
+        )
+        .join('')}
+    </div>
+  `;
+
+  const buttons = container.querySelectorAll('.size-option');
+  buttons.forEach((button) => {
+    const isActive = button.dataset.sizeValue === selectedSize?.value;
+    if (isActive) button.classList.add('active');
+    button.addEventListener('click', () => {
+      const nextSize = product.sizes.find(
+        (size) => String(size.value) === String(button.dataset.sizeValue)
+      );
+      if (!nextSize) return;
+      selectedSizes.set(product.id, nextSize);
+      currentProductSize = nextSize;
+      buttons.forEach((btn) => btn.classList.remove('active'));
+      button.classList.add('active');
     });
   });
 }
@@ -1140,6 +1263,7 @@ function renderProductPage(productId) {
   productSliderIndex = 0;
   initProductSlider();
   renderProductColors(product);
+  renderProductSizes(product);
   updateProductPrimaryButton(product);
   switchTab(0);
 }
@@ -1339,9 +1463,11 @@ function saveCart(cart) {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-function buildCartItem(product, color) {
+function buildCartItem(product, color, size) {
   const colorLabel = color?.label || '';
   const colorValue = color?.value || '';
+  const sizeLabel = size?.label || '';
+  const sizeValue = size?.value || '';
   return {
     id: product.id,
     title: product.title,
@@ -1350,7 +1476,9 @@ function buildCartItem(product, color) {
     qty: 1,
     selected: true,
     colorLabel,
-    colorValue
+    colorValue,
+    sizeLabel,
+    sizeValue
   };
 }
 
@@ -1413,6 +1541,9 @@ function renderCart() {
     const colorMarkup = item.colorLabel
       ? `<div class="cart-color">Rangi: ${item.colorLabel}</div>`
       : '';
+    const sizeMarkup = item.sizeLabel
+      ? `<div class="cart-color">O'lcham: ${item.sizeLabel}</div>`
+      : '';
 
 
     list.innerHTML += `
@@ -1425,6 +1556,7 @@ function renderCart() {
         <div class="cart-info">
           <div>${item.title}</div>
           ${colorMarkup}
+          ${sizeMarkup}
           <strong>${(item.price * item.qty).toLocaleString()} so'm</strong>
 
           <div class="cart-actions">
@@ -1624,12 +1756,13 @@ function addToCartFromProduct() {
   if (!product) return;
   
   const color = getProductColor(product);
+  const size = getProductSize(product);
   const existingIndex = cart.findIndex(item => item.id === product.id);
   
   if (existingIndex !== -1) {
     cart.splice(existingIndex, 1);
   } else {
-    cart.push(buildCartItem(product, color));
+    cart.push(buildCartItem(product, color, size));
   }
   
   saveCart(cart);
@@ -1649,6 +1782,7 @@ function addToCartFromCard(event) {
   if (!product) return;
 
   const color = getDefaultColor(product);
+  const size = getDefaultSize(product);
   const existingIndex = cart.findIndex(item => item.id === product.id);
 
   if (existingIndex !== -1) {
@@ -1656,7 +1790,7 @@ function addToCartFromCard(event) {
     cart.splice(existingIndex, 1);
   } else {
     // Добавляем в корзину
-    cart.push(buildCartItem(product, color));
+    cart.push(buildCartItem(product, color, size));
   }
 
   saveCart(cart);
@@ -1674,9 +1808,10 @@ function buyNowFromProduct() {
   if (!product) return;
 
   const color = getProductColor(product);
+  const size = getProductSize(product);
   let cart = getCart().map(item => ({ ...item, selected: false }));
   const existingIndex = cart.findIndex(item => item.id === product.id);
-  const nextItem = buildCartItem(product, color);
+  const nextItem = buildCartItem(product, color, size);
 
   if (existingIndex !== -1) {
     cart[existingIndex] = {
@@ -1711,12 +1846,16 @@ function renderCreditItem(item, basePrice) {
   const colorInfo = item.colorLabel
     ? `<div class="checkout-item-color">Rangi: ${item.colorLabel}</div>`
     : '';
+  const sizeInfo = item.sizeLabel
+    ? `<div class="checkout-item-color">O'lcham: ${item.sizeLabel}</div>`
+    : '';
   container.innerHTML = `
     <div class="checkout-item">
       <img src="${item.image}">
       <div class="checkout-item-info">
         <div class="checkout-item-title">${item.title}</div>
         ${colorInfo}
+        ${sizeInfo}
         <div class="checkout-item-qty">${item.qty} dona</div>
         <div class="checkout-item-price">${formatPrice(basePrice)} so'm</div>
       </div>
@@ -1776,10 +1915,11 @@ function openCreditCheckout(productId = currentProductId) {
   }
 
   const color = getProductColor(product);
+  const size = getProductSize(product);
   const basePrice = getCreditBasePrice(product);
   currentCreditBasePrice = basePrice;
   currentCreditItem = {
-    ...buildCartItem(product, color),
+    ...buildCartItem(product, color, size),
     price: basePrice
   };
   selectedCreditPlan = creditPlanMonths[0];
@@ -1912,6 +2052,9 @@ function openCheckout() {
     const colorInfo = item.colorLabel
       ? `<div class="checkout-item-color">Rangi: ${item.colorLabel}</div>`
       : '';
+    const sizeInfo = item.sizeLabel
+      ? `<div class="checkout-item-color">O'lcham: ${item.sizeLabel}</div>`
+      : '';
 
     list.innerHTML += `
       <div class="checkout-item">
@@ -1919,6 +2062,7 @@ function openCheckout() {
         <div class="checkout-item-info">
           <div class="checkout-item-title">${item.title}</div>
           ${colorInfo}
+          ${sizeInfo}
           <div class="checkout-item-qty">${item.qty} dona</div>
           <div class="checkout-item-price">${(item.price * item.qty).toLocaleString()} so'm</div>
         </div>
@@ -1998,8 +2142,9 @@ function openCreditPaymentPage() {
   const months = selectedCreditPlan || creditPlanMonths[0];
   const monthlyPayment = getCreditMonthlyPayment(basePrice, months);
   const color = getProductColor(product);
+  const size = getProductSize(product);
   const item = currentCreditItem || {
-    ...buildCartItem(product, color),
+    ...buildCartItem(product, color, size),
     price: basePrice
   };
 
@@ -2124,10 +2269,16 @@ function openManagerChat() {
             colorLabel =
               product.colors.find(color => color.value === item.colorValue)?.label || '';
           }
+          let sizeLabel = item.sizeLabel || '';
+          if (!sizeLabel && item.sizeValue && product?.sizes?.length) {
+            sizeLabel =
+              product.sizes.find(size => String(size.value) === String(item.sizeValue))?.label || '';
+          }
           const colorText = colorLabel ? `, rangi: ${colorLabel}` : '';
+          const sizeText = sizeLabel ? `, o'lcham: ${sizeLabel}` : '';
           const qty = Number(item.qty) || 1;
           const lineTotal = (Number(item.price) || 0) * qty;
-          return `• ${title}${colorText} — ${qty} dona — ${lineTotal.toLocaleString()} so'm`;
+          return `• ${title}${colorText}${sizeText} — ${qty} dona — ${lineTotal.toLocaleString()} so'm`;
         })
         .join('\n')
     : '—';
