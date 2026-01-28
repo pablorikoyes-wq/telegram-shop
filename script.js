@@ -924,6 +924,7 @@ let currentProductColor = null;
 const selectedColors = new Map();
 let currentProductSize = null;
 const selectedSizes = new Map();
+let productSearchQuery = '';
 const creditEligibleProductId = 'sofa-1';
 const creditPlanMonths = [4, 3, 2];
 let selectedCreditPlan = creditPlanMonths[0];
@@ -1025,6 +1026,21 @@ function getColorImage(product, color) {
     return product.images[color.imageIndex] || product.images[0];
   }
   return product.images[0];
+}
+
+function normalizeText(value) {
+  return String(value || '').toLowerCase();
+}
+
+function getSearchableText(product) {
+  const parts = [product?.title, product?.description?.title];
+  return normalizeText(parts.filter(Boolean).join(' '));
+}
+
+function filterProducts(query) {
+  const term = normalizeText(query).trim();
+  if (!term) return products;
+  return products.filter(product => getSearchableText(product).includes(term));
 }
 
 function renderStars(count = 5) {
@@ -1154,11 +1170,16 @@ function renderProductSizes(product) {
   });
 }
 
-function renderProductCards() {
+function renderProductCards(list = products) {
   const grid = document.getElementById('products-grid');
   if (!grid) return;
 
-  grid.innerHTML = products.map(product => {
+  if (!list.length) {
+    grid.innerHTML = "<div class='search-empty'>Hech narsa topilmadi</div>";
+    return;
+  }
+
+  grid.innerHTML = list.map(product => {
     const slidesMarkup = product.images.map(src => `<img src="${src}">`).join('');
     const dotsMarkup = product.images
       .map((_, index) => `<span${index === 0 ? ' class="active"' : ''}></span>`)
@@ -1219,6 +1240,7 @@ function renderProductCards() {
 
   bindProductCardEvents();
   initCardSliders();
+  updateMainPageButton();
 }
 
 function bindProductCardEvents() {
@@ -1227,6 +1249,11 @@ function bindProductCardEvents() {
       openProduct(card.dataset.productId);
     });
   });
+}
+
+function updateSearchResults() {
+  const filtered = filterProducts(productSearchQuery);
+  renderProductCards(filtered);
 }
 
 function initCardSliders() {
@@ -1449,6 +1476,27 @@ document.addEventListener("DOMContentLoaded", () => {
     renderProductPage(currentProductId);
   }
   updateMainPageButton();
+
+  const searchInput = document.getElementById('product-search');
+  const searchButton = document.getElementById('product-search-btn');
+  const handleSearch = () => {
+    productSearchQuery = searchInput ? searchInput.value : '';
+    updateSearchResults();
+  };
+
+  if (searchInput) {
+    searchInput.addEventListener('input', handleSearch);
+    searchInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        handleSearch();
+      }
+    });
+  }
+
+  if (searchButton) {
+    searchButton.addEventListener('click', handleSearch);
+  }
 });
 
 
