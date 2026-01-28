@@ -203,6 +203,46 @@ body {
   align-items: stretch;
 }
 
+/* ===== SEARCH ===== */
+.search-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+}
+
+.search-input:focus {
+  border-color: #6a00ff;
+}
+
+.search-btn {
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: none;
+  background: #6a00ff;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.search-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+  padding: 20px 0;
+}
+
 
 
 /* ===== PRODUCT CARD ===== */
