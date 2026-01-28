@@ -478,6 +478,72 @@ const products = [
     ]
   },
   {
+    id: 'dior-suit-1',
+    title: 'Christian Dior erkaklar kostyumi',
+    price: 290000,
+    oldPrice: 900000,
+    discount: '-68%',
+    rating: 4.8,
+    deliveryText: 'Ertaga',
+    images: [
+      'assets/products/dior-suit/main-1.jpg',
+      'assets/products/dior-suit/main-2.jpg',
+      'assets/products/dior-suit/main-3.jpg',
+      'assets/products/dior-suit/main-4.jpg'
+    ],
+    sizes: [
+      { label: 'XS', value: 'xs' },
+      { label: 'S', value: 's' },
+      { label: 'M', value: 'm' },
+      { label: 'L', value: 'l' },
+      { label: 'XL', value: 'xl' },
+      { label: 'XXL', value: 'xxl' }
+    ],
+    description: {
+      title: 'Zamonaviy dizayn va yuqori qulaylik',
+      lines: [
+        'Material: 100% paxta 🌿',
+        "Tabiiy va yumshoq mato teriga yoqimli, nafas oladi va kundalik kiyishga juda qulay.",
+        'Kiyish uchun qulay ✅',
+        "Erkin kroya, elastik bel qismi va yengil mato tufayli harakatlanishda noqulaylik tug'dirmaydi.",
+        'Juda zamonaviy 🔥',
+        'Minimalistik dizayn va brend uslubi zamonaviy erkaklar uchun ideal tanlov.'
+      ]
+    },
+    specs: [
+      { label: 'Turi', value: 'Erkaklar sport kostyumi' },
+      { label: 'Brend', value: 'Christian Dior' },
+      { label: 'Material', value: '100% paxta' },
+      { label: "To'plam", value: 'Kapyushonli jaket + shim' },
+      { label: 'Foydalanish', value: 'Kundalik kiyim, sayr, sport' },
+      { label: 'Mavsum', value: 'Bahor / Kuz / Salqin yoz' },
+      {
+        label: 'Afzalliklari',
+        value: "Tabiiy mato, terlatmaydi, qulay va yengil, zamonaviy ko'rinish, sovg'a uchun ham mos"
+      }
+    ],
+    reviews: [
+      {
+        name: 'Sherzod',
+        date: '18 yanvar 2026',
+        text: "Kiyim juda qulay, matosi yumshoq.",
+        rating: 5
+      },
+      {
+        name: 'Jahongir',
+        date: '17 yanvar 2026',
+        text: "Zamonaviy ko'rinadi, mos keldi.",
+        rating: 5
+      },
+      {
+        name: 'Dilshod',
+        date: '16 yanvar 2026',
+        text: "Sifat yaxshi, lekin o'lcham biroz kichikroq.",
+        rating: 4
+      }
+    ]
+  },
+  {
     id: 'aerogrill-1',
     title: 'AEROGRILL DEAMIND',
     price: 300000,
@@ -961,8 +1027,9 @@ function getColorImage(product, color) {
   return product.images[0];
 }
 
-function renderStars() {
-  return `${starIconMarkup.repeat(5)}`;
+function renderStars(count = 5) {
+  const rating = Math.max(1, Math.min(5, Math.round(Number(count) || 5)));
+  return `${starIconMarkup.repeat(rating)}`;
 }
 
 function renderReviewImages(images = []) {
@@ -973,10 +1040,11 @@ function renderReviewImages(images = []) {
 }
 
 function renderReviewCard(review) {
+  const rating = review?.rating ?? 5;
   return `
     <div class="review-card">
       <div class="review-rating">
-        ${renderStars()}
+        ${renderStars(rating)}
       </div>
       ${review.date ? `<div class="review-date">${review.date}</div>` : ''}
       ${
