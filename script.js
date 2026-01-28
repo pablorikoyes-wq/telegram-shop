@@ -326,7 +326,15 @@ const products = [
       'assets/products/modular-sofa/main-4.jpg',
       'assets/products/modular-sofa/main-5.jpg',
       'assets/products/modular-sofa/main-6.jpg',
-      'assets/products/modular-sofa/main-7.jpg'
+      'assets/products/modular-sofa/main-7.jpg',
+      'assets/products/modular-sofa/main-8.jpg'
+    ],
+    colors: [
+      { label: 'Qora', value: 'black', imageIndex: 0 },
+      { label: 'Kulrang', value: 'gray', imageIndex: 1 },
+      { label: "To'q sariq", value: 'orange', imageIndex: 3 },
+      { label: 'Pushti', value: 'pink', imageIndex: 5 },
+      { label: 'Oq', value: 'white', imageIndex: 7 }
     ],
     description: {
       title: 'Modulli divan-karavot',
