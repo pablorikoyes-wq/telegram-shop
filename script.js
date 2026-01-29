@@ -584,7 +584,7 @@ const products = [
       {
         name: 'Oybek',
         date: '18 yanvar 2026',
-        text: '',
+        text: "Juda qulay, uyda SPA bo'ldi.",
         rating: 5
       },
       {
