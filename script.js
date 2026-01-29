@@ -634,34 +634,36 @@ const products = [
       {
         name: 'Malika',
         date: '18 yanvar 2026',
-        text: '😍',
+        text: "Qaren juda chiroyli ko'rinishi, dugonam hayron, men ham😂",
         rating: 5,
         images: ['assets/products/smart-girlyanda/reviews/review-1-1.jpg']
       },
       {
         name: 'Jahongir',
         date: '17 yanvar 2026',
-        text: 'Tez yetkazib berganingiz uchun tashakkur, hammasi yaxshi ishlaydi.',
+        text: "Yetib keldi, xozir yangi yil tugadi lekin baribir osib qoyaman🙃 raxmat",
         rating: 5,
         images: ['assets/products/smart-girlyanda/reviews/review-2-1.jpg']
       },
       {
-        name: 'Dilshoda',
+        name: 'Nigora',
         date: '16 yanvar 2026',
-        text: '',
-        rating: 5
+        text: '😍',
+        rating: 5,
+        images: ['assets/products/smart-girlyanda/reviews/review-3-1.jpg']
       },
       {
-        name: 'Shohruh',
+        name: 'Shaxzoda',
         date: '15 yanvar 2026',
-        text: '',
-        rating: 5
+        text: 'Tez yetkazib berganingiz uchun tashakkur, hammasi yaxshi ishlaydi.',
+        rating: 5,
+        images: ['assets/products/smart-girlyanda/reviews/review-4-1.jpg']
       },
       {
         name: 'Aziza',
         date: '14 yanvar 2026',
         text: '',
-        rating: 5
+        rating: 4
       }
     ]
   },
