@@ -634,14 +634,14 @@ const products = [
       {
         name: 'Malika',
         date: '18 yanvar 2026',
-        text: "Qaren juda chiroyli ko'rinishi, dugonam hayron, men ham 😂",
+        text: '😍',
         rating: 5,
         images: ['assets/products/smart-girlyanda/reviews/review-1-1.jpg']
       },
       {
         name: 'Jahongir',
         date: '17 yanvar 2026',
-        text: "Yetib keldi, xozir yangi yil tugadi lekin baribir osib qo'yaman 🙃 raxmat",
+        text: 'Tez yetkazib berganingiz uchun tashakkur, hammasi yaxshi ishlaydi.',
         rating: 5,
         images: ['assets/products/smart-girlyanda/reviews/review-2-1.jpg']
       },
