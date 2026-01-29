@@ -663,7 +663,7 @@ const products = [
         name: 'Aziza',
         date: '14 yanvar 2026',
         text: '',
-        rating: 5
+        rating: 4
       }
     ]
   },
