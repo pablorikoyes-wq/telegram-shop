@@ -544,6 +544,64 @@ const products = [
     ]
   },
   {
+    id: 'heated-tub-1',
+    title: "Aqlli isitiladigan buklanadigan cho'milish bochkasi",
+    price: 360000,
+    oldPrice: 1940000,
+    discount: '-81%',
+    rating: 5.0,
+    deliveryText: 'Ertaga',
+    images: [
+      'assets/products/heated-tub/main-1.jpg',
+      'assets/products/heated-tub/main-2.jpg',
+      'assets/products/heated-tub/main-3.jpg'
+    ],
+    colors: [
+      { label: 'Pushti', value: 'pink', imageIndex: 0 },
+      { label: 'Oq', value: 'white', imageIndex: 2 }
+    ],
+    description: {
+      title: 'Mahsulot tavsifi',
+      lines: [
+        "Aqlli isitiladigan buklanadigan cho'milish bochkasi — uy sharoitida SPA darajasida dam olish imkonini beradigan zamonaviy vanna.",
+        "Doimiy isitish funksiyasi suv haroratini 30–42°C oralig'ida ushlab turadi, tanani chuqur bo'shashtiradi va stressni kamaytiradi.",
+        "Mahsulot ixcham buklanadigan dizaynga ega — 1 soniyada ochiladi, 1 soniyada yopiladi va joy deyarli egallamaydi.",
+        "Qalinlashtirilgan PP materialidan tayyorlangan, mustahkam konstruksiya va metall tayanchlar bilan jihozlangan."
+      ]
+    },
+    specs: [
+      { label: 'Mahsulot nomi', value: "Aqlli isitiladigan yumaloq cho'milish bochkasi" },
+      { label: "O'lchami (ochiq holatda)", value: '81 × 81 × 65 sm' },
+      { label: 'Buklangan holatda', value: '81 × 81 × 30 sm' },
+      { label: 'Material (bochka)', value: 'PP + TPE' },
+      { label: 'Yuqori qopqoq', value: 'ABS' },
+      { label: 'Tayanchlar', value: 'metall qotishma' },
+      { label: 'Quvvat', value: '1200 W' },
+      { label: 'Kuchlanish', value: '220 V' },
+      { label: "Harorat oralig'i", value: '30–42°C (sozlanadi)' }
+    ],
+    reviews: [
+      {
+        name: 'Oybek',
+        date: '18 yanvar 2026',
+        text: "Juda qulay, uyda SPA endi bor",
+        rating: 5
+      },
+      {
+        name: 'Dilnoza',
+        date: '17 yanvar 2026',
+        text: '',
+        rating: 5
+      },
+      {
+        name: 'Shaxlo',
+        date: '16 yanvar 2026',
+        text: '',
+        rating: 5
+      }
+    ]
+  },
+  {
     id: 'aerogrill-1',
     title: 'AEROGRILL DEAMIND',
     price: 300000,
