@@ -584,7 +584,7 @@ const products = [
       {
         name: 'Oybek',
         date: '18 yanvar 2026',
-        text: "Juda qulay, uyda SPA endi bor",
+        text: "Juda qulay, uyda SPA bo'ldi.",
         rating: 5
       },
       {
@@ -596,6 +596,70 @@ const products = [
       {
         name: 'Shaxlo',
         date: '16 yanvar 2026',
+        text: '',
+        rating: 5
+      }
+    ]
+  },
+  {
+    id: 'smart-girlyanda-1',
+    title: 'Smart Girlyanda',
+    price: 150000,
+    oldPrice: 740000,
+    discount: '-80%',
+    rating: 4.8,
+    deliveryText: 'Ertaga',
+    images: [
+      'assets/products/smart-girlyanda/main-1.jpg',
+      'assets/products/smart-girlyanda/main-2.jpg'
+    ],
+    description: {
+      title: 'Tavsiflar',
+      lines: [
+        "Biz sizning e'tiboringizga masofadan boshqarish pulti va 2x2 RGB ilovasi bilan aqlli parda gulchambarini taqdim etamiz - bu sizning uyingizda sehrli muhit yaratish uchun ideal echim.",
+        "Ushbu LED gulchambar sizning ichki makoningizning ajralmas elementi bo'lib, har qanday xonaga qulaylik va bayram qo'shadi.",
+        "Ushbu parda gulchambarida juda ko'p boshqaruv funktsiyalari mavjud bo'lib, ular undan foydalanishni intuitiv va qulay qiladi.",
+        "Masofadan boshqarish pulti yorug'lik rejimlarini osongina o'zgartirish va turli xil rang kombinatsiyalaridan tanlash imkonini beradi.",
+        "Bundan tashqari, smartfoningizdagi maxsus dastur yorug'lik effektlarini nozik sozlash, musiqa bilan sinxronlash va uyingizda noyob muhit yaratish imkoniyatini beradi.",
+        "Gulchambarning o'lchamlari 2×2 metrni tashkil etadi, bu uni derazalar, devorlar yoki eshiklarni bezash uchun ideal qiladi.",
+        "Siz uni an'anaviy yangi yil dekorasi yoki doimiy ichki element sifatida ishlatishingiz mumkin.",
+        "LED lampalar yorqin va bir xil yoritishni ta'minlaydi va ularning uzoq umr ko'rishini ta'minlaydi."
+      ]
+    },
+    specs: [
+      { label: 'Mavzu uzunligi', value: '200 sm' },
+      { label: "Ob'ektning balandligi", value: '200 sm' }
+    ],
+    reviews: [
+      {
+        name: 'Malika',
+        date: '18 yanvar 2026',
+        text: '😍',
+        rating: 5,
+        images: ['assets/products/smart-girlyanda/reviews/review-1-1.jpg']
+      },
+      {
+        name: 'Jahongir',
+        date: '17 yanvar 2026',
+        text: 'Tez yetkazib berganingiz uchun tashakkur, hammasi yaxshi ishlaydi.',
+        rating: 5,
+        images: ['assets/products/smart-girlyanda/reviews/review-2-1.jpg']
+      },
+      {
+        name: 'Dilshoda',
+        date: '16 yanvar 2026',
+        text: '',
+        rating: 5
+      },
+      {
+        name: 'Shohruh',
+        date: '15 yanvar 2026',
+        text: '',
+        rating: 5
+      },
+      {
+        name: 'Aziza',
+        date: '14 yanvar 2026',
         text: '',
         rating: 5
       }
